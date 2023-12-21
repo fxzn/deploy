@@ -1,5 +1,5 @@
-/* Google Font */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
+
+/* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"); */
 
 
 
@@ -8,6 +8,7 @@
   --black-color: #212121;
   --pink-color: #fa80ab;
   --white-color: #ffffff;
+  --green-color: #c00000;
 }
 
 .body {
@@ -33,18 +34,27 @@
 .kelas-lain{
   margin-left: 28px;  
   margin-top: -5px;
+  color: var(--black-color);
 }
 
 .text-judul{
-  font-weight: 700;
-  font-size: 30px;
+  font-weight: 800;
+  font-size: 23px;
   padding-bottom: 5px;
+  color: rgba(97, 72, 255, 1);
+
+}
+
+.text-about{
+  color: var(--black-color);
+  font-size: 27px;
+  font-weight: 400;
 }
 
 .rating{
   font-size: 16px;
   margin-left: 5px;
-  margin-top: -3px;
+  margin-top: 3px;
 }
 
 .font-weight-bold{
@@ -58,7 +68,7 @@
 }
 
 .text-course-info{
-  font-weight: 400;
+  font-weight: 500;
   margin-left: 4px;
   font-size: 16px;
   margin-top: -3px;
@@ -112,9 +122,14 @@
   border: none;
 }
 
+.icon-rating{
+  color: #F9CC00;
+}
 
 
-
+.icon-triangle{
+  color: #73CA5C;
+}
 
 .progress-text{
   margin-left: 5rem;

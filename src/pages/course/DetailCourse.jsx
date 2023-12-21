@@ -76,25 +76,25 @@ function DetailCourse() {
                 </div>
                 <div className="course-details">
                   <div className="d-flex justify-content-between align-items-center mb-">
-                    <h5 className="text-judul">{courseDetail.title}</h5>
+                    <h2 className="text-judul">{courseDetail.title}</h2>
                     <span className="d-flex ">
-                      <FontAwesomeIcon icon={faStar} className="" />
+                      <FontAwesomeIcon icon={faStar} className="icon-rating" />
                       <p className="rating">4.7</p>
                     </span>
                   </div>
-                  <h5 className="font-weight-bold mb-1">{courseDetail.about}</h5>
+                  <h4 className="text-about mb-1">{courseDetail.about}</h4>
                   <p className="fasilator-name">By {courseDetail.teacher}</p>
                   <div className="d-flex flex-wrap align-items-center mb-3 info-course">
                     <div className="d-flex mb-2">
-                      <FontAwesomeIcon icon={faShield} className="" />
+                      <FontAwesomeIcon icon={faShield} className="icon-triangle" />
                       <p className="text-course-info">{courseDetail.level}</p>
                     </div>
                     <span className="d-flex mb-2">
-                      <FontAwesomeIcon icon={faBook} />
+                      <FontAwesomeIcon icon={faBook} className="icon-triangle"/>
                       <p className="text-course-info">{courseDetail.module} Module</p>
                     </span>
                     <span className="d-flex mb-2">
-                      <FontAwesomeIcon icon={faClock} />
+                      <FontAwesomeIcon icon={faClock} className="icon-triangle"/>
                       <p className="text-course-info">{courseDetail.duration}</p>
                     </span>
                   </div>
