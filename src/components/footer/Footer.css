@@ -1,0 +1,42 @@
+:root {
+  /* Colors */
+  --primary-color: #ba2530;
+  --red-color: #f81745;
+  --red-pink: #212121;
+  --red-black: #fa80ab;
+  /* Font & Typography */
+  --body-font: "Poppins", sans-serif;
+  --biggest-font-size: 58px;
+  --h1-font-size: 45px;
+  --normal-font-size: 18px;
+  --small-font-size: 16px;
+  --smaller-font-size: 14px;
+  /* Font Weight */
+  --font-semibold: 600;
+  --font-medium: 500;
+}
+
+footer.footer-section {
+  padding-top: 10rem;
+}
+footer.footer-section .footer-brand span {
+  font-weight: var(--font-medium);
+  font-size: 25px;
+  font-weight: 700;
+}
+footer.footer-section .footer-content span {
+  font-weight: var(--font-medium);
+  font-size: var(--normal-font-size);
+}
+footer.footer-section .footer-link li a {
+  color: var(--black-color);
+}
+footer.footer-section .footer-link li a:hover {
+  color: var(--red-color);
+}
+footer.footer-section .copyright {
+  font-size: var(--smaller-font-size);
+  padding: 1rem;
+}
+
+

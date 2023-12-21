@@ -1,0 +1,27 @@
+/* Partner.css */
+
+section.services {
+    padding-top: 8rem;
+  }
+  
+  section.services .content-services .services-title {
+    font-weight: var(--font-semibold);
+  }
+  
+  .content-services {
+    padding-top: 1rem;
+  }
+  
+  .content-services img {
+    max-width: 200%;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 15px;
+  }
+  
+  /* Add the "larger-logo" class for even larger logos */
+  .larger-logo {
+    max-width: 100%;
+    height: auto;
+  }
+  

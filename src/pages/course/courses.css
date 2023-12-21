@@ -1,0 +1,202 @@
+
+:root {
+  --red-color: #f81745;
+  --red-pink: #212121;
+  --red-black: #fa80ab;
+}
+
+:root {
+  /* Colors */
+  --primary-color: #ba2530;
+  --primary-light-color: #ffd6d7;
+  --yellow-color: #fec65e;
+  --white-color: #ffffff;
+  --black-color: #323232;
+  /* Font & Typography */
+  --body-font: "Poppins", sans-serif;
+  --biggest-font-size: 58px;
+  --h1-font-size: 45px;
+  --normal-font-size: 18px;
+  --small-font-size: 16px;
+  --smaller-font-size: 14px;
+  /* Font Weight */
+  --font-semibold: 600;
+  --font-medium: 500;
+}
+
+body {
+  font-family: var(--body-font);
+}
+
+.accordion-button:focus {
+  box-shadow: none !important;
+  background-color: none;
+}
+
+.content-course {
+  margin-top: 100px;
+}
+
+/* Custom styling for radio button */
+.custom-radio {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #333;
+  border-radius: 4px;
+  outline: none;
+  margin-top: 3px;
+  margin-right: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.kotakcourse {
+  width: 450px;
+  height: 250x;
+  background-color: #faf5f5;
+  border: var(--red-pink);
+  border-radius: 20px;
+  padding: 2px;
+  overflow: hidden;
+  box-shadow: 0px 4px 28px rgba(0, 0, 0, 0.04);
+}
+.kotakcourse:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.level .img {
+  width: 15px;
+  height: 15px;
+}
+
+.kotakcourse .title {
+  color: var(--red-black);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 14px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.kotakcourse .desc {
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 14px;
+  letter-spacing: 0em;
+  text-align: left;
+  line-height: 1.5;
+}
+
+.infocourse p {
+
+
+font-size: 10px;
+font-weight: 600;
+line-height: 14px;
+letter-spacing: 0em;
+text-align: left;
+
+
+
+}
+
+.search {
+  width: 250px;
+  height: 40px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: 20px;
+  border: solid 2px var(--red-color);
+}
+
+.search input {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--red-black);
+  width: 100%;
+}
+
+.search input:focus {
+  border: none;
+  outline: none;
+}
+
+.rating {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 14px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.header-payment {
+  display: flex;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 10px;
+  background-color: #f81745;
+  justify-content: center;
+  height: 100%;
+}
+
+.loader-container {
+  position: relative;
+  height: 100vh; /* Atur tinggi sesuai kebutuhan, misalnya 100vh untuk tinggi viewport */
+}
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 48px;
+  border: 5px solid #f81745;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+@media only screen and (max-width: 767px) {
+  /* Navbar */
+
+  /* Search Input in Navbar */
+  .search {
+    margin: 10px 0;
+    width: 100%;
+  }
+
+  /* Course Filters */
+  .accordion-item {
+    width: 100%;
+  }
+
+  /* Course Cards */
+  .kotakcourse {
+    margin: 5px;
+  }
+
+  /* Footer */
+  .footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+}

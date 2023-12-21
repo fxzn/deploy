@@ -1,0 +1,170 @@
+
+
+:root {
+  --red-color: #f81745;
+  --black-color: #212121;
+  --pink-color: #fa80ab;
+  --white-color: #ffffff;
+}
+
+.navbar-brand {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.navbar {
+  padding: 12px 12px;
+  transition: all 0.5s ease;
+
+}
+
+.nav-item{
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 13px;
+}
+
+.nav-link{
+  color: var(--black-color);
+}
+
+.nav-link:hover{
+  color: var(--red-color);
+}
+
+.drop-shadow {
+  box-shadow: 0px 4px 28px rgba(0, 0, 0, 0.04);
+}
+
+.btn-navbar {
+  margin-right: auto;
+  margin-left: 20px;
+  background-color: var(--black-color);
+  color: var(--white-color);
+  margin-top: 8px;
+}
+
+.btn-navbar {
+  margin-right: auto;
+  margin-left: 20px;
+  border-radius: 14px;
+  width: 100px;
+  height: 40px;
+}
+
+.btn-navbar:hover {
+  background-color: var(--red-color);
+  color: var(--white-color);
+}
+
+.profil {
+  background-color: white;
+}
+
+/* Style the profile dropdown */
+.profil .dropdown-menu {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease; /* Add transition for smoother effects */
+}
+
+/* Style the dropdown items */
+/* .profil .dropdown-menu a {
+  color: #333;
+  padding: 10px 20px; 
+  transition: background-color 0.3s ease;
+  font-size: 15px; 
+} */
+
+
+
+
+/* Style the font-awesome icon color */
+.profil .dropdown-toggle {
+  color: #333;
+  transition: color 0.3s ease; 
+}
+
+
+.profil .dropdown-toggle:hover {
+  color: var(--black-color);
+}
+
+/* Add some space between the icon and text */
+.profil .dropdown-toggle::after {
+  margin-left: 5px;
+}
+
+/* Adjust the position of the dropdown */
+.profil .dropdown-menu {
+  margin-top: 8px;
+}
+
+.icon {
+  margin-right: 7px; 
+}
+
+.notif-bell {
+  color: var(--black-color);
+  margin-top: 16px;
+  font-size: 22px;
+  margin-right: 46px;
+}
+.icon-user{
+  color: var(--black-color);
+  font-size: 22px;
+  margin-top: 15px;
+}
+
+.icon-user:hover{
+  color: var(--black-color);
+}
+
+@media (max-width: 767px) {
+  .navbar {
+    padding: 8px 12px; 
+  }
+
+  .nav-item {
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  .btn-navbar {
+    margin-left: 10px; 
+  }
+
+  .notif-bell, .icon-user {
+    margin-top: 10px; 
+  }
+
+  .offcanvas {
+    width: 50%; 
+  }
+
+  .offcanvas-header {
+    font-size: 18px;
+  }
+
+  .navbar-toggler-icon {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 575px) {
+  .offcanvas {
+    width: 90%; 
+  }
+
+  .offcanvas-header {
+    font-size: 16px;
+  }
+
+  .navbar-toggler-icon {
+    font-size: 20px;
+  }
+}
+
+

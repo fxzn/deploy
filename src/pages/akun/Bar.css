@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,regular,500,600,700,800,900');
+
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+section {
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profileInf {
+  position: absolute;
+  width: 40%;
+  left: -30px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  height: 100%;
+  z-index: 1;
+  top: 5%;
+}
+
+.profileInf h1 {
+  color: #0f3959;
+}
+
+.link-text {
+  margin-left: 10px;
+  font-size: 16px;
+}
+
+.profileInf hr {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  border: none;
+  height: 1px;
+  background-color: #000;
+  margin-top: 4px;
+}
+
+.akun-headr {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .profileInf {
+    margin-left: 15%;
+    margin-top: 10%;
+    position: absolute;
+    width: 348px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    z-index: 1;
+    top: 5%;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    height: 300px;
+  }
+
+  .akun-headr {
+    text-align: start;
+    display: block;
+    margin-left: -20px;
+    margin-bottom: 10px;
+  }
+
+  .akun-headr h2 {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .profileInf h1 {
+    margin-left: -20px;
+    font-size: 12px;
+    color: #0f3959;
+  }
+
+  .link-text {
+    color: #000000;
+  }
+
+  .profileInf hr {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    border: none;
+    height: 1px;
+    background-color: #000;
+    margin-top: -2px;
+    margin-bottom: 20px;
+  }
+}

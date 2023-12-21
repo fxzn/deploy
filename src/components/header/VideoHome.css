@@ -1,0 +1,51 @@
+
+.video-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .video-modal {
+    position: relative;
+  }
+  
+  .close {
+    position: absolute;
+    right:13px;
+    color: black;
+    font-size: 34px;
+    cursor: pointer;
+    margin-bottom: auto; 
+  }
+  
+  @media (max-width: 767px) {
+    .video-modal {
+      width: 90%;
+      padding: 10px;
+    }
+  
+    .close {
+      top: 5px;
+      right: 5px;
+      font-size: 20px;
+    }
+  }
+  @media (max-width: 480px) {
+    .video-modal {
+      width: 95%;
+      padding: 10px;
+    }
+  
+    .close {
+      top: 5px;
+      right: 5px;
+      font-size: 18px;
+    }
+  }

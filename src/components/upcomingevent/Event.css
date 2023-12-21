@@ -1,0 +1,80 @@
+:root {
+    --red-color: #f81745;
+    --red2-color: #fd355dde;
+    --black-color: #212121;
+    --pink-color: #fa80ab;
+    --white-color: #ffffff;
+    --blue: #76e0f5;
+    --blue2: #6cb3cf;
+  }
+  
+
+.wow,
+.animated {
+    animation-duration: 2s !important;
+}
+
+/*** Spinner End ***/
+
+.back-to-top {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    display: flex;
+    width: 50px;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
+    z-index: 99;
+}
+
+.back-to-top:hover {
+    background: var(--bs-dark);
+    color: var(--bs-primary);
+}
+
+h1, h2, h3, .h1, .h2, .h3 {
+    font-weight: 700 !important;
+    font-family: 'Open', sans-serif !important;
+}
+
+h4, h5, h6, .h4, .h5, .h6 {
+    font-weight: 600 !important;
+    font-family: 'Open', sans-serif !important;
+}
+
+.py-6 {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+}
+
+
+/*** Events Start ***/
+.text-span{
+    color: var(--red-color);
+}
+.event-item img {
+    transition: 0.5s;
+
+}
+
+.event .event-item a {
+    transition: 0.5s;
+}
+
+.event-item:hover img {
+    transition: 0.5s;
+    transform: scale(1.2)
+}
+
+.event-item a:hover {
+    /* background: var(--bs-dark);
+    color: var(--bs-primary); */
+    opacity: 0.5s;
+}
+
+
+
+
+

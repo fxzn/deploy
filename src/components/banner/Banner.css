@@ -1,0 +1,24 @@
+:root {
+    --red-color: #f81745;
+    --red2-color: #fd355dde;
+    --black-color: #212121;
+    --pink-color: #fa80ab;
+    --white-color: #ffffff;
+    --blue: #76e0f5;
+    --blue2: #6cb3cf;
+  }
+  
+.banner{
+    background-color:var(--blue2);
+    border-radius: 10px;
+}
+.text-banner h1 {
+    font-size: 30px;
+    font-weight: 200;
+    margin-left: 35px;
+}
+.icon-brain{
+    font-size: 5rem;
+    color: var(--white-color);
+    margin-left: 10px;
+}
