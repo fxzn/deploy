@@ -3,6 +3,7 @@
 :root {
   --red-color: #f81745;
   --black-color: #212121;
+  --black2-color: #3f3f3f;
   --pink-color: #fa80ab;
   --white-color: #ffffff;
 }
@@ -42,20 +43,37 @@
   background-color: var(--black-color);
   color: var(--white-color);
   margin-top: 8px;
-}
-
-.btn-navbar {
-  margin-right: auto;
-  margin-left: 20px;
   border-radius: 14px;
   width: 100px;
   height: 40px;
 }
 
+
 .btn-navbar:hover {
   background-color: var(--red-color);
   color: var(--white-color);
 }
+
+
+.btn-kelas {
+  margin-right: 23px;
+  margin-left: 20px;
+  background-color: var(--black-color);
+  color: var(--white-color);
+  margin-top: 8px;
+  border: none;
+  border-radius: 14px;
+  width: 91px;
+  cursor: pointer;
+  height: 36px;
+}
+
+
+.btn-kelas:hover {
+  background-color: var(--black2-color);
+  color: var(--white-color);
+}
+
 
 .profil {
   background-color: white;
@@ -106,16 +124,20 @@
   margin-right: 7px; 
 }
 
+/* .icon-bars{
+  margin-right: 30px;
+} */
+
 .notif-bell {
   color: var(--black-color);
-  margin-top: 16px;
-  font-size: 22px;
-  margin-right: 46px;
+  margin-top: 12px;
+  font-size: 20px;
+  margin-right: 24px;
 }
 .icon-user{
   color: var(--black-color);
-  font-size: 22px;
-  margin-top: 15px;
+  font-size: 20px;
+  margin-top: 11px;
 }
 
 .icon-user:hover{

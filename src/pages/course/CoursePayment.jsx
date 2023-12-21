@@ -56,7 +56,7 @@ function CoursePayment() {
       );
 
       if (response.status === 200) {
-        navigate("", { replace: true }); 
+        navigate("/paymentsucces", { replace: true }); 
       }
 
 ;
@@ -69,19 +69,6 @@ function CoursePayment() {
     }
   };
 
-  // const handleOrder = async () => {
-  //   try {
-  //     const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/order/createOrder`, {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //         // "Content-Type": "application/json",
-  //       },
-  //     });
-  //     setVideoData(response.data.data);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
 
   return (
     <>

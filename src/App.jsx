@@ -11,6 +11,7 @@ import ChangePass from "./pages/akun/ChangePass";
 import History from "./pages/akun/History";
 import Course from "./pages/course/Course";
 import CourseRun from "./pages/course/CourseRun";
+
 import ResetPaswd from "./auth/ResetPaswd";
 import DetailCourse from "./pages/course/DetailCourse";
 import DashboardAdmin from "./users/admin/DashboardAdmin";
@@ -18,6 +19,7 @@ import KelolaKelas from "./users/admin/KelolaKelas";
 import Bars from "./pages/akun/Bar";
 import OTPPage from "./auth/otp/Otp";
 import CoursePayment from "./pages/course/CoursePayment";
+import Succespayment from "./pages/course/paymentsucces";
 
 function App() {
   return (
@@ -39,6 +41,7 @@ function App() {
         <Route path="/course" element={<Course />} />
         <Route path="/course/payment/:title" element={<CoursePayment />} />
         <Route path="/courserun" element={<CourseRun />} />
+        <Route path="/paymentsucces" element={<Succespayment/>}/>
 
         <Route
           path="/admin/dashboard"
