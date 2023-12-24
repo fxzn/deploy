@@ -9,6 +9,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import EditKelas from "../crud/EditKelas";
 
+
 function TabelKelas() {
   const [showModal, setShowModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -66,8 +67,8 @@ function TabelKelas() {
   return (
     <>
       <div className="content">
-        <NavAdmin />
-        <CardInfo />
+        <NavAdmin/>
+        <CardInfo/>
         <div className="container-fluid pt-4 px-4">
           <div className="row g-4">
             <div className="col-12">

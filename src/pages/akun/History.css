@@ -169,17 +169,6 @@ section {
   margin-top: 3%;
 }
 
-.circular-profile-picture-container {
-  overflow: hidden;
-  border-radius: 50%;
-}
-
-.circular-profile-picture {
-  border-radius: 50%;
-  max-width: 90px;
-  object-fit: cover;
-}
-
 .cardkursus {
   background-color: #fff;
   border-radius: 20px;

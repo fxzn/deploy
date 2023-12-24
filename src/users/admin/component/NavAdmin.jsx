@@ -1,9 +1,16 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Style.css";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
+import testi1 from "../../../assets/admin.png";
 
 function NavAdmin() {
+  const navigate = useNavigate();
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  };
 
   return (
     <>
@@ -17,11 +24,16 @@ function NavAdmin() {
         <div className="navbar-nav align-items-center ms-auto">
           <div className="nav-item dropdown">
             <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-              <img className="rounded-circle me-lg-2" src="img/user.jpg" alt="" style={{ width: 40, height: 40 }} />
+              <img
+                className="rounded-circle me-lg-2 img-fluid"
+                src={testi1}
+                alt=""
+                style={{ maxWidth: 50, maxHeight: 50 }}
+              />
               <span className="d-none d-lg-inline-flex">Hi Admin</span>
             </a>
             <div className="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-              <a href="#" className="dropdown-item">
+              <a href="#" className="dropdown-item" onClick={handleLogout}>
                 Log Out
               </a>
             </div>

@@ -151,7 +151,7 @@ function Course() {
                                 <p className="ms-1 mt-1">{courseData.duration} menit</p>
                               </div>
                             </div>
-                            <Button variant="danger">{courseData.price > 0 ? "Premium" : "Gratis"}</Button>
+                            <Button variant="danger">{courseData.isPremium ? "Premium" : "Gratis"}</Button>
                           </Card.Body>
                         </Card>
                       </Col>

@@ -22,6 +22,7 @@
 .text-admin {
     margin-top: 3rem;
     background-color: #F3F6F9;
+    
 }
 
 /*** Spinner ***/
@@ -90,10 +91,10 @@
 
 .content {
     margin-left: 250px;
-    min-height: 100vh;
+    margin-bottom: 2rem;
     background: #FFFFFF;
     transition: 0.5s;
-    margin-top: -10px;
+    
 }
 
 @media (min-width: 992px) {

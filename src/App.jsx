@@ -46,9 +46,7 @@ function App() {
         <Route
           path="/admin/dashboard"
           element={
-            // <Login>
               <DashboardAdmin />
-            // </Login>
           }
         />
         <Route path="/admin/kelas" element={<KelolaKelas />} />

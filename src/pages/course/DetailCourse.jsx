@@ -50,11 +50,13 @@ function DetailCourse() {
   const handlBuyClick = () => {
     console.log("Tombol Premium diklik");
     navigate(`/course/payment/${title}`);
-  };  
+  };
 
   const handleCloseModal = () => {
     setShowModal(false);
   };
+
+  const handleJoinTelegram = () => {};
 
   return (
     <>
@@ -76,7 +78,11 @@ function DetailCourse() {
                 </div>
                 <div className="course-details">
                   <div className="d-flex justify-content-between align-items-center mb-">
+
                     <h2 className="text-judul">{courseDetail.title}</h2>
+
+                  
+
                     <span className="d-flex ">
                       <FontAwesomeIcon icon={faStar} className="icon-rating" />
                       <p className="rating">4.7</p>
@@ -86,6 +92,7 @@ function DetailCourse() {
                   <p className="fasilator-name">By {courseDetail.teacher}</p>
                   <div className="d-flex flex-wrap align-items-center mb-3 info-course">
                     <div className="d-flex mb-2">
+
                       <FontAwesomeIcon icon={faShield} className="icon-triangle" />
                       <p className="text-course-info">{courseDetail.level}</p>
                     </div>
@@ -93,15 +100,25 @@ function DetailCourse() {
                       <FontAwesomeIcon icon={faBook} className="icon-triangle"/>
                       <p className="text-course-info">{courseDetail.module} Module</p>
                     </span>
+
                     <span className="d-flex mb-2">
-                      <FontAwesomeIcon icon={faClock} className="icon-triangle"/>
+                      <FontAwesomeIcon icon={faClock} className="icon-triangle" />
+
                       <p className="text-course-info">{courseDetail.duration}</p>
                     </span>
+                   
+                 
                   </div>
                   <div>
-                    <button className="btn btn-telegram" onClick={handlBuyClick}>
-                      {courseDetail.isPremium ? "Premium" : "Free"}
-                    </button>
+                    {courseDetail.isPremium ? (
+                      <button className="btn btn-telegram" onClick={handlBuyClick}>
+                        Premium
+                      </button>
+                    ) : (
+                      <button className="btn btn-telegram" onClick={handleJoinTelegram}>
+                        Join Telegram
+                      </button>
+                    )}
                   </div>
                 </div>
                 <div>
@@ -152,14 +169,13 @@ function DetailCourse() {
                       <ol>
                         {subjectResponse.map((subject, index) => (
                           <li key={index} className="my-2 d-flex justify-content-between align-items-center pointer">
-                            <p onClick={() => clickTitle(subject.link, subject.description, index)} className={`d-flex gap-3 align-items-center ${titleAktive === index ? "text-success fw-bold" : null}`}>
+                            <p onClick={() => {subject.isPremium ? handlBuyClick() : clickTitle(subject.link, subject.description, index)}} className={`d-flex gap-3 align-items-center ${titleAktive === index ? "text-success fw-bold" : null}`}>
                               <span onClick={() => clickTitle(subject.link)} className="p-1 align-items-center justify-content-center">
                                 {index + 1}
                               </span>
                               {subject.title}
                             </p>
-
-                            <FontAwesomeIcon icon={faPlayCircle} className="icon-play text-dark w-10 h-full" />
+                            {courseDetail.isPremium ? <FontAwesomeIcon icon={faLock} className="icon-lock" /> : <FontAwesomeIcon icon={faPlayCircle} className="icon-play text-dark w-10 h-full" />}
                           </li>
                         ))}
                       </ol>

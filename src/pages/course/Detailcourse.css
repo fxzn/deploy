@@ -42,7 +42,7 @@
   font-size: 23px;
   padding-bottom: 5px;
   color: rgba(97, 72, 255, 1);
-
+  /* color: var(--pink-color); */
 }
 
 .text-about{

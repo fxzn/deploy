@@ -2,12 +2,12 @@ import "./Navigation.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLock, faHistory, faSignOutAlt, faDeleteLeft, faBars } from "@fortawesome/free-solid-svg-icons";
+import { faLock, faHistory, faSignOutAlt, faBars } from "@fortawesome/free-solid-svg-icons";
 import { NavDropdown, Modal, Button } from "react-bootstrap";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { faBell, faUser } from "@fortawesome/free-regular-svg-icons";
+import { faBell, faTrashCan, faUser } from "@fortawesome/free-regular-svg-icons";
 
 function NavigationBars() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -41,8 +41,7 @@ function NavigationBars() {
 
       if (response.status === 200) {
         toast.success("Account deleted successfully");
-        // Perform any other actions after successful account deletion
-        localStorage.removeItem("token"); // Remove token after successful deletion
+        localStorage.removeItem("token");
         setIsLoggedIn(false);
         navigate("/");
       } else {
@@ -51,7 +50,7 @@ function NavigationBars() {
     } catch (error) {
       console.error("Error:", error);
     } finally {
-      // Close the modal after confirming the account deletion
+
       setShowConfirmationModal(false);
     }
   };
@@ -85,17 +84,17 @@ function NavigationBars() {
             <div className="offcanvas-body">
               <ul className="navbar-nav mx-auto mb-2 mb-lg-0 small fw-bolder">
                 <li className="nav-item">
-                  <Link to="/" className="nav-link mx-3">
+                  <Link to="/" className="nav-link mx-3 ">
                     Home
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/course" className="nav-link mx-3" href="index.html">
+                  <Link to="/course" className="nav-link mx-3" >
                     Course
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/about" className="nav-link mx-3" href="projects.html">
+                  <Link to="/about" className="nav-link mx-3" >
                     About
                   </Link>
                 </li>
@@ -124,7 +123,7 @@ function NavigationBars() {
                         <NavDropdown.Item
                           href="/"
                           onClick={(e) => {
-                            e.preventDefault(); // Prevent default anchor link behavior
+                            e.preventDefault();
                             localStorage.removeItem("token");
                             setIsLoggedIn(false);
                             navigate("/");
@@ -134,7 +133,7 @@ function NavigationBars() {
                         </NavDropdown.Item>
 
                         <NavDropdown.Item onClick={handleDeleteClick}>
-                          <FontAwesomeIcon icon={faSignOutAlt} className="icon" /> Delete Account
+                          <FontAwesomeIcon icon={faTrashCan} className="icon" /> Delete Account
                         </NavDropdown.Item>
 
                         {/* Modal Konfirmasi */}

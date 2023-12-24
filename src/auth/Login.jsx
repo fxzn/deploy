@@ -32,21 +32,25 @@ function Login() {
       };
 
       const response = await axios.request(config);
-
-      const { token } = response.data;
+      const { token, roles } = response.data;
 
       if (token) {
         localStorage.setItem("token", token);
-
-        navigate("/");
+        if (roles && roles.includes("ROLE_ADMIN")) {
+          navigate("/admin/dashboard");
+        } else {
+          navigate("/");
+        }
       } else {
         console.error("Token not received from the server");
         toast.error("Token not received from the server");
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
+        console.error("Axios Error:", error.response.data.message);
         toast.error(error.response.data.message);
       } else {
+        console.error("General Error:", error.message);
         toast.error(error.message);
       }
     }

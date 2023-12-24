@@ -43,11 +43,15 @@
   background-color: var(--black-color);
   color: var(--white-color);
   margin-top: 8px;
+}
+
+.btn-navbar {
+  margin-right: auto;
+  margin-left: 20px;
   border-radius: 14px;
   width: 100px;
   height: 40px;
 }
-
 
 .btn-navbar:hover {
   background-color: var(--red-color);

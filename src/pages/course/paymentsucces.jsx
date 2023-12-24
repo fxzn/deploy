@@ -3,7 +3,9 @@ import Footerr from "../../components/footer/Footerr";
 import NavigationBars from "../../components/navigation/NavigationBars";
 import "./Detailcourse.css";
 import imgsucces from "../../assets/succes.png";
+
 import { useNavigate } from "react-router-dom";
+
 
 function succespayment() {
   const navigate = useNavigate;
