@@ -1,4 +1,3 @@
-import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
@@ -11,7 +10,6 @@ import ChangePass from "./pages/akun/ChangePass";
 import History from "./pages/akun/History";
 import Course from "./pages/course/Course";
 import CourseRun from "./pages/course/CourseRun";
-
 import ResetPaswd from "./auth/ResetPaswd";
 import DetailCourse from "./pages/course/DetailCourse";
 import DashboardAdmin from "./users/admin/DashboardAdmin";
@@ -32,8 +30,8 @@ function App() {
         <Route path="/auth/otp" element={<OTPPage />} />
         <Route path="/bar" element={<Bars />} />
         <Route path="/userprofile" element={<Akun />} />
-        <Route path="/ChangePass" element={<ChangePass />} />
-        <Route path="/History" element={<History />} />
+        <Route path="/changepass" element={<ChangePass />} />
+        <Route path="/history" element={<History />} />
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/register" element={<Register />} />
         <Route path="/auth/resetPassword" element={<ResetPaswd />} />
