@@ -80,14 +80,14 @@ const Bars = () => {
             </h1>
           </Link>
           <hr />
-          <Link to="/ChangePass">
+          <Link to="/changePass">
             <h1>
               <FontAwesomeIcon icon={faLock} style={{ fontSize: '16px' }} />
               <span className="link-text">Ubah Password</span>
             </h1>
           </Link>
           <hr />
-          <Link to="/History">
+          <Link to="/history">
             <h1>
               <FontAwesomeIcon icon={faHistory} style={{ fontSize: '16px' }} />
               <span className="link-text">Riwayat Pembayaran</span>
