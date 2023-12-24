@@ -111,17 +111,16 @@ function NavigationBars() {
                     </Link>
                     <div className="profil">
                       <NavDropdown title={<FontAwesomeIcon icon={faUser} />} className="icon-user" id="basic-nav-dropdown">
-                        <NavDropdown.Item onClick="/userprofile">
+                        <NavDropdown.Item onClick={() => navigate("/userprofile")}>
                           <FontAwesomeIcon icon={faUser} className="icon" /> Profil Saya
                         </NavDropdown.Item>
-                        <NavDropdown.Item onClick="/changePass">
+                        <NavDropdown.Item onClick={() => navigate("/changePass")}>
                           <FontAwesomeIcon icon={faLock} className="icon" /> Ubah Password
                         </NavDropdown.Item>
-                        <NavDropdown.Item onClick="/history">
+                        <NavDropdown.Item onClick={() => navigate("/history")}>
                           <FontAwesomeIcon icon={faHistory} className="icon" /> History Pembayaran
                         </NavDropdown.Item>
                         <NavDropdown.Item
-                          // href="/"
                           onClick={(e) => {
                             e.preventDefault();
                             localStorage.removeItem("token");
