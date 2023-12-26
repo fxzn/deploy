@@ -18,6 +18,7 @@ import Bars from "./pages/akun/Bar";
 import OTPPage from "./auth/otp/Otp";
 import CoursePayment from "./pages/course/CoursePayment";
 import Succespayment from "./pages/course/paymentsucces";
+import PostUsername from "./auth/PostUsername";
 
 function App() {
   return (
@@ -42,7 +43,7 @@ function App() {
         <Route path="/paymentsucces" element={<Succespayment/>}/>
         <Route path="/admin/dashboard" element={<DashboardAdmin />}/>
         <Route path="/admin/kelas" element={<KelolaKelas />} />
-        <Route path="" />
+        <Route path="/auth/postUsername" element={<PostUsername/>}/>
       </Routes>
     </>
   );

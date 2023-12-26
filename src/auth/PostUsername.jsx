@@ -5,25 +5,15 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useState } from "react";
 
-function ResetPaswd() {
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setNewConfirmPassword] = useState("");
+function PostUsername() {
+  const [username, setUsername] = useState("");
 
   const handleSubmitUsername = async (e) => {
     e.preventDefault();
 
     try {
-      if (newPassword !== confirmPassword) {
-        toast.error("Passwords do not match");
-        return;
-      }
-
       const response = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/api/auth/resetPassword`,
-        {
-          newPassword,
-          confirmPassword,
-        },
+        `${import.meta.env.VITE_BASE_URL}/api/auth/sendToken?username=${username}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -31,8 +21,6 @@ function ResetPaswd() {
         }
       );
       console.log("Response:", response.data);
-      const resetLink = `https://easyclass-course.vercel.app/auth/resetPassword?token=${response.data.token}`;
-      window.location.href = resetLink;
     } catch (error) {
       console.error("Error:", error);
 
@@ -57,30 +45,11 @@ function ResetPaswd() {
                 </div>
                 <div className="heading-username">
                   <h2>Trouble logging in ?</h2>
-                  <p>Enter your new password, and we'll reset your account.</p>
+                  <p>Enter your username, and we'll send you a link to get back into your account.</p>
                 </div>
                 <div className="actual-form">
                   <div className="input-username">
-                    <input
-                      type="password"
-                      className="input-field"
-                      autoComplete="off"
-                      required
-                      placeholder="New Password"
-                      value={newPassword}
-                      onChange={(e) => setNewPassword(e.target.value)}
-                    />
-                  </div>
-                  <div className="input-username">
-                    <input
-                      type="password"
-                      className="input-field"
-                      autoComplete="off"
-                      required
-                      placeholder="Confirm Password"
-                      value={confirmPassword}
-                      onChange={(e) => setNewConfirmPassword(e.target.value)}
-                    />
+                    <input type="text" className="input-field" autoComplete="off" required placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
                   </div>
                   <button type="submit" className="sign-btn" onClick={handleSubmitUsername}>
                     Submit
@@ -95,4 +64,4 @@ function ResetPaswd() {
   );
 }
 
-export default ResetPaswd;
+export default PostUsername;

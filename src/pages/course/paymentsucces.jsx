@@ -8,10 +8,11 @@ import { useNavigate } from "react-router-dom";
 
 
 function succespayment() {
-  const navigate = useNavigate;
+  const navigate = useNavigate();
 
   const handleBackClick = () => {
-    navigate(`/detailcourse/${title}`);
+    // navigate(`/detailcourse/${title}`);
+    navigate("/courserun")
   };
   return (
     <>
@@ -31,7 +32,7 @@ function succespayment() {
         <Button onClick={handleBackClick} variant="primary">
           Mulai Belajar
         </Button>
-        <p className="text-danger mt-3">Kembali ke berandda</p>
+        <p className="text-danger mt-3" onClick={handleBackClick}>Kembali ke berandda</p>
       </Container>
 
       <Footerr />

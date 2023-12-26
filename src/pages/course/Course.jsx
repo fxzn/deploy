@@ -63,7 +63,7 @@ function Course() {
                         </Form>
                       </div>
                       <div className="mt-4">
-                        dddddddddd
+                        
                         <p className="fw-bold">Level Kesulitan</p>
                         <Form className="mt-1">
                           <Form.Check inline label="Semua Level" name="group1" id="checkbox1" className="mt-2" />
@@ -124,7 +124,8 @@ function Course() {
                               <div className="title">{courseData.title}</div>
                               <div className="rating d-flex">
                                 <FontAwesomeIcon icon={faStar} className="img text-warning me-1" />
-                                <p>{courseData.rating}</p>
+                                {/* <p>{courseData.rating}</p> */}
+                                <p className="rate-card">0</p>
                               </div>
                             </div>
                             <Card.Text>

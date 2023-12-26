@@ -55,7 +55,7 @@ body {
 .kotakcourse {
   width: 450px;
   height: 250x;
-  background-color: #faf5f5;
+  background-color: var(--white-color);
   border: var(--red-pink);
   border-radius: 20px;
   padding: 2px;
@@ -81,7 +81,7 @@ body {
   text-align: left;
 }
 
-.kotakcourse .desc {
+.desc {
   font-size: 17px;
   font-weight: 400;
   line-height: 14px;
@@ -91,16 +91,11 @@ body {
 }
 
 .infocourse p {
-
-
-font-size: 10px;
-font-weight: 600;
+font-size: 12px;
+font-weight: 500;
 line-height: 14px;
 letter-spacing: 0em;
 text-align: left;
-
-
-
 }
 
 .search {
@@ -118,7 +113,7 @@ text-align: left;
   border: none;
   outline: none;
   background: transparent;
-  color: var(--red-black);
+  color: var(--black-color);
   width: 100%;
 }
 
@@ -133,8 +128,12 @@ text-align: left;
   line-height: 14px;
   letter-spacing: 0em;
   text-align: left;
+  margin-top: 0px;
 }
 
+.rate-card{
+  margin-top: 3px;
+}
 .header-payment {
   display: flex;
   margin: 0 auto;

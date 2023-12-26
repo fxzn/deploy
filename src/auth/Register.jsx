@@ -25,13 +25,13 @@ function Register() {
         username,
         email,
         password,
-        phoneNumber: phonenumber, // make sure to use the correct casing
+        phoneNumber: phonenumber, 
         country,
         city,
       };
   
       const response = await axios.post(
-        "https://easy-class-407401.et.r.appspot.com/api/auth/signup",
+        `${import.meta.env.VITE_BASE_URL}/api/auth/signup`,
         userData,
         {
           headers: {
