@@ -10,7 +10,7 @@ export const GetCourse = async (callback) => {
 };
 
 
-export async function getCourseDetail(title) {
+export async function GetCourseDetail(title) {
   try {
     const token = localStorage.getItem("token");
     const response = await axios.get(`https://easy-class-407401.et.r.appspot.com/api/course/detailsFromTitle?title=${title}`, {
