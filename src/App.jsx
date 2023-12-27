@@ -2,7 +2,6 @@ import { Routes, Route } from "react-router-dom";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Home from "./pages/home/Home";
-import Contact from "./pages/contact/Contact";
 import About from "./pages/about/About";
 import Notifikasi from "./pages/notifikasi/Notifikasi";
 import Akun from "./pages/akun/Akun";
@@ -27,7 +26,6 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/notifikasi" element={<Notifikasi />} />
         <Route path="/auth/otp" element={<OTPPage />} />

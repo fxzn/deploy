@@ -71,7 +71,7 @@ function TabelDashboard() {
                       {transaksi?.length > 0 ? (
                         transaksi.map((data, index) => (
                           <tr key={index}>
-                            <td>{data.id}</td>
+                            <td>{data.userId}</td>
                             <td>{data.time}</td>
                             <td>{data.paymentMethod}</td>
                             <td>{data.completed ? "Completed" : "Pending"}</td>

@@ -7,10 +7,12 @@ import testi1 from "../../../assets/admin.png";
 function NavAdmin() {
   const navigate = useNavigate();
 
-  const handleLogout = () => {
+  const handleLogout = (e) => {
+    e.preventDefault();
     localStorage.removeItem("token");
     navigate("/");
   };
+  
 
   return (
     <>

@@ -9,11 +9,14 @@ import Footerr from "../../components/footer/Footerr";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { GetCourse } from "../../../service/Course.service";
+import LoginModal from "./LoginModal";
+
 
 function Course() {
   const navigate = useNavigate();
   const [course, setCourse] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   useEffect(() => {
     GetCourse((data) => {
@@ -22,8 +25,21 @@ function Course() {
     });
   }, []);
 
+  const handleShowLoginModal = () => setShowLoginModal(true);
+  const handleCloseLoginModal = () => setShowLoginModal(false);
+
+  // Fungsi untuk mendapatkan status login dari token
+  const userIsLoggedIn = () => {
+    const token = localStorage.getItem("token");
+    return !!token; // Mengembalikan true jika token ada, false jika tidak
+  };
+
   const handleCardClick = (coursetitle) => {
-    navigate(`/detailcourse/${coursetitle}`);
+    if (userIsLoggedIn()) {
+      navigate(`/detailcourse/${coursetitle}`);
+    } else {
+      handleShowLoginModal();
+    }
   };
 
   return (
@@ -162,6 +178,7 @@ function Course() {
             </Row>
           </Container>
           <Footerr />
+          <LoginModal show={showLoginModal} handleClose={handleCloseLoginModal} navigate={navigate} />
         </>
       )}
     </>

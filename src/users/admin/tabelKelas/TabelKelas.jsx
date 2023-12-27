@@ -8,8 +8,7 @@ import EditKelas from "../crud/EditKelas";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import EditVideo from "../crud/EditVideo";
-import TabelVideo from "./TabelVideo";
+
 
 function TabelKelas() {
   const [showModal, setShowModal] = useState(false);
@@ -105,7 +104,7 @@ function TabelKelas() {
                             <td>{course.title}</td>
                             <td>{course.isPremium ? "Premium" : "Free"}</td>
                             <td>{course.level}</td>
-                            <td>Rp. {course.price}</td>
+                            <td>Rp. {course.price.toLocaleString("id-ID", {currency: "IDR"})}</td>
                             <td>
                               <div>
                                 <button type="button" className="btn btn-edit" onClick={() => handleEditClick(course.code)}>
