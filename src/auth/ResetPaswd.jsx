@@ -15,6 +15,7 @@ function ResetPaswd() {
   const token = new URLSearchParams(location.search).get("token");
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirm, setShowPasswordConfrim] = useState(false);
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
