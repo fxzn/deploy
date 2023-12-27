@@ -8,7 +8,7 @@ function SideBar() {
     <>
       <>
         <div className="sidebar pe-4 pb-3 ">
-          <nav className="navbar  navbar-light">
+          <nav className="navbar-admin navbar-light">
             <Link to={"/admin/dashboard"}  className="navbar-brand mx-4 mb-3">
               <h3 className="text-admin mb-5">
                 easyclass
