@@ -17,47 +17,58 @@ import axios from 'axios';
 import { GridLoader } from 'react-spinners';
 
 const CourseCard = ({ order }) => {
+  const {
+    title,
+    about,
+    teacher,
+    level,
+    duration,
+    module,
+    price,
+    isPremium,
+  } = order;
+
   return (
     <Col md={12} className="d-flex justify-content-center mt-3">
-      <Card className="cardkursus" style={{ width: '400px', height: '185px' }}>
-        <Card.Img variant="top" src={imgcourse} style={{ height: '80px' }} />
-        <Card.Body>
-          <div className="title mt-0" id="text1">
-            UI/UX Design
+    <Card className="cardkursus" style={{ width: '400px', height: '185px' }}>
+      <Card.Img variant="top" src={imgcourse} style={{ height: '80px' }} />
+      <Card.Body>
+        <div className="title mt-0" id="text1">
+        {title}
+        </div>
+        <Card.Text className="desc mt-0" id="text2">
+        {about}
+        </Card.Text>
+        <div className="d-flex infocourse1" style={{ margin: '-8px 0' }}>
+          <div className="level me-4 d-flex">
+            <div>
+              <FontAwesomeIcon icon={faStar} className="img" />
+            </div>
+            <p className="ms-1 mt-0">{level}</p>
           </div>
-          <Card.Text className="desc mt-0" id="text2">
-            Belajar Web Designer dengan Figma by Angela Doe
-          </Card.Text>
-          <div className="d-flex infocourse1" style={{ margin: '-8px 0' }}>
-            <div className="level me-4 d-flex">
-              <div>
-                <FontAwesomeIcon icon={faStar} className="img" />
-              </div>
-              <p className="ms-1 mt-0"> Intermediate Level</p>
+          <div className="level me-4 d-flex">
+            <div>
+              <FontAwesomeIcon icon={faBook} className="img" />
             </div>
-            <div className="level me-4 d-flex">
-              <div>
-                <FontAwesomeIcon icon={faBook} className="img" />
-              </div>
-              <p className="ms-1 mt-0">10 modul</p>
-            </div>
-            <div className="level me-4 d-flex">
-              <div>
-                <FontAwesomeIcon icon={faClock} className="img" />
-              </div>
-              <p className="ms-1 mt-0">{order.orderResponses[0].time}</p>
-            </div>
+            <p className="ms-1 mt-0">{module} modul</p>
           </div>
-          <Button
+          <div className="level me-4 d-flex">
+            <div>
+              <FontAwesomeIcon icon={faClock} className="img" />
+            </div>
+            <p className="ms-1 mt-0">{duration}</p>
+          </div>
+        </div>
+        <Button
             variant="danger"
             style={{ height: '18px', fontSize: '10px' }}
             className="d-flex align-items-center justify-content-center"
           >
-            {order.orderResponses[0].paymentMethod}
+            {isPremium ? 'Premium Course' : 'Free Course'}
           </Button>
-        </Card.Body>
-      </Card>
-    </Col>
+      </Card.Body>
+    </Card>
+  </Col>
   );
 };
 
@@ -67,42 +78,53 @@ const UserProfile = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        const token = localStorage.getItem('token');
 
-  const fetchData = async () => {
-    try {
-      const token = localStorage.getItem('token');
-
-      if (!token) {
-        console.error('Token tidak ditemukan.');
-        return;
-      }
-
-      setIsLoading(true);
-
-      const userResponse = await axios.get(
-        'https://easy-class-407401.et.r.appspot.com/api/user/get',
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+        if (!token) {
+          console.error('Token tidak ditemukan.');
+          return;
         }
-      );
 
-      const userId = userResponse.data.data.username;
+        const response = await axios.get(
+          'https://easy-class-407401.et.r.appspot.com/api/user/get',
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
-      const orderResponse = await axios.get(
-        `http://easy-class-407401.et.r.appspot.com/api/admin/order/getAllOrderTransactions?userId=${userId}`
-      );
+        console.log('Respon Server:', response);
 
-      setOrderHistory(orderResponse.data.data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+        // Dapatkan ID pengguna dari respons server
+        const userId = response.data.data.id; 
+
+        // Lakukan fetching data getCourseOrder berdasarkan ID pengguna
+        const orderResponse = await axios.get(
+          `http://easy-class-407401.et.r.appspot.com/api/course/getCourseOrder?userId=${userId}`,
+          {
+            headers: {
+              accept: 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        console.log('Respon:', orderResponse);
+
+        setOrderHistory(orderResponse.data.data);
+      } catch (error) {
+        console.error('Error fetching data:', error.response);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData(); // Panggil fungsi fetchData
+  }, []);
 
   const toggleShowAllCards = () => {
     setShowAllCards(!showAllCards);
@@ -138,9 +160,11 @@ const UserProfile = () => {
                 ))}
 
                 {showAllCards &&
-                  orderHistory.slice(2).map((order) => (
-                    <CourseCard key={order.id} order={order} />
-                  ))}
+                  orderHistory
+                    .slice(2)
+                    .map((order) => (
+                      <CourseCard key={order.id} order={order} />
+                    ))}
 
                 {orderHistory.length > 2 && (
                   <div className="text-center mt-3">
