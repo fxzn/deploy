@@ -1,17 +1,17 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import "../Tabelkelola.css";
-
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-
 import EditVideo from "../crud/EditVideo";
+import AddData from "../crud/AddData";
 
 function TabelVideo() {
   const [showEditModal, setShowEditModal] = useState(false);
   const [kelasData, setKelasData] = useState([]);
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const [refresh, setRefresh] = useState(false); 
 
   useEffect(() => {
     async function getCourseList() {
@@ -31,7 +31,7 @@ function TabelVideo() {
       }
     }
     getCourseList();
-  }, []);
+  }, [refresh]);
 
   const handleEditClick = (code) => {
     setSelectedVideo(code);
@@ -51,6 +51,7 @@ function TabelVideo() {
 
       if (response.status === 200) {
         toast.success("Course deleted successfully");
+        setRefresh((prevRefresh) => !prevRefresh); 
       } else {
         toast.error("Failed to delete course");
       }
@@ -119,7 +120,9 @@ function TabelVideo() {
         handleCloseModal={handleCloseModal}
         selectedCourse={selectedVideo}
         code={selectedVideo} 
+        setRefresh={setRefresh}
       />
+      <AddData  handleClose={handleCloseModal} setRefresh={setRefresh}  />
     </>
   );
 }

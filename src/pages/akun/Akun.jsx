@@ -7,8 +7,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { ClipLoader, PuffLoader, SyncLoader } from 'react-spinners';
+import { Toast } from 'react-bootstrap';
 
 const Akun = () => {
+  const [loading, setLoading] = useState(true);
   const [profilePicture, setProfilePicture] = useState(null);
   const [imageSize, setImageSize] = useState(50);
   const [userData, setUserData] = useState({
@@ -18,11 +21,14 @@ const Akun = () => {
     country: '',
     city: '',
   });
-  const [imageURL, setImageURL] = useState(null); // Added state for image URL
+  const [imageURL, setImageURL] = useState(null);
+  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
+
         const token = localStorage.getItem('token');
 
         if (!token) {
@@ -52,7 +58,6 @@ const Akun = () => {
             city: user.city,
           });
 
-          // Set the image URL to state if it exists
           if (user.linkPhoto) {
             setImageURL(user.linkPhoto);
           }
@@ -61,6 +66,8 @@ const Akun = () => {
         }
       } catch (error) {
         console.error('Error mengambil data pengguna:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -75,7 +82,7 @@ const Akun = () => {
       reader.onloadend = () => {
         console.log('Profile picture loaded:', reader.result);
         setProfilePicture(file);
-        setImageURL(reader.result); // Set the image URL when a new image is selected
+        setImageURL(reader.result);
       };
       reader.readAsDataURL(file);
     }
@@ -107,7 +114,6 @@ const Akun = () => {
         return;
       }
 
-      // Upload the new profile picture if it exists
       if (profilePicture) {
         const formData = new FormData();
         formData.append('multipartFile', profilePicture);
@@ -130,7 +136,6 @@ const Akun = () => {
         }
       }
 
-      // Update other user data
       const response = await axios.put(
         'https://easy-class-407401.et.r.appspot.com/api/user/update',
         {
@@ -219,7 +224,7 @@ const Akun = () => {
               </div>
 
               <div className="formBox">
-                <div className="inputBox w100">
+                <div className="inputBoxx w100 ${loading ? 'loading' : ''}`}">
                   <input
                     type="text"
                     name=""
@@ -229,10 +234,17 @@ const Akun = () => {
                     onChange={(e) =>
                       setUserData({ ...userData, username: e.target.value })
                     }
+                    disabled={loading}
+                    readOnly
                   />
-                  <label>Name</label>
+                  
+                  <label>{loading && (
+                  <div className="spin">
+                    <PuffLoader color={'#fa4c4c'} loading={loading} size={20}/>
+                  </div> 
+                )}Name</label>
                 </div>
-                <div className="inputBox w100">
+                <div className="inputBoxx w100 ${loading ? 'loading' : ''}`}">
                   <input
                     type="email"
                     name=""
@@ -242,10 +254,16 @@ const Akun = () => {
                     onChange={(e) =>
                       setUserData({ ...userData, email: e.target.value })
                     }
+                    disabled={loading}
+                    readOnly
                   />
-                  <label>Email</label>
+                  <label>Email{loading && (
+                  <div className="spin">
+                    <PuffLoader color={'#fa4c4c'} loading={loading} size={20}/>
+                  </div> 
+                )}</label>
                 </div>
-                <div className="inputBox w100">
+                <div className="inputBoxx w100">
                   <input
                     type="text"
                     name=""
@@ -261,7 +279,7 @@ const Akun = () => {
                   />
                   <label>Mobile Number</label>
                 </div>
-                <div className="inputBox w50">
+                <div className="inputBoxx w50">
                   <input
                     type="text"
                     name=""
@@ -274,7 +292,7 @@ const Akun = () => {
                   />
                   <label>Negara</label>
                 </div>
-                <div className="inputBox w50">
+                <div className="inputBoxx w50">
                   <input
                     type="text"
                     name=""
@@ -287,7 +305,7 @@ const Akun = () => {
                   />
                   <label>Kota</label>
                 </div>
-                <div id="tomb1" className="inputBox w100">
+                <div id="tomb1" className="inputBoxx w100">
                   <input
                     type="submit"
                     defaultValue="Submit"
@@ -302,6 +320,24 @@ const Akun = () => {
       <div className="foot1">
         <Footerr />
       </div>
+      <Toast
+        show={showToast}
+        onClose={() => setShowToast(false)}
+        delay={3000}
+        autohide
+        style={{
+          position: 'fixed',
+          top: 20,
+          right: 20,
+        }}
+      >
+        <Toast.Header>
+          <strong className="mr-auto">Notification</strong>
+        </Toast.Header>
+        <Toast.Body>
+          {loading ? 'Loading...' : 'Submit successful!'}
+        </Toast.Body>
+      </Toast>
     </>
   );
 };

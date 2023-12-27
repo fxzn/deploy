@@ -1,9 +1,10 @@
 import { Modal, Button, Form } from "react-bootstrap";
 import { useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function AddData(props) {
-  const { showModal, handleClose } = props;
+  const { showModal, handleClose, setRefresh } = props;
 
   const [formData, setFormData] = useState({
     // id: "",
@@ -64,8 +65,11 @@ function AddData(props) {
         }
       );
       console.log(response.data);
+      toast.success("Course added successfully");
+      setRefresh((prevRefresh) => !prevRefresh);
     } catch (error) {
       console.error(error);
+      toast.error("Failed to add course");
     }
   };
 

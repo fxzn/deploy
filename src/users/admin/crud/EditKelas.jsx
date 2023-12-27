@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
+import { toast } from "react-toastify";
 
 function EditKelas(props) {
-  const { showModal, handleCloseModal, code } = props;
+  const { showModal, handleCloseModal, code, setRefresh } = props;
 
   const [courseData, setCourseData] = useState({
     title: "",
@@ -50,8 +51,9 @@ function EditKelas(props) {
         },
       })
       .then((response) => {
-        alert("Data kelas berhasil diperbarui:", response.data);
+        toast.success("Data kelas berhasil diperbarui");
         handleCloseModal();
+        setRefresh((prevRefresh) => !prevRefresh);
       })
       .catch((error) => {
         console.log("Terjadi kesalahan saat memperbarui kelas:", error);
@@ -59,10 +61,13 @@ function EditKelas(props) {
         if (error.response) {
           console.log("Data respons error:", error.response.data);
           console.log("Kode status HTTP:", error.response.status);
+          toast.error(`Gagal memperbarui kelas: ${error.response.data.message}`);
         } else if (error.request) {
           console.log("Tidak ada respons yang diterima:", error.request);
+          toast.error("Gagal memperbarui kelas: Tidak ada respons yang diterima");
         } else {
           console.log("Kesalahan lainnya:", error.message);
+          toast.error(`Gagal memperbarui kelas: ${error.message}`);
         }
       });
   };

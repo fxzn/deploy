@@ -18,7 +18,9 @@ import Bars from "./pages/akun/Bar";
 import OTPPage from "./auth/otp/Otp";
 import CoursePayment from "./pages/course/CoursePayment";
 import Succespayment from "./pages/course/paymentsucces";
-import PostUsername from "./auth/PostUsername";
+import ForgotPassword from "./auth/ForgotPassword";
+
+
 
 function App() {
   return (
@@ -35,7 +37,7 @@ function App() {
         <Route path="/history" element={<History />} />
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/register" element={<Register />} />
-        <Route path="/auth/resetPassword/:token" element={<ResetPaswd />} />
+        <Route path="/auth/resetPassword" element={<ResetPaswd />} />
         <Route path="/detailcourse/:title" element={<DetailCourse />} />
         <Route path="/course" element={<Course />} />
         <Route path="/course/payment/:title" element={<CoursePayment />} />
@@ -43,7 +45,8 @@ function App() {
         <Route path="/paymentsucces" element={<Succespayment/>}/>
         <Route path="/admin/dashboard" element={<DashboardAdmin />}/>
         <Route path="/admin/kelas" element={<KelolaKelas />} />
-        <Route path="/auth/postUsername" element={<PostUsername/>}/>
+        <Route path="/auth/forgotpassword" element={<ForgotPassword/>}/>
+        
       </Routes>
     </>
   );

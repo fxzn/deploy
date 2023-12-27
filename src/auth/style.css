@@ -143,6 +143,14 @@ form.sign-up-form {
   transition: 0.4s;
 }
 
+.icon-eye {
+  font-size: 20px;
+  cursor: pointer; 
+  position: relative;
+  left: 23rem; 
+  top: 2px; 
+}
+
 .box label {
   position: absolute;
   left: 0;

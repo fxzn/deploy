@@ -1,92 +1,116 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./PostUsername.css";
-import { faCircleUser } from "@fortawesome/free-regular-svg-icons";
+import "./ForgotPassword.css";
+import { faCircleUser, faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Form } from "react-bootstrap";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function ResetPaswd() {
   const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setNewConfirmPassword] = useState("");
+  const [confirmationPassword, setConfirmationPassword] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
+  const token = new URLSearchParams(location.search).get("token");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirm, setShowPasswordConfrim] = useState(false);
 
-  const handleSubmitUsername = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      if (newPassword !== confirmPassword) {
-        toast.error("Passwords do not match");
-        return;
-      }
+      const data = {
+        newPassword,
+        confirmationPassword,
+      };
 
-      const response = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/api/auth/resetPassword`,
-        {
-          newPassword,
-          confirmPassword,
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/auth/resetPassword?token=${token}`, data, {
+        headers: {
+          "Content-Type": "application/json",
         },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log("Response:", response.data);
-      const resetLink = `https://easyclass-course.vercel.app/auth/resetPassword?token=${response.data.token}`;
-      window.location.href = resetLink;
-    } catch (error) {
-      console.error("Error:", error);
+      });
 
-      if (axios.isAxiosError(error)) {
-        toast.error(error.response?.data?.message || "An error occurred");
-        return;
+      if (response.status === 200) {
+        console.log("Password changed successfully!");
+        toast.success("Password changed successfully!");
+        navigate("/auth/login", { replace: true });
+      } else {
+        console.error("Unexpected response status:", response.status);
+        toast.error("Unexpected response status");
       }
-
-      toast.error("An error occurred");
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.error("Axios Error:", error.response?.data.message || "Unknown error");
+        toast.error(error.response?.data.message || "Unknown error");
+      } else {
+        console.error("General Error:", error.message || "Unknown error");
+        toast.error(error.message || "Unknown error");
+      }
     }
   };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const togglePasswordVisibilityConfirm = () => {
+    setShowPasswordConfrim(!showPasswordConfirm);
+  };
+
+
+  useEffect(() => {
+    const inputs = document.querySelectorAll(".input-field");
+
+    inputs.forEach((inp) => {
+      inp.addEventListener("focus", () => {
+        inp.classList.add("active");
+      });
+
+      inp.addEventListener("blur", () => {
+        if (inp.value !== "") return;
+        inp.classList.remove("active");
+      });
+    });
+
+    return () => {
+      inputs.forEach((inp) => {
+        inp.removeEventListener("focus", () => {});
+        inp.removeEventListener("blur", () => {});
+      });
+    };
+  }, []);
 
   return (
     <>
       <main>
-        <div className="box">
-          <div className="inner-box">
+        <div className="box-forgot">
+          <div className="inner-forgot">
             <div className="forms-username">
-              <form autoComplete="off" className="form">
+              <Form autoComplete="off" className="form" onSubmit={handleSubmit}>
                 <div className="icon-username">
                   <FontAwesomeIcon icon={faCircleUser} />
                 </div>
                 <div className="heading-username">
-                  <h2>Trouble logging in ?</h2>
+                  <h2>Change password</h2>
                   <p>Enter your new password, and we'll reset your account.</p>
                 </div>
                 <div className="actual-form">
-                  <div className="input-username">
-                    <input
-                      type="password"
-                      className="input-field"
-                      autoComplete="off"
-                      required
-                      placeholder="New Password"
-                      value={newPassword}
-                      onChange={(e) => setNewPassword(e.target.value)}
-                    />
+                  <div className="input-password">
+                    <input type={showPassword ? "text" : "password"} className="input-field" autoComplete="off" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+                    <label>New Password</label>
+                    <FontAwesomeIcon className="icon-eyeslash" icon={showPassword ? faEyeSlash : faEye} onClick={togglePasswordVisibility} />
                   </div>
-                  <div className="input-username">
-                    <input
-                      type="password"
-                      className="input-field"
-                      autoComplete="off"
-                      required
-                      placeholder="Confirm Password"
-                      value={confirmPassword}
-                      onChange={(e) => setNewConfirmPassword(e.target.value)}
-                    />
+                  <div className="input-password">
+                    <input type={showPasswordConfirm ? "text" : "password"} className="input-field" autoComplete="off" value={confirmationPassword} onChange={(e) => setConfirmationPassword(e.target.value)} />
+                    <label>Confirm Password</label>
+                    <FontAwesomeIcon className="icon-eyeslash" icon={showPasswordConfirm ? faEyeSlash : faEye} onClick={togglePasswordVisibilityConfirm} />
                   </div>
-                  <button type="submit" className="sign-btn" onClick={handleSubmitUsername}>
-                    Submit
+                  <button type="submit" className="sign-btn">
+                    Update
                   </button>
                 </div>
-              </form>
+              </Form>
             </div>
           </div>
         </div>

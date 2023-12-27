@@ -67,21 +67,21 @@
   padding-top: 20px;
 }
 
-.container-profile .profileForm .formBox .inputBox {
+.container-profile .profileForm .formBox .inputBoxx {
   position: relative;
   margin: 0 0 35px 0;
 }
 
-.container-profile .profileForm .formBox .inputBox.w50 {
+.container-profile .profileForm .formBox .inputBoxx.w50 {
   width: 47%;
 }
 
-.container-profile .profileForm .formBox .inputBox.w100 {
+.container-profile .profileForm .formBox .inputBoxx.w100 {
   width: 100%;
 }
 
-.container-profile .profileForm .formBox .inputBox input,
-.container-profile .profileForm .formBox .inputBox textarea {
+.container-profile .profileForm .formBox .inputBoxx input,
+.container-profile .profileForm .formBox .inputBoxx textarea {
   width: 100%;
   resize: none;
   padding: 10px 10px;
@@ -92,7 +92,7 @@
   border-radius: 16px;
 }
 
-.container-profile .profileForm .formBox .inputBox span {
+.container-profile .profileForm .formBox .inputBoxx span {
   position: absolute;
   left: 5px;
   padding: 5px 0;
@@ -101,17 +101,17 @@
   font-weight: 300;
 }
 
-.container-profile .profileForm .formBox .inputBox input:focus ~ span,
-.container-profile .profileForm .formBox .inputBox input:valid ~ span,
-.container-profile .profileForm .formBox .inputBox textarea:focus ~ span,
-.container-profile .profileForm .formBox .inputBox textarea:valid ~ span {
+.container-profile .profileForm .formBox .inputBoxx input:focus ~ span,
+.container-profile .profileForm .formBox .inputBoxx input:valid ~ span,
+.container-profile .profileForm .formBox .inputBoxx textarea:focus ~ span,
+.container-profile .profileForm .formBox .inputBoxx textarea:valid ~ span {
   transform: translateY(-20px);
   font-size: 12px;
   font-weight: 600;
   top: -9px;
 }
 
-.container-profile .profileForm .formBox .inputBox input[type='submit'] {
+.container-profile .profileForm .formBox .inputBoxx input[type='submit'] {
   position: relative;
   cursor: pointer;
   background-color: #000;
@@ -120,17 +120,17 @@
   padding: 12px;
 }
 
-.container-profile .profileForm .formBox .inputBox input[type='submit']:hover {
+.container-profile .profileForm .formBox .inputBoxx input[type='submit']:hover {
   background-color: #fa4c4c;
   font-weight: 500;
 }
 
-.inputBox {
+.inputBoxx {
   position: relative;
   margin-bottom: 20px;
 }
 
-.inputBox input {
+.inputBoxx input {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
@@ -138,22 +138,24 @@
   transition: border-color 0.3s;
 }
 
-.inputBox label {
+.inputBoxx label {
   position: absolute;
-  top: 10px;
-  left: 12px;
+  top: -18px;
+  left: 8px;
+  font-size: 12px;
+  font-weight: 600;
   color: #777;
   pointer-events: none;
   transition: top 0.3s, left 0.3s, font-size 0.3s, font-weight 0.3s;
 }
 
-.inputBox input:focus + label,
-.inputBox input:valid + label {
+/* .inputBoxx input:focus + label,
+.inputBoxx input:valid + label {
   top: -18px;
   left: 10px;
   font-size: 12px;
   font-weight: 600;
-}
+} */
 
 .akun-header {
   background-color: #fa4c4c;
@@ -215,6 +217,13 @@
   display: block;
   margin: 0 auto;
   border-color: red;
+}
+
+.spin {
+  position: absolute;
+  top: 39px;
+  left: 350px; 
+  transform: translateY(-50%);
 }
 
 @media (max-width: 768px) {

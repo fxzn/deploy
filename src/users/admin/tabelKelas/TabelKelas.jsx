@@ -4,17 +4,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import "../Tabelkelola.css";
 import AddData from "../crud/AddData";
+import EditKelas from "../crud/EditKelas";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import EditKelas from "../crud/EditKelas";
-
+import EditVideo from "../crud/EditVideo";
+import TabelVideo from "./TabelVideo";
 
 function TabelKelas() {
   const [showModal, setShowModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [kelasData, setKelasData] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState(null);
+  const [refresh, setRefresh] = useState(false); 
 
   useEffect(() => {
     async function getCourseList() {
@@ -34,7 +36,7 @@ function TabelKelas() {
       }
     }
     getCourseList();
-  }, []);
+  }, [refresh]);
 
   const handleTambahClick = () => {
     setShowModal(true);
@@ -56,6 +58,7 @@ function TabelKelas() {
 
       if (response.status === 200) {
         toast.success("Course deleted successfully");
+        setRefresh((prevRefresh) => !prevRefresh); 
       } else {
         toast.error("Failed to delete course");
       }
@@ -127,10 +130,11 @@ function TabelKelas() {
             </div>
           </div>
         </div>
+        
       </div>
-      <EditKelas showModal={showEditModal} handleCloseModal={handleCloseModal} selectedCourse={selectedCourse} code={selectedCourse} />
-
-      {showModal && <AddData showModal={showModal} handleClose={handleCloseModal} />}
+      {/* <TabelVideo/> */}
+      <EditKelas showModal={showEditModal} handleCloseModal={handleCloseModal} selectedCourse={selectedCourse} code={selectedCourse} setRefresh={setRefresh}/>
+      {showModal && <AddData showModal={showModal} handleClose={handleCloseModal} setRefresh={setRefresh} />}
     </>
   );
 }

@@ -7,11 +7,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { Form } from "react-bootstrap";
+import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [fieldLogin, setFieldLogin] = useState("");
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -36,14 +40,23 @@ function Login() {
 
       if (token) {
         localStorage.setItem("token", token);
+
         if (roles && roles.includes("ROLE_ADMIN")) {
           navigate("/admin/dashboard");
         } else {
           navigate("/");
         }
+
+        setUsername("");
+        setPassword("");
+        setFieldLogin("");
       } else {
-        console.error("Token not received from the server");
-        toast.error("Token not received from the server");
+        console.error("Token tidak diterima dari server");
+        toast.error("Token tidak diterima dari server");
+        setFieldLogin("Password atau Username salah");
+
+        setUsername("");
+        setPassword("");
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -52,8 +65,17 @@ function Login() {
       } else {
         console.error("General Error:", error.message);
         toast.error(error.message);
+        toast.error("Login gagal. Harap periksa kredensial Anda.");
       }
+
+      setFieldLogin("Password atau Username salah");
+      setUsername("");
+      setPassword("");
     }
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   useEffect(() => {
@@ -98,7 +120,6 @@ function Login() {
       bullet.addEventListener("click", moveSlider);
     });
 
-    // Cleanup event listeners when the component unmounts
     return () => {
       inputs.forEach((inp) => {
         inp.removeEventListener("focus", () => {});
@@ -137,15 +158,17 @@ function Login() {
                   <label>Name</label>
                 </div>
                 <div className="input-wrap">
-                  <input type="password" minLength="0" className="input-field" autoComplete="off" required value={password} onChange={(e) => setPassword(e.target.value)} />
+                  <input type={showPassword ? "text" : "password"} className="input-field" value={password} onChange={(e) => setPassword(e.target.value)} />
                   <label>Password</label>
+                  <FontAwesomeIcon className="icon-eye" icon={showPassword ? faEyeSlash : faEye} onClick={togglePasswordVisibility} />
                 </div>
+                {fieldLogin && <p className="text-danger text-center">{fieldLogin}</p>}
                 <button type="submit" className="sign-btn">
                   Sign In
                 </button>
                 <p className="text">
                   Forgotten your password or your login details?
-                  <Link to="/auth/postUsername">Reset password</Link>
+                  <Link to="/auth/forgotpassword">Reset password</Link>
                 </p>
               </div>
             </Form>
