@@ -5,17 +5,15 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 function ResetPaswd() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmationPassword, setConfirmationPassword] = useState("");
   const navigate = useNavigate();
-  const location = useLocation();
-  const token = new URLSearchParams(location.search).get("token");
+  const { token } = useParams(); 
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirm, setShowPasswordConfrim] = useState(false);
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -58,7 +56,6 @@ function ResetPaswd() {
   const togglePasswordVisibilityConfirm = () => {
     setShowPasswordConfrim(!showPasswordConfirm);
   };
-
 
   useEffect(() => {
     const inputs = document.querySelectorAll(".input-field");
