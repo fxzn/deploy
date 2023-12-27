@@ -103,7 +103,7 @@ function CourseRun() {
                             </div>
 
                             <Card.Text>
-                              <div className="desc mt-1 fw-bold">{index.description}</div>
+                              <div className="desc mt-1 fw-bold">{index.about}</div>
                               <div>{index.teacher}</div>
                             </Card.Text>
                             <div className="d-flex infocourse">

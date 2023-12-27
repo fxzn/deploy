@@ -158,7 +158,7 @@ function Login() {
                   <label>Name</label>
                 </div>
                 <div className="input-wrap">
-                  <input type={showPassword ? "text" : "password"} className="input-field" value={password} onChange={(e) => setPassword(e.target.value)} />
+                  <input type={showPassword ? "text" : "password"} className="input-field" autoComplete="off" required  value={password} onChange={(e) => setPassword(e.target.value)} />
                   <label>Password</label>
                   <FontAwesomeIcon className="icon-eye" icon={showPassword ? faEyeSlash : faEye} onClick={togglePasswordVisibility} />
                 </div>
