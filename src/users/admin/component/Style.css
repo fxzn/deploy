@@ -136,8 +136,7 @@
 .navbar-admin {
     background-color: var(--light);
     padding: 12px 12px;
-    transition: all 0.5s ease;
-  
+    margin-left: 25px;  
   }
 
 .sidebar .navbar-admin .navbar-admin-nav .nav-link {
