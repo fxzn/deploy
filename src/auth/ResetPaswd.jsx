@@ -24,7 +24,7 @@ function ResetPaswd() {
         confirmationPassword,
       };
 
-      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/auth/resetPassword?/${token}`, data, {
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/auth/resetPassword/${token}`, data, {
         headers: {
           "Content-Type": "application/json",
         },
