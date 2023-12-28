@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./ForgotPassword.css";
 import { faCircleUser } from "@fortawesome/free-regular-svg-icons";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import "./ForgotPassword.css"; // Import CSS file
 
 function ForgotPassword() {
   const [username, setUsername] = useState("");
@@ -14,6 +14,9 @@ function ForgotPassword() {
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/api/auth/sendToken?username=${username}`,
+        {
+          username: username,
+        },
         {
           headers: {
             "Content-Type": "application/json",
@@ -35,33 +38,39 @@ function ForgotPassword() {
   };
 
   return (
-    <>
-      <main>
-        <div className="box-forgot">
-          <div className="inner-forgot">
-            <div className="forms-username">
-              <form autoComplete="off" className="form">
-                <div className="icon-username">
-                  <FontAwesomeIcon icon={faCircleUser} />
+    <main>
+      <div className="box-forgot">
+        <div className="inner-forgot">
+          <div className="forms-username">
+            <form autoComplete="off" className="form" onSubmit={handleSubmitUsername}>
+              <div className="icon-username">
+                <FontAwesomeIcon icon={faCircleUser} />
+              </div>
+              <div className="heading-username">
+                <h2>Trouble logging in?</h2>
+                <p>Enter your username, and we'll send you a link to get back into your account.</p>
+              </div>
+              <div className="actual-form">
+                <div className="input-username">
+                  <input
+                    type="text"
+                    className="input-field"
+                    autoComplete="off"
+                    required
+                    placeholder="Username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
                 </div>
-                <div className="heading-username">
-                  <h2>Trouble logging in ?</h2>
-                  <p>Enter your username, and we'll send you a link to get back into your account.</p>
-                </div>
-                <div className="actual-form">
-                  <div className="input-username">
-                    <input type="text" className="input-field" autoComplete="off" required placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-                  </div>
-                  <button type="submit" className="sign-btn" onClick={handleSubmitUsername}>
-                    Submit
-                  </button>
-                </div>
-              </form>
-            </div>
+                <button type="submit" className="sign-btn">
+                  Submit
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-      </main>
-    </>
+      </div>
+    </main>
   );
 }
 

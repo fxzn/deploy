@@ -11,7 +11,8 @@ function ResetPaswd() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmationPassword, setConfirmationPassword] = useState("");
   const navigate = useNavigate();
-  const { token } = useParams(); 
+  const urlParams = new URLSearchParams(window.location.search);
+  const token = urlParams.get("token"); 
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirm, setShowPasswordConfrim] = useState(false);
 
@@ -33,7 +34,7 @@ function ResetPaswd() {
       if (response.status === 200) {
         console.log("Password changed successfully!");
         toast.success("Password changed successfully!");
-        navigate("/auth/login", { replace: true });
+        // navigate("/auth/login", { replace: true });
       } else {
         console.error("Unexpected response status:", response.status);
         toast.error("Unexpected response status");
