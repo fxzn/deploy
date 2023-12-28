@@ -7,6 +7,8 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Form } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 
 function Register() {
   const [username, setUsername] = useState("");
@@ -16,6 +18,13 @@ function Register() {
   const [country, setCountry] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+
+  
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -116,7 +125,7 @@ function Register() {
     <main>
       <div className="box">
         <div className="inner-box">
-          <Form className="forms-wrap" onSubmit={onSubmit}>
+          <Form className="forms-wrap-register " onSubmit={onSubmit}>
             <div autoComplete="off" className="sign-in-form">
               <div className="logo">
                 <h4>easyclass</h4>
@@ -152,6 +161,7 @@ function Register() {
                 <div className="input-wrap">
                   <input type="password" className="input-field" autoComplete="off" required value={password} onChange={(e) => setPassword(e.target.value)} />
                   <label>Password</label>
+                  <FontAwesomeIcon className="icon-eye" icon={showPassword ? faEyeSlash : faEye} onClick={togglePasswordVisibility} />
                 </div>
                 <button type="submit" className="sign-btn" onSubmit={onSubmit}>
                   Sign Up
