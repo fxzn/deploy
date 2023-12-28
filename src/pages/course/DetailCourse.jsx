@@ -8,7 +8,6 @@ import Footerr from "../../components/footer/Footerr";
 import { useEffect, useState } from "react";
 import { GetCourseDetail } from "../../../service/Course.service";
 
-
 function DetailCourse() {
   const [showModal, setShowModal] = useState(false);
   const [courseDetail, setCourseDetail] = useState([]);
@@ -78,26 +77,22 @@ function DetailCourse() {
                 </div>
                 <div className="course-details">
                   <div className="d-flex justify-content-between align-items-center mb-">
-
                     <h2 className="text-judul">{courseDetail.title}</h2>
-
-                  
 
                     <span className="d-flex ">
                       <FontAwesomeIcon icon={faStar} className="icon-rating" />
-                      <p className="rating">4.7</p>
+                      <p className="rating-text">4.7</p>
                     </span>
                   </div>
                   <h4 className="text-about mb-1">{courseDetail.about}</h4>
                   <p className="fasilator-name">By {courseDetail.teacher}</p>
                   <div className="d-flex flex-wrap align-items-center mb-3 info-course">
                     <div className="d-flex mb-2">
-
                       <FontAwesomeIcon icon={faShield} className="icon-triangle" />
                       <p className="text-course-info">{courseDetail.level}</p>
                     </div>
                     <span className="d-flex mb-2">
-                      <FontAwesomeIcon icon={faBook} className="icon-triangle"/>
+                      <FontAwesomeIcon icon={faBook} className="icon-triangle" />
                       <p className="text-course-info">{courseDetail.module} Module</p>
                     </span>
 
@@ -158,9 +153,14 @@ function DetailCourse() {
                       <ol>
                         {subjectResponse.map((subject, index) => (
                           <li key={index} className="my-2 d-flex justify-content-between align-items-center pointer">
-                            <p onClick={() => {subject.isPremium ? handlBuyClick() : clickTitle(subject.link, subject.description, index)}} className={`d-flex gap-3 align-items-center ${titleAktive === index ? "text-success fw-bold" : null}`}>
+                            <p
+                              onClick={() => {
+                                subject.isPremium ? handlBuyClick() : clickTitle(subject.link, subject.description, index);
+                              }}
+                              className={`d-flex gap-3 align-items-center title-video ${titleAktive === index ? "text-success fw-bold" : null}`}
+                            >
                               <span onClick={() => clickTitle(subject.link)} className="p-1 align-items-center justify-content-center">
-                                {index + 1}
+                                {index + 1}.
                               </span>
                               {subject.title}
                             </p>

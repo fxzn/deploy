@@ -60,7 +60,7 @@ main {
   transition: 0.8s ease-in-out;
 }
 
-.forms-wrap-register {
+/* .forms-wrap-register {
   position: absolute;
   height: 100%;
   width: 45%;
@@ -71,7 +71,7 @@ main {
   grid-template-rows: 1fr;
   transition: 0.8s ease-in-out;
 }
-
+ */
 
 form {
   max-width: 260px;

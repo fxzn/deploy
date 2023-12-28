@@ -5,7 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function ResetPaswd() {
   const [newPassword, setNewPassword] = useState("");
@@ -34,7 +34,7 @@ function ResetPaswd() {
       if (response.status === 200) {
         console.log("Password changed successfully!");
         toast.success("Password changed successfully!");
-        // navigate("/auth/login", { replace: true });
+        navigate("/auth/login", { replace: true });
       } else {
         console.error("Unexpected response status:", response.status);
         toast.error("Unexpected response status");

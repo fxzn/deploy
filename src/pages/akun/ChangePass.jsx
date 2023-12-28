@@ -152,7 +152,6 @@ e
           </div>
         </div>
       </section>
-
       <div className="foot1">
         <Footerr/>
       </div>

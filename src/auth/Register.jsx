@@ -50,6 +50,7 @@ function Register() {
       );
   
       if (response.status === 200) {
+        toast.success("Registration successful!");
         navigate("/auth/otp", { replace: true });
       }
     } catch (error) {
@@ -123,10 +124,10 @@ function Register() {
 
   return (
     <main>
-      <div className="box">
+       <div className="box">
         <div className="inner-box">
-          <Form className="forms-wrap-register " onSubmit={onSubmit}>
-            <div autoComplete="off" className="sign-in-form">
+          <div className="forms-wrap">
+            <Form autoComplete="off" className="sign-in-form" onSubmit={onSubmit}>
               <div className="logo">
                 <h4>easyclass</h4>
               </div>
@@ -138,9 +139,9 @@ function Register() {
                 </Link>
               </div>
               <div className="actual-form">
-                <div className="input-wrap">
+              <div className="input-wrap">
                   <input type="text" className="input-field" autoComplete="off" required value={username} onChange={(e) => setUsername(e.target.value)} />
-                  <label>Name</label>
+                  <label>Username</label>
                 </div>
                 <div className="input-wrap">
                   <input type="email" className="input-field" autoComplete="off" required value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -166,15 +167,13 @@ function Register() {
                 <button type="submit" className="sign-btn" onSubmit={onSubmit}>
                   Sign Up
                 </button>
-
-
                 <p className="text">
                   if you forget your password
                   <Link to="/auth/forgotpassword">Forgot password</Link>
                 </p>
               </div>
-            </div>
-          </Form>
+            </Form>
+          </div>
           <div className="carousel">
             <div className="images-wrapper">
               <img src={img1} className="image img-1 show" alt="" />

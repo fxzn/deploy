@@ -67,11 +67,11 @@ function Login() {
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.error("Axios Error:", error.response.data.message);
-        toast.error(error.response.data.message);
+        // toast.error(error.response.data.message);
       } else {
         console.error("General Error:", error.message);
-        toast.error(error.message);
-        toast.error("Login gagal. Harap periksa kredensial Anda.");
+        // toast.error(error.message);
+        // toast.error("Login gagal. Harap periksa kredensial Anda.");
       }
 
       setFieldLogin("Password atau Username salah");
@@ -170,7 +170,7 @@ function Login() {
                 </button>
                 <p className="text">
                   Forgotten your password or your login details?
-                  <Link to="/auth/forgotpassword">Reset password</Link>
+                  <Link to="/auth/forgotpassword">Forgot password</Link>
                 </p>
               </div>
             </Form>
