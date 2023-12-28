@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './ChangePass.css';
 import Bars from './Bar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,7 +12,7 @@ const UserProfile = () => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmationPassword, setConfirmationPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false); // Added isLoading state
+  const [isLoading, setIsLoading] = useState(false); 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,7 +44,7 @@ const UserProfile = () => {
     };
 
     fetchData();
-  }, []); // Empty dependency array means it runs once when component mounts
+  }, []); 
 
   const handleChangePassword = async (e) => {
     e.preventDefault();
@@ -75,10 +75,9 @@ const UserProfile = () => {
 
       console.log(response);
 
-      // Handle the response, for example, show a success message
+e
       console.log('Password changed successfully', response.data);
     } catch (error) {
-      // Handle errors, for example, show an error message
       console.error('Error changing password', error);
     }
   };
