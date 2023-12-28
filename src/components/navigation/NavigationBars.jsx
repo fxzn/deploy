@@ -45,8 +45,8 @@ function NavigationBars() {
               </h5>
               <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" />
             </div>
-            <div className="offcanvas-body">
-              <ul className="navbar-nav mx-auto mb-2 mb-lg-0 small fw-bolder">
+            <div className="offcanvas-body mb-2">
+              <ul className="navbar-nav mx-auto mb-1 mb-lg-0 small fw-bolder">
                 <li className="nav-item">
                   <Link to="/" className="nav-link mx-3">
                     Home
