@@ -169,7 +169,7 @@ function Register() {
                 </button>
                 <p className="text">
                   if you forget your password
-                  <Link to="/auth/forgotpassword">Forgot password</Link>
+                  <Link to="/auth/forgotpassword"> Forgot password</Link>
                 </p>
               </div>
             </Form>
