@@ -169,6 +169,43 @@ function DetailCourse() {
                         ))}
                       </ol>
                     </div>
+
+                    {/* <div>
+                      <div className="d-flex justify-content-between header-chapter">
+                        <p className="text-dark font-weight-bold">Chapter 2 - Materi</p>
+                        <p className="text-dark font-weight-bold"> 120 Menit</p>
+                      </div>
+                      <ol>
+                        <li className="my-2 d-flex justify-content-between align-items-center">
+                          <p className="d-flex gap-3 align-items-center">
+                            <span className="p-1 align-items-center justify-content-center">1</span>
+                            Anda yang ingin memahami poin penting design system
+                          </p>
+                          <FontAwesomeIcon icon={faLock} className="icon-lock" />
+                        </li>
+                        <li className="my-2 d-flex justify-content-between align-items-center">
+                          <p className="d-flex gap-3 align-items-center">
+                            <span className="p-1 align-items-center justify-content-center">2</span>
+                            Anda yang ingin memahami poin penting design system
+                          </p>
+                          <FontAwesomeIcon icon={faLock} className="icon-lock" />
+                        </li>
+                        <li className="my-2 d-flex justify-content-between align-items-center">
+                          <p className="d-flex gap-3 align-items-center">
+                            <span className="p-1 align-items-center justify-content-center">3</span>
+                            Anda yang ingin memahami poin penting design system
+                          </p>
+                          <FontAwesomeIcon icon={faLock} className="icon-lock" />
+                        </li>
+                        <li className="my-2 d-flex justify-content-between align-items-center">
+                          <p className="d-flex gap-3 align-items-center">
+                            <span className="p-1 align-items-center justify-content-center">4</span>
+                            Anda yang ingin memahami poin penting design system
+                          </p>
+                          <FontAwesomeIcon icon={faLock} className="icon-lock" />
+                        </li>
+                      </ol>
+                    </div> */}
                   </Card.Body>
                 </Card>
               </div>

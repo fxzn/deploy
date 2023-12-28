@@ -116,6 +116,10 @@
   margin-left: 2rem;
 }
 
+.card-video{
+  margin-top: 6.6rem;
+}
+
 
 .card {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
@@ -131,12 +135,6 @@
   color: #73CA5C;
 }
 
-.progress-text{
-  margin-left: 5rem;
-  font-size: 12px;
-  font-weight: 400;
-  color: rgb(5, 5, 5);
-}
 
 .header-content{
   font-weight: 600;
