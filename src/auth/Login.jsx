@@ -17,6 +17,12 @@ function Login() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
+  
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -72,10 +78,6 @@ function Login() {
       setUsername("");
       setPassword("");
     }
-  };
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
   };
 
   useEffect(() => {

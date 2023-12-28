@@ -9,6 +9,7 @@ import "./courses.css"; // Link or import your CSS file
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function CoursePayment() {
   const [courseData, setCourseData] = useState([]);
@@ -59,7 +60,6 @@ function CoursePayment() {
         navigate("/paymentsucces", { replace: true }); 
       }
 
-;
     } catch (error) {
       if (axios.isAxiosError(error)) {
         toast.error(error.response.data.message);

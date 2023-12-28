@@ -32,7 +32,7 @@ function succespayment() {
         <Button onClick={handleBackClick} variant="primary">
           Mulai Belajar
         </Button>
-        <p className="text-danger mt-3" onClick={handleBackClick}>Kembali ke berandda</p>
+        <p className="text-danger mt-3" onClick={handleBackClick}>Kembali ke beranda</p>
       </Container>
 
       <Footerr />

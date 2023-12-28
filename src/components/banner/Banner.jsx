@@ -17,7 +17,7 @@ function Banner() {
                 <h1 className="mb-0">Make your future brighter by "learning" new things all the time</h1>
               </div>
               <div className="col-lg-3">
-                <Link to={"/course"} className="btn btn-light py-2 px-4">
+                <Link to={"/course"} className="btn btn-light py-2 px-4 ">
                   Learn More
                 </Link>
               </div>

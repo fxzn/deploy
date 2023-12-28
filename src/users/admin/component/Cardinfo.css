@@ -26,8 +26,13 @@
     /* margin-top: 7rem; */
 }
 
-.text-cardinfo{
-    font-size: 20px;
+.text-cardinfo p {
+    font-size: 24px;
+}
+
+.text-cardinfo h6{
+    font-size: 17px;
+    font-weight: 600;
 }
 
 .icon-cardinfo{

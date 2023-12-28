@@ -18,6 +18,7 @@ import OTPPage from "./auth/otp/Otp";
 import CoursePayment from "./pages/course/CoursePayment";
 import Succespayment from "./pages/course/paymentsucces";
 import ForgotPassword from "./auth/ForgotPassword";
+import NotFound from "./components/notFound/NotFound";
 
 
 
@@ -44,7 +45,7 @@ function App() {
         <Route path="/admin/dashboard" element={<DashboardAdmin />}/>
         <Route path="/admin/kelas" element={<KelolaKelas />} />
         <Route path="/auth/forgotpassword" element={<ForgotPassword/>}/>
-        
+        <Route path="*" element={<NotFound/>}/>
       </Routes>
     </>
   );
