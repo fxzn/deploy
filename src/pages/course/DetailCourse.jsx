@@ -146,24 +146,15 @@ function DetailCourse() {
                 </div>
               </div>
               <div className="col-md-4 ">
-                <Card className="mb-2">
+                <Card className="mb-2 card-video">
                   <Card.Body className="jutify-content-center ">
                     <div className="d-flex align-items-center gap-2=">
                       <div className="d-flex justify-content-between w-50 align-items-center">
                         <h1 className="header-content">Materi Belajar</h1>
                       </div>
-                      <div className="position-relative">
-                        <label className="position-absolute progress-text">90% Progress</label>
-                        <progress className="rounded-strip" id="progress" value="60" max="100"></progress>
-                      </div>
                     </div>
 
                     <div>
-                      <div className="d-flex justify-content-between mt-5 mb-3 header-chapter">
-                        <p className="text-dark">Chapter 1 - Pendahuluan</p>
-                        <p className="text-dark"> 40 Menit</p>
-                      </div>
-
                       <ol>
                         {subjectResponse.map((subject, index) => (
                           <li key={index} className="my-2 d-flex justify-content-between align-items-center pointer">
@@ -176,43 +167,6 @@ function DetailCourse() {
                             {courseDetail.isPremium ? <FontAwesomeIcon icon={faLock} className="icon-lock" /> : <FontAwesomeIcon icon={faPlayCircle} className="icon-play text-dark w-10 h-full" />}
                           </li>
                         ))}
-                      </ol>
-                    </div>
-
-                    <div>
-                      <div className="d-flex justify-content-between header-chapter">
-                        <p className="text-dark font-weight-bold">Chapter 2 - Materi</p>
-                        <p className="text-dark font-weight-bold"> 120 Menit</p>
-                      </div>
-                      <ol>
-                        <li className="my-2 d-flex justify-content-between align-items-center">
-                          <p className="d-flex gap-3 align-items-center">
-                            <span className="p-1 align-items-center justify-content-center">1</span>
-                            Anda yang ingin memahami poin penting design system
-                          </p>
-                          <FontAwesomeIcon icon={faLock} className="icon-lock" />
-                        </li>
-                        <li className="my-2 d-flex justify-content-between align-items-center">
-                          <p className="d-flex gap-3 align-items-center">
-                            <span className="p-1 align-items-center justify-content-center">2</span>
-                            Anda yang ingin memahami poin penting design system
-                          </p>
-                          <FontAwesomeIcon icon={faLock} className="icon-lock" />
-                        </li>
-                        <li className="my-2 d-flex justify-content-between align-items-center">
-                          <p className="d-flex gap-3 align-items-center">
-                            <span className="p-1 align-items-center justify-content-center">3</span>
-                            Anda yang ingin memahami poin penting design system
-                          </p>
-                          <FontAwesomeIcon icon={faLock} className="icon-lock" />
-                        </li>
-                        <li className="my-2 d-flex justify-content-between align-items-center">
-                          <p className="d-flex gap-3 align-items-center">
-                            <span className="p-1 align-items-center justify-content-center">4</span>
-                            Anda yang ingin memahami poin penting design system
-                          </p>
-                          <FontAwesomeIcon icon={faLock} className="icon-lock" />
-                        </li>
                       </ol>
                     </div>
                   </Card.Body>
