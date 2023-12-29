@@ -13,28 +13,60 @@
     --light: #F3F6F9;
     --dark: #191C24;
 }
-.body{
+.body {
     font-family: "Poppins", sans-serif;
   }
-
-  .content-card{
-    margin-top: rem;
+  
+  .content-card {
+    margin-top: 1rem;
+  }
+  
+  .active-users {
+    background-color: #489CFF;
+    border-radius: 30px;
+    color: var(--white-color);
   }
 
-.card-info{
-    background-color: var(--pink-color);
-    /* margin-top: 7rem; */
-}
+  .active-class{
+    background-color: #73CA5C;
+    border-radius: 30px;
+    color: var(--white-color);
+  }
+  
+  .premium-class {
+    background-color: #6148FF;
+    border-radius: 30px;
+    color: var(--white-color);
+  }
+  
+  
 
-.text-cardinfo p {
-    font-size: 24px;
-}
-
-.text-cardinfo h6{
+  .text-cardinfo h4 {
+    font-size: 33px;
+    color: #191C24;
+    font-weight: 800;
+    margin-left: 38px;
+  }
+  
+  .text-cardinfo p {
     font-size: 17px;
     font-weight: 600;
-}
+    margin-right: 20px;
+    
+  }
+  
+  .number{
+    margin-left: 30px;
+   
+  }
 
-.icon-cardinfo{
+  .text-cardinfo .number {
+    color: white;
+  }
+
+  
+  .icon-cardinfo {
     color: var(--white-color);
-}
+    font-size: 3.3rem;
+    margin-left: 20px;
+  }

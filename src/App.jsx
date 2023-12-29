@@ -20,6 +20,7 @@ import Succespayment from "./pages/course/paymentsucces";
 import ForgotPassword from "./auth/ForgotPassword";
 import NotFound from "./components/notFound/NotFound";
 import DetailCourseRun from "./pages/course/detailCourseRun";
+import User from "./users/admin/User";
 
 
 
@@ -47,6 +48,7 @@ function App() {
         <Route path="/paymentsucces" element={<Succespayment/>}/>
         <Route path="/admin/dashboard" element={<DashboardAdmin />}/>
         <Route path="/admin/kelas" element={<KelolaKelas />} />
+        <Route path="/admin/user" element={<User/>} />
         <Route path="/auth/forgotpassword" element={<ForgotPassword/>}/>
         <Route path="*" element={<NotFound/>}/>
       </Routes>

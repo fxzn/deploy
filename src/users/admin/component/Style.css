@@ -1,296 +1,278 @@
 /********** Template CSS **********/
 :root {
-    --red-color: #f81745;
-    --red-pink-color: #f15d7b;
-    --black-color: #212121;
-    --pink-color: #fa80ab;
-    --white-color: #ffffff;
-    --primary: #009CFF;
-    --light: #F3F6F9;
-    --dark: #191C24;
+  --red-color: #f81745;
+  --red-pink-color: #f15d7b;
+  --black-color: #212121;
+  --pink-color: #fa80ab;
+  --white-color: #ffffff;
+  --primary: #009cff;
+  --light: #f3f6f9;
+  --dark: #191c24;
 }
 
 .back-to-top {
-    position: fixed;
-    display: none;
-    right: 45px;
-    bottom: 45px;
-    z-index: 99;
+  position: fixed;
+  display: none;
+  right: 45px;
+  bottom: 45px;
+  z-index: 99;
 }
-
 
 .text-admin {
-    margin-top: 3rem;
-    background-color: var(--light);
-    
+  margin-top: 3rem;
+  background-color: #ebf3fc;
 }
 
+
+.sidebar .navbar-nav .nav-item.active-link {
+    background-color: #009CFF; 
+    color: #ffffff;
+    border-radius: 10px; 
+  }
+  
+  .sidebar .navbar-nav .nav-item.active-link .nav-link {
+    color: #ffffff; 
+  }
+
+  
 /*** Spinner ***/
 #spinner {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity .5s ease-out, visibility 0s linear .5s;
-    z-index: 99999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease-out, visibility 0s linear 0.5s;
+  z-index: 99999;
 }
 
 #spinner.show {
-    transition: opacity .5s ease-out, visibility 0s linear 0s;
-    visibility: visible;
-    opacity: 1;
+  transition: opacity 0.5s ease-out, visibility 0s linear 0s;
+  visibility: visible;
+  opacity: 1;
 }
 
-
-/*** Button ***/
-
-/* 
-.btn.btn-primary {
-    color: #FFFFFF;
-}
-
-.btn-square {
-    width: 38px;
-    height: 38px;
-}
-
-.btn-sm-square {
-    width: 32px;
-    height: 32px;
-}
-
-.btn-lg-square {
-    width: 48px;
-    height: 48px;
-}
-
-.btn-square,
-.btn-sm-square,
-.btn-lg-square {
-    padding: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: normal;
-    border-radius: 50px;
-} */
-
+.status-order {
+    font-weight: bold;
+  }
+  
+  .status-order.completed {
+    color: rgb(1, 173, 1);
+  }
+  
+  .status-order.pending {
+    color: rgb(255, 4, 4);
+  }
+  
 
 /*** Layout ***/
 .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 250px;
-    height: 100vh;
-    overflow-y: auto;
-    background: var(--light);
-    transition: 0.5s;
-    z-index: 999;
-    /* margin-top: 3rem; */
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 250px;
+  height: 100vh;
+  overflow-y: auto;
+  background: #ebf3fc;
+  transition: 0.5s;
+  z-index: 999;
+  /* margin-top: 3rem; */
 }
 
 .content {
-    margin-left: 250px;
-    margin-bottom: 2rem;
-    background: var(--light);
-    transition: 0.5s;
-    
+  margin-left: 250px;
+  margin-bottom: 2rem;
+  /* background: #ebf3fc; */
+  transition: 0.5s;
 }
 
 @media (min-width: 992px) {
-    .sidebar {
-        margin-left: 0;
-    }
+  .sidebar {
+    margin-left: 0;
+  }
 
-    .sidebar.open {
-        margin-left: -250px;
-    }
+  .sidebar.open {
+    margin-left: -250px;
+  }
 
-    .content {
-        width: calc(100% - 250px);
-    }
+  .content {
+    width: calc(100% - 250px);
+  }
 
-    .content.open {
-        width: 100%;
-        margin-left: 0;
-    }
+  .content.open {
+    width: 100%;
+    margin-left: 0;
+  }
 }
 
 @media (max-width: 991.98px) {
-    .sidebar {
-        margin-left: -250px;
-    }
+  .sidebar {
+    margin-left: -250px;
+  }
 
-    .sidebar.open {
-        margin-left: 0;
-    }
+  .sidebar.open {
+    margin-left: 0;
+  }
 
-    .content {
-        width: 100%;
-        margin-left: 0;
-    }
+  .content {
+    width: 100%;
+    margin-left: 0;
+  }
 }
-
 
 /*** navbar ***/
 .navbar-admin {
-    background-color: var(--light);
-    padding: 12px 12px;
-    margin-left: 25px;  
-  }
-
+  background-color: #ebf3fc;
+  padding: 12px 12px;
+  margin-left: 25px;
+}
 
 .sidebar .navbar-admin .navbar-admin-nav .nav-link {
-    margin-bottom: 5px;
-    padding: 7px 20px;
-    color: var(--dark);
-    font-weight: 500;
-    border-left: 3px solid var(--light);
-    border-radius: 0 30px 30px 0;
-    outline: none;
+  margin-bottom: 5px;
+  padding: 7px 20px;
+  color: var(--dark);
+  font-weight: 500;
+  border-left: 3px solid var(--light);
+  border-radius: 0 30px 30px 0;
+  outline: none;
 }
 
 .sidebar .navbar-admin .navbar-admin-nav .nav-link:hover,
 .sidebar .navbar-admin .navbar-admin-nav .nav-link.active {
-    color: var(--primary);
-    background: var(--light);
-    border-color: var(--primary);
+  color: var(--primary);
+  background: var(--light);
+  border-color: var(--primary);
 }
 
 .sidebar .navbar-admin .navbar-admin-nav .nav-link i {
-    width: 40px;
-    height: 40px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--light);
-    border-radius: 40px;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--light);
+  border-radius: 40px;
 }
 
 .sidebar .navbar-admin .navbar-admin-nav .nav-link:hover i,
 .sidebar .navbar-admin .navbar-admin-nav .nav-link.active i {
-    background: var(--light);
+  background: var(--light);
 }
 
 .sidebar .navbar-admin .dropdown-toggle::after {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    border: none;
-    content: "\f107";
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    transition: .5s;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  border: none;
+  content: "\f107";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  transition: 0.5s;
 }
 
-.sidebar .navbar-admin .dropdown-toggle[aria-expanded=true]::after {
-    transform: rotate(-180deg);
+.sidebar .navbar-admin .dropdown-toggle[aria-expanded="true"]::after {
+  transform: rotate(-180deg);
 }
 
 .sidebar .navbar-admin .dropdown-item {
-    padding-left: 25px;
-    border-radius: 0 30px 30px 0;
+  padding-left: 25px;
+  border-radius: 0 30px 30px 0;
 }
 
 .content .navbar-admin .navbar-admin-nav .nav-link {
-    margin-left: 25px;
-    padding: 12px 0;
-    color: var(--dark);
-    outline: none;
+  margin-left: 25px;
+  padding: 12px 0;
+  color: var(--dark);
+  outline: none;
 }
 
 .content .navbar-admin .navbar-admin-nav .nav-link:hover,
 .content .navbar-admin .navbar-admin-nav .nav-link.active {
-    color: var(--primary);
+  color: var(--primary);
 }
 
 .content .navbar-admin .sidebar-toggler,
 .content .navbar-admin .navbar-admin-nav .nav-link i {
-    width: 40px;
-    height: 40px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--light);
-    border-radius: 40px;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--light);
+  border-radius: 40px;
 }
 
 .content .navbar-admin .dropdown-toggle::after {
-    margin-left: 6px;
-    vertical-align: middle;
-    border: none;
-    content: "\f107";
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    transition: .5s;
+  margin-left: 6px;
+  vertical-align: middle;
+  border: none;
+  content: "\f107";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  transition: 0.5s;
 }
 
-.content .navbar-admin .dropdown-toggle[aria-expanded=true]::after {
-    transform: rotate(-180deg);
+.content .navbar-admin .dropdown-toggle[aria-expanded="true"]::after {
+  transform: rotate(-180deg);
 }
 
 @media (max-width: 575.98px) {
-    .content .navbar-admin .navbar-admin-nav .nav-link {
-        margin-left: 15px;
-    }
+  .content .navbar-admin .navbar-admin-nav .nav-link {
+    margin-left: 15px;
+  }
 }
-
 
 /*** Date Picker ***/
 .bootstrap-datetimepicker-widget.bottom {
-    top: auto !important;
+  top: auto !important;
 }
 
 .bootstrap-datetimepicker-widget .table * {
-    border-bottom-width: 0px;
+  border-bottom-width: 0px;
 }
 
 .bootstrap-datetimepicker-widget .table th {
-    font-weight: 500;
+  font-weight: 500;
 }
 
 .bootstrap-datetimepicker-widget.dropdown-menu {
-    padding: 10px;
-    border-radius: 2px;
+  padding: 10px;
+  border-radius: 2px;
 }
 
 .bootstrap-datetimepicker-widget table td.active,
 .bootstrap-datetimepicker-widget table td.active:hover {
-    background: var(--primary);
+  background: var(--primary);
 }
 
 .bootstrap-datetimepicker-widget table td.today::before {
-    border-bottom-color: var(--primary);
+  border-bottom-color: var(--primary);
 }
-
 
 /*** Testimonial ***/
 .progress .progress-bar {
-    width: 0px;
-    transition: 2s;
+  width: 0px;
+  transition: 2s;
 }
-
 
 /*** Testimonial ***/
 .testimonial-carousel .owl-dots {
-    margin-top: 24px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
+  margin-top: 24px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
 
 .testimonial-carousel .owl-dot {
-    position: relative;
-    display: inline-block;
-    margin: 0 5px;
-    width: 15px;
-    height: 15px;
-    border: 5px solid var(--primary);
-    border-radius: 15px;
-    transition: .5s;
+  position: relative;
+  display: inline-block;
+  margin: 0 5px;
+  width: 15px;
+  height: 15px;
+  border: 5px solid var(--primary);
+  border-radius: 15px;
+  transition: 0.5s;
 }
 
 .testimonial-carousel .owl-dot.active {
-    background: var(--dark);
-    border-color: var(--primary);
+  background: var(--dark);
+  border-color: var(--primary);
 }

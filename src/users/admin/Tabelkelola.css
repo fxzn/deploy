@@ -16,23 +16,7 @@
   --font-medium: 500;
 }
 
-/* .btn-sewa {
-  font-size: 14px;
-  border: 2px solid var(--green);
-  box-shadow: 0 0 1px rgba(0, 0, 0, .1);
-  padding: 6px 14px;
-  background: var(--green);
-  font-weight:600;
-  line-height: 24px;
-  color: var(--white);
-  margin-bottom: 10px;
-  justify-content: start;
-  align-items: start;
-}
- .btn-sewa:hover {
-  background: transparent;
-  color: var(--green);
-} */
+
 
 .table-responsive{
   justify-content: center;
@@ -64,7 +48,7 @@
   border-radius: 8px;
   font-size: 14px;
   font-weight: var(--font-medium);
-  background-color: var(--red-color);
+  background-color: #6148FF;
   color: var(--white-color);
   border: none;
 }
@@ -75,7 +59,19 @@
   background-color: var(--black-color);
 }
 
+.table th{
+  font-size: 18px;
+}
 
+.tipe-kelas.premium {
+  color: #6148FF; 
+  font-weight: 600;
+}
+
+.tipe-kelas.free {
+  color: #2dce01; 
+  font-weight: 600;
+}
 
 .btn-delete{
   padding: 8px 16px;
