@@ -19,6 +19,8 @@ import CoursePayment from "./pages/course/CoursePayment";
 import Succespayment from "./pages/course/paymentsucces";
 import ForgotPassword from "./auth/ForgotPassword";
 import NotFound from "./components/notFound/NotFound";
+import DetailCourseRun from "./pages/course/detailCourseRun";
+
 
 
 
@@ -38,6 +40,7 @@ function App() {
         <Route path="/auth/register" element={<Register />} />
         <Route path="/auth/resetPassword" element={<ResetPaswd />} />
         <Route path="/detailcourse/:title" element={<DetailCourse />} />
+        <Route path="/detailcourserun/:title" element={<DetailCourseRun/>}/>
         <Route path="/course" element={<Course />} />
         <Route path="/course/payment/:title" element={<CoursePayment />} />
         <Route path="/courserun" element={<CourseRun />} />

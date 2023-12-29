@@ -14,7 +14,7 @@ const LoginModal = ({ show, handleClose, navigate }) => {
         <Button variant="secondary" onClick={handleClose}>
           Close
         </Button>
-        <Button variant="primary" onClick={() => navigate("/login")}>
+        <Button variant="primary" onClick={() => navigate("/auth/login")}>
           Login
         </Button>
       </Modal.Footer>

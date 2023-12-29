@@ -14,31 +14,57 @@ function CourseRun() {
   const [loading, setLoading] = useState(true);
   const [myclass, setMyclass] = useState([]);
   const navigate = useNavigate();
+  const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
-    async function getMyClass() {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/course/getCourseOrder`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setMyclass(response.data);
-        setLoading(false);
-      } catch (error) {
-        if (axios.isAxiosError(error)) {
-          toast.error(error.response.data.message);
-          return;
-        }
+    reloadData();
+  }, []);
+
+  const reloadData = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/course/getCourseOrder`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setMyclass(response.data);
+      setLoading(false);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response.data.message);
+      } else {
         toast.error(error.message);
       }
     }
-    getMyClass();
-  }, []);
-
+  };
   const handleCardClick = (coursetitle) => {
-    navigate(`/detailcourse/${coursetitle}`);
+    navigate(`/detailcourserun/${coursetitle}`);
+  };
+
+  const handleSearchInputChange = (event) => {
+    const inputValue = event.target.value;
+    setSearchInput(inputValue);
+    if (inputValue === "") {
+      reloadData();
+    }
+  };
+
+  const handleSearch = async () => {
+    try {
+      if (searchInput) {
+        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/course/searchingCourseByTitle`, {
+          params: {
+            title: searchInput,
+          },
+        });
+        setMyclass(response.data);
+      } else {
+        reloadData();
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -55,8 +81,8 @@ function CourseRun() {
               <Col>
                 <div className="d-flex justify-content-end">
                   <div className="search d-flex p-3">
-                    <input type="text" />
-                    <div className="iconsearh m-1 text-danger">
+                    <input type="text" value={searchInput} onChange={handleSearchInputChange} onKeyDown={(e) => e.key === "Enter" && handleSearch()} />
+                    <div className="iconsearh m-1 text-danger" onClick={handleSearch}>
                       <FontAwesomeIcon icon={faSearch} />
                     </div>
                   </div>
@@ -87,8 +113,7 @@ function CourseRun() {
 
                 {/* Card */}
                 <Row className="mt-4">
-                  {myclass.data &&
-                    myclass.data.length > 0 &&
+                  {myclass.data && myclass.data.length > 0 ? (
                     myclass.data.map((index) => (
                       <Col key={index.code} md={4} className="d-flex justify-content-center mt-3">
                         <Card className="kotakcourse" onClick={() => handleCardClick(index.title)}>
@@ -133,7 +158,12 @@ function CourseRun() {
                           </Card.Body>
                         </Card>
                       </Col>
-                    ))}
+                    ))
+                  ) : (
+                    <Col md={12} className="text-center mt-3">
+                      <p>No results found</p>
+                    </Col>
+                  )}
                 </Row>
               </Col>
             </Row>
