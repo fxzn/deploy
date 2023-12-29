@@ -17,7 +17,7 @@ import axios from 'axios';
 import { GridLoader } from 'react-spinners';
 
 const CourseCard = ({ order }) => {
-  const { title, about, teacher, level, duration, module, price, isPremium } = order;
+  const { title, about, level, duration, module, isPremium } = order;
 
   return (
     <Col md={12} className="d-flex justify-content-center mt-3">
@@ -79,19 +79,8 @@ const UserProfile = () => {
           return;
         }
 
-        const response = await axios.get(
-          'https://easy-class-407401.et.r.appspot.com/api/user/get',
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        const userId = response.data.data;
-
         const orderResponse = await axios.get(
-          `http://easy-class-407401.et.r.appspot.com/api/course/getCourseOrder?userId=${userId}`,
+          `http://easy-class-407401.et.r.appspot.com/api/course/getCourseOrder`,
           {
             headers: {
               accept: 'application/json',
