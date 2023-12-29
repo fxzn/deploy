@@ -17,58 +17,49 @@ import axios from 'axios';
 import { GridLoader } from 'react-spinners';
 
 const CourseCard = ({ order }) => {
-  const {
-    title,
-    about,
-    teacher,
-    level,
-    duration,
-    module,
-    price,
-    isPremium,
-  } = order;
+  const { title, about, teacher, level, duration, module, price, isPremium } = order;
 
   return (
     <Col md={12} className="d-flex justify-content-center mt-3">
-    <Card className="cardkursus" style={{ width: '400px', height: '185px' }}>
-      <Card.Img variant="top" src={imgcourse} style={{ height: '80px' }} />
-      <Card.Body>
-        <div className="title mt-0" id="text1">
-        {title}
-        </div>
-        <Card.Text className="desc mt-0" id="text2">
-        {about}
-        </Card.Text>
-        <div className="d-flex infocourse1" style={{ margin: '-8px 0' }}>
-          <div className="level me-4 d-flex">
-            <div>
-              <FontAwesomeIcon icon={faStar} className="img" />
-            </div>
-            <p className="ms-1 mt-0">{level}</p>
+      <Card className="cardkursus" style={{ width: '400px', height: '185px' }}>
+        <Card.Img variant="top" src={imgcourse} style={{ height: '80px' }} />
+        <Card.Body>
+          <div className="title mt-0" id="text1">
+            {title}
           </div>
-          <div className="level me-4 d-flex">
-            <div>
-              <FontAwesomeIcon icon={faBook} className="img" />
+          <Card.Text className="desc mt-0" id="text2">
+            {about}
+          </Card.Text>
+          <div className="d-flex infocourse1" style={{ margin: '-8px 0' }}>
+            <div className="level me-4 d-flex">
+              <div>
+                <FontAwesomeIcon icon={faStar} className="img" />
+              </div>
+              <p className="ms-1 mt-0">{level}</p>
             </div>
-            <p className="ms-1 mt-0">{module} modul</p>
-          </div>
-          <div className="level me-4 d-flex">
-            <div>
-              <FontAwesomeIcon icon={faClock} className="img" />
+            <div className="level me-4 d-flex">
+              <div>
+                <FontAwesomeIcon icon={faBook} className="img" />
+              </div>
+              <p className="ms-1 mt-0">{module} modul</p>
             </div>
-            <p className="ms-1 mt-0">{duration}</p>
+            <div className="level me-4 d-flex">
+              <div>
+                <FontAwesomeIcon icon={faClock} className="img" />
+              </div>
+              <p className="ms-1 mt-0">{duration}</p>
+            </div>
           </div>
-        </div>
-        <Button
+          <Button
             variant="danger"
             style={{ height: '18px', fontSize: '10px' }}
             className="d-flex align-items-center justify-content-center"
           >
             {isPremium ? 'Premium Course' : 'Free Course'}
           </Button>
-      </Card.Body>
-    </Card>
-  </Col>
+        </Card.Body>
+      </Card>
+    </Col>
   );
 };
 
@@ -97,12 +88,8 @@ const UserProfile = () => {
           }
         );
 
-        console.log('Respon Server:', response);
+        const userId = response.data.data;
 
-        // Dapatkan ID pengguna dari respons server
-        const userId = response.data.data.id; 
-
-        // Lakukan fetching data getCourseOrder berdasarkan ID pengguna
         const orderResponse = await axios.get(
           `http://easy-class-407401.et.r.appspot.com/api/course/getCourseOrder?userId=${userId}`,
           {
@@ -112,8 +99,6 @@ const UserProfile = () => {
             },
           }
         );
-
-        console.log('Respon:', orderResponse);
 
         setOrderHistory(orderResponse.data.data);
       } catch (error) {
@@ -155,16 +140,14 @@ const UserProfile = () => {
                   </Link>
                 </span>
 
-                {orderHistory.slice(0, 2).map((order) => (
-                  <CourseCard key={order.id} order={order} />
+                {orderHistory.slice(0, 2).map((order, index) => (
+                  <CourseCard key={index} order={order} />
                 ))}
 
                 {showAllCards &&
-                  orderHistory
-                    .slice(2)
-                    .map((order) => (
-                      <CourseCard key={order.id} order={order} />
-                    ))}
+                  orderHistory.slice(2).map((order, index) => (
+                    <CourseCard key={index} order={order} />
+                  ))}
 
                 {orderHistory.length > 2 && (
                   <div className="text-center mt-3">

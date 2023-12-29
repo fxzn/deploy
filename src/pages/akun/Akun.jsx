@@ -45,8 +45,6 @@ const Akun = () => {
           }
         );
 
-        console.log('Respon Server:', response.data);
-
         const user = response.data.data;
 
         if (user) {
@@ -224,7 +222,7 @@ const Akun = () => {
               </div>
 
               <div className="formBox">
-                <div className="inputBoxx w100 ${loading ? 'loading' : ''}`}">
+                <div className={`inputBoxx w100 ${loading ? 'loading' : ''}`}>
                   <input
                     type="text"
                     name=""
@@ -244,7 +242,7 @@ const Akun = () => {
                   </div> 
                 )}Name</label>
                 </div>
-                <div className="inputBoxx w100 ${loading ? 'loading' : ''}`}">
+                <div className={`inputBoxx w100 ${loading ? 'loading' : ''}`}>
                   <input
                     type="email"
                     name=""

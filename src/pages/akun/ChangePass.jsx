@@ -34,8 +34,6 @@ const UserProfile = () => {
           }
         );
 
-        console.log('Respon Server:', response);
-
         setIsLoading(false);
       } catch (error) {
         console.error('Error fetching user data', error);
@@ -73,10 +71,7 @@ const UserProfile = () => {
         }
       );
 
-      console.log(response);
-
-e
-      console.log('Password changed successfully', response.data);
+ 
     } catch (error) {
       console.error('Error changing password', error);
     }

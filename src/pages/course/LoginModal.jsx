@@ -1,4 +1,3 @@
-
 import { Modal, Button } from "react-bootstrap";
 
 const LoginModal = ({ show, handleClose, navigate }) => {

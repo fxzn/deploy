@@ -16,8 +16,6 @@ function DetailCourseRun() {
   const [titleAktive, settitleAktive] = useState(null);
   const [loadingVidio, setLoadingvidio] = useState(false);
   const [loading, setLoading] = useState(true);
-  // const navigate = useNavigate();
-
   const { title } = useParams();
 
   useEffect(() => {
@@ -133,15 +131,12 @@ function DetailCourseRun() {
                       <div className="d-flex justify-content-between w-50 align-items-center">
                         <h1 className="header-content">Materi Belajar</h1>
                       </div>
-                     
                     </div>
-
                     <div>
                       <div className="d-flex justify-content-between mt-5 mb-3 header-chapter">
                         <p className="text-dark">Chapter 1 - Pendahuluan</p>
                         <p className="text-dark"> 40 Menit</p>
                       </div>
-
                       <ol>
                         {subjectResponse.map((subject, index) => (
                           <li key={index} className="my-2 d-flex justify-content-between align-items-center pointer">
@@ -156,14 +151,11 @@ function DetailCourseRun() {
                         ))}
                       </ol>
                     </div>
-
-                   
                   </Card.Body>
                 </Card>
               </div>
             </div>
           </div>
-
           <Footerr />
         </>
       )}

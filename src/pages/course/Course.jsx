@@ -5,7 +5,6 @@ import { faSearch, faClock, faBook, faStar } from "@fortawesome/free-solid-svg-i
 import imgcourse from "../../assets/image.png";
 import NavigationBars from "../../components/navigation/NavigationBars";
 import Footerr from "../../components/footer/Footerr";
-
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { GetCourse } from "../../../service/Course.service";

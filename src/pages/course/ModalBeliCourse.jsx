@@ -4,39 +4,17 @@ import { faClock, faBook, faStar } from "@fortawesome/free-solid-svg-icons";
 import imgcourse from "../../assets/image.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import axios from "axios";
 import "./Detailcourse.css";
 
 
 
-function ModalBeliCourse({ showModal, handleCloseModal, title, level, duration,module}) {
+function ModalBeliCourse({ showModal, handleCloseModal, title, level, duration, module, teacher, price, about}) {
   const navigate = useNavigate();
-  const [courseData, setCourseData] = useState(null);
 
   const handlBuyClick = () => {
-    navigate("/course/payment");
+    navigate(`/course/payment/${title}`);
   };
 
-  useEffect(() => {
-    const getCourseByTitle = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if (title) {
-          const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/order/getOrder?title=${title}`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-          setCourseData(response.data.data);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    getCourseByTitle();
-  }, [title]);
 
   return (
     <Modal show={showModal} onHide={handleCloseModal} centered>
@@ -49,12 +27,11 @@ function ModalBeliCourse({ showModal, handleCloseModal, title, level, duration,m
       </Modal.Header>
       <Modal.Body>
         <div className="contentModal">
-          {courseData && (
             <Card className="modalkotakcourse">
               <Card.Img className="img-card" variant="top" src={imgcourse} />
               <Card.Body>
                 <div className="d-flex justify-content-between">
-                  <div className="title ">{courseData.title}</div>
+                  <div className="title ">{title}</div>
                   <div className="rating d-flex ">
                     <FontAwesomeIcon icon={faStar} className="img text-warning me-1" />
                     <p className="text-rating">4.5</p>
@@ -62,8 +39,8 @@ function ModalBeliCourse({ showModal, handleCloseModal, title, level, duration,m
                 </div>
 
                 <Card.Text>
-                  <div className="desc mt-1 fw-bold">Belajar Web Designer dengan Figma </div>
-                  <div>by {courseData.teacher}</div>
+                  <div className="desc mt-1 fw-bold">{about}</div>
+                  <div>by {teacher}</div>
                 </Card.Text>
                 <div className="d-flex infocourse">
                   <div className="level me-4 d-flex">
@@ -86,11 +63,10 @@ function ModalBeliCourse({ showModal, handleCloseModal, title, level, duration,m
                   </div>
                 </div>
                 <Button variant="success">
-                  Beli Rp. {courseData.price}
+                  Beli Rp. {price}
                 </Button>
               </Card.Body>
             </Card>
-          )}
         </div>
       </Modal.Body>
       <Modal.Footer>
@@ -106,11 +82,13 @@ function ModalBeliCourse({ showModal, handleCloseModal, title, level, duration,m
 ModalBeliCourse.propTypes = {
   showModal: PropTypes.bool.isRequired,
   handleCloseModal: PropTypes.func.isRequired,
-  // title: PropTypes.string.isRequired,
-  // teacher: PropTypes.string.isRequired,
-  // price: PropTypes.number.isRequired,
-  // ppn: PropTypes.number.isRequired,
-  // totalPrice: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  teacher: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  level: PropTypes.number.isRequired,
+  duration: PropTypes.number.isRequired,
+  module: PropTypes.number.isRequired,
+  about: PropTypes.number.isRequired,
 };
 
 export default ModalBeliCourse;

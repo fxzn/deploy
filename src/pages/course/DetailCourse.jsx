@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./Detailcourse.css";
 import { Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,6 +7,7 @@ import NavigationBars from "../../components/navigation/NavigationBars";
 import Footerr from "../../components/footer/Footerr";
 import { useEffect, useState } from "react";
 import { getCourseDetail } from "../../../service/Course.service";
+import ModalBeliCourse from "./ModalBeliCourse";
 
 function DetailCourse() {
   const [showModal, setShowModal] = useState(false);
@@ -17,7 +18,6 @@ function DetailCourse() {
   const [titleAktive, settitleAktive] = useState(null);
   const [loadingVidio, setLoadingvidio] = useState(false);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
 
   const { title } = useParams();
 
@@ -47,8 +47,7 @@ function DetailCourse() {
   };
 
   const handlBuyClick = () => {
-    console.log("Tombol Premium diklik");
-    navigate(`/course/payment/${title}`);
+    setShowModal(true);
   };
 
   const handleCloseModal = () => {
@@ -173,49 +172,22 @@ function DetailCourse() {
                         ))}
                       </ol>
                     </div>
-
-                    {/* <div>
-                      <div className="d-flex justify-content-between header-chapter">
-                        <p className="text-dark font-weight-bold">Chapter 2 - Materi</p>
-                        <p className="text-dark font-weight-bold"> 120 Menit</p>
-                      </div>
-                      <ol>
-                        <li className="my-2 d-flex justify-content-between align-items-center">
-                          <p className="d-flex gap-3 align-items-center">
-                            <span className="p-1 align-items-center justify-content-center">1</span>
-                            Anda yang ingin memahami poin penting design system
-                          </p>
-                          <FontAwesomeIcon icon={faLock} className="icon-lock" />
-                        </li>
-                        <li className="my-2 d-flex justify-content-between align-items-center">
-                          <p className="d-flex gap-3 align-items-center">
-                            <span className="p-1 align-items-center justify-content-center">2</span>
-                            Anda yang ingin memahami poin penting design system
-                          </p>
-                          <FontAwesomeIcon icon={faLock} className="icon-lock" />
-                        </li>
-                        <li className="my-2 d-flex justify-content-between align-items-center">
-                          <p className="d-flex gap-3 align-items-center">
-                            <span className="p-1 align-items-center justify-content-center">3</span>
-                            Anda yang ingin memahami poin penting design system
-                          </p>
-                          <FontAwesomeIcon icon={faLock} className="icon-lock" />
-                        </li>
-                        <li className="my-2 d-flex justify-content-between align-items-center">
-                          <p className="d-flex gap-3 align-items-center">
-                            <span className="p-1 align-items-center justify-content-center">4</span>
-                            Anda yang ingin memahami poin penting design system
-                          </p>
-                          <FontAwesomeIcon icon={faLock} className="icon-lock" />
-                        </li>
-                      </ol>
-                    </div> */}
                   </Card.Body>
                 </Card>
               </div>
             </div>
           </div>
-          {/* <ModalBeliCourse title={courseDetail.title} duration={courseDetail.duration} module={courseDetail.module} level={courseDetail.level} showModal={showModal} handleCloseModal={handleCloseModal} /> */}
+          <ModalBeliCourse
+            showModal={showModal}
+            handleCloseModal={handleCloseModal}
+            title={courseDetail.title}
+            level={courseDetail.level}
+            duration={courseDetail.duration}
+            module={courseDetail.module}
+            teacher={courseDetail.teacher}
+            price={courseDetail.price}
+            about={courseDetail.about}
+          />
           <Footerr />
         </>
       )}
