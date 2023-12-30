@@ -85,10 +85,10 @@ ModalBeliCourse.propTypes = {
   title: PropTypes.string.isRequired,
   teacher: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
-  level: PropTypes.number.isRequired,
-  duration: PropTypes.number.isRequired,
-  module: PropTypes.number.isRequired,
-  about: PropTypes.number.isRequired,
+  level: PropTypes.string.isRequired,
+  duration: PropTypes.string.isRequired,
+  module: PropTypes.string.isRequired,
+  about: PropTypes.string.isRequired,
 };
 
 export default ModalBeliCourse;

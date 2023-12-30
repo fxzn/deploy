@@ -28,7 +28,6 @@ function Course() {
   const handleShowLoginModal = () => setShowLoginModal(true);
   const handleCloseLoginModal = () => setShowLoginModal(false);
 
-
   const userIsLoggedIn = () => {
     const token = localStorage.getItem("token");
     return !!token;
@@ -169,9 +168,10 @@ function Course() {
                               </div>
                             </div>
                             <Card.Text>
-                              <div className="desc mt-1 fw-bold">{courseData.description}</div>
-                              <div>by {courseData.teacher}</div>
+                              <span className="desc mt-1 fw-bold">{courseData.about}</span>
+                              <p> {courseData.teacher}</p>
                             </Card.Text>
+
                             <div className="d-flex infocourse">
                               <div className="level me-4 d-flex">
                                 <div>
@@ -192,14 +192,7 @@ function Course() {
                                 <p className="ms-1 mt-1">{courseData.duration} menit</p>
                               </div>
                             </div>
-                            {courseData.isPremium ? (
-                              <Button variant="danger">
-                              Rp.{courseData.price.toLocaleString("id-ID", { currency: "IDR" })}
-                            </Button>
-
-                            ) :(
-                              <Button variant="danger">gratis</Button>
-                            )}
+                            {courseData.isPremium ? <Button variant="danger">Rp.{courseData.price.toLocaleString("id-ID", { currency: "IDR" })}</Button> : <Button variant="danger">gratis</Button>}
                           </Card.Body>
                         </Card>
                       </Col>

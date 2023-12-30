@@ -97,6 +97,10 @@
   align-items: center;
 }
 
+.card-video{
+  border-radius:25px;
+}
+
 .vidio {
   width: 100%;
   height: 100%;
@@ -126,6 +130,10 @@
   margin-top: 2rem;
   margin-right: 1rem;
   font-size: 20px;
+}
+
+.icon-tele{
+  margin-left: 14px;
 }
 
 .rating-text{

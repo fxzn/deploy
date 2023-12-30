@@ -7,6 +7,7 @@ import NavigationBars from "../../components/navigation/NavigationBars";
 import Footerr from "../../components/footer/Footerr";
 import { useEffect, useState } from "react";
 import { getCourseDetail } from "../../../service/Course.service";
+import { faComments } from "@fortawesome/free-regular-svg-icons";
 
 function DetailCourseRun() {
   const [courseDetail, setCourseDetail] = useState([]);
@@ -42,8 +43,6 @@ function DetailCourseRun() {
       setLoadingvidio(false);
     }, 1500);
   };
-
-  
 
   return (
     <>
@@ -91,11 +90,12 @@ function DetailCourseRun() {
                     </span>
                   </div>
                   <div>
-                    <a href="">
+                    <div>
                       <Link to={courseDetail.linkTelegram} className="btn btn-telegram" target="_blank" rel="noopener noreferrer">
                         Join Telegram
+                        <FontAwesomeIcon icon={faComments} className="icon-tele" />
                       </Link>
-                    </a>
+                    </div>
                   </div>
                 </div>
                 <div>
@@ -105,7 +105,7 @@ function DetailCourseRun() {
                         <span className="loader-vidio"></span>
                       </div>
                     ) : (
-                      <iframe className="vidio" src={linkVidio} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                      <iframe className="vidio" src={linkVidio} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
                     )}
                   </div>
                 </div>
@@ -134,8 +134,8 @@ function DetailCourseRun() {
                     </div>
                     <div>
                       <div className="d-flex justify-content-between mt-5 mb-3 header-chapter">
-                        <p className="text-dark">Chapter 1 - Pendahuluan</p>
-                        <p className="text-dark"> 40 Menit</p>
+                        <p className="text-dark">Video Pembelajaran</p>
+                        {/* <p className="text-dark"> 40 Menit</p> */}
                       </div>
                       <ol>
                         {subjectResponse.map((subject, index) => (

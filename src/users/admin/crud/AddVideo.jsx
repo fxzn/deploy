@@ -43,7 +43,7 @@ function AddVideo(props) {
         <Modal.Body>
           <Form>
             <Form.Group controlId="idCourse">
-              <Form.Label> Course</Form.Label>
+              <Form.Label>ID Course</Form.Label>
               <Form.Control type="text" value={formData.course.id} onChange={(e) => setFormData({ ...formData, course: { id: e.target.value } })} />
             </Form.Group>
 

@@ -1,6 +1,6 @@
 import "./courses.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button, Card, Col, Container, ProgressBar, Row } from "react-bootstrap";
+import { Card, Col, Container, ProgressBar, Row } from "react-bootstrap";
 import { faSearch, faClock, faBook, faStar } from "@fortawesome/free-solid-svg-icons";
 import imgcourse from "../../assets/image.png";
 import NavigationBars from "../../components/navigation/NavigationBars";
@@ -70,9 +70,10 @@ function CourseRun() {
   return (
     <>
       {loading ? (
-        <div className=".loader-container">
-          <span className="loader"></span>
-        </div>
+          <div className="loader-container">
+            <span className="loader"></span>
+          </div>
+
       ) : (
         <>
           <NavigationBars />
@@ -90,24 +91,19 @@ function CourseRun() {
 
                 <Row className="mt-1">
                   <Col md={3}>
-                    <Button variant="danger" className="w-100 mt-3">
-                      All
-                    </Button>
+                    <div className="w-100 mt-3 btn btn-danger">All</div>
                   </Col>
+
                   <Col md={3}>
-                    <Button variant="danger" className="w-100 mt-3">
-                      Backend
-                    </Button>
+                    <div className="w-100 mt-3 btn btn-danger">Backend</div>
                   </Col>
+
                   <Col md={3}>
-                    <Button variant="danger" className="w-100 mt-3">
-                      Frontend
-                    </Button>
+                    <div className="w-100 mt-3 btn btn-danger">Frontend</div>
                   </Col>
+
                   <Col md={3}>
-                    <Button variant="danger" className="w-100 mt-3">
-                      Fullstack
-                    </Button>
+                    <div className="w-100 mt-3 btn btn-danger">Fullstack</div>
                   </Col>
                 </Row>
 

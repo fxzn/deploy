@@ -21,7 +21,7 @@ function TabelKelas() {
   useEffect(() => {
     async function getCourseList() {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/course/getAll`, {
+        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/admin/course/getAllCourse`, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -94,6 +94,7 @@ function TabelKelas() {
                     <table className="table">
                       <thead>
                         <tr>
+                          <th scope="col">ID</th>
                           <th scope="col">Kode Kelas</th>
                           <th scope="col">Kategori</th>
                           <th scope="col">Nama Kelas</th>
@@ -107,6 +108,7 @@ function TabelKelas() {
                         {kelasData && kelasData.length > 0 ? (
                           kelasData.map((course, index) => (
                             <tr key={index}>
+                              <td>{course.id}</td>
                               <td>{course.code}</td>
                               <td>{course.categories && course.categories.length > 0 ? course.categories.map((category) => category.categoryName).join(",") : "No category"}</td>
                               <td>{course.title}</td>
