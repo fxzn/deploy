@@ -55,19 +55,33 @@ function CoursePayment() {
           },
         }
       );
-
+  
       if (response.status === 200) {
-        navigate("/paymentsucces", { replace: true }); 
+        if (response.data.message === "Create order successfully!") {
+          toast.success("Order placed successfully!");
+          navigate("/paymentsuccess", { replace: true });
+        } else if (response.data.message === "User already ordered this course!") {
+          toast.error("User already ordered this course!");
+          navigate("/courserun", { replace: true });
+        } else {
+          toast.error("Unknown success message from the server");
+        }
       }
-
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        toast.error(error.response.data.message);
+        if (error.response.data.message) {
+          toast.error(error.response.data.message);
+        } else {
+          toast.error("Server error");
+        }
         return;
       }
       toast.error(error.message);
     }
   };
+  
+  
+  
 
 
   return (

@@ -1,87 +1,111 @@
-import { Modal, Button, Form } from "react-bootstrap";
-import { useState } from "react";
 import axios from "axios";
+import { useState } from "react";
+import { Modal, Button, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 
-function AddVideo(props) {
-  const { showModal, handleClose, setRefresh } = props;
+function EditVideo(props) {
+  const { showModal, handleCloseModal, code, setRefresh  } = props;
 
-  const [formData, setFormData] = useState({
-    course: {
-      id: "",
-    },
-    code: "",
+  const [videoData, setVideoData] = useState({
     title: "",
-    linkVideo: "",
-    description: "",
+    code: "",
+    link: "",
     isPremium: true,
+    description: "",
   });
 
-  const handleCourseSubmit = async () => {
+  const getCourseByCode = async () => {
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/admin/subject/add`, formData, {
+      const token = localStorage.getItem("token");
+      const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/admin/subject/get?code=${code}`, {
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       });
-  
-      console.log(response.data);
-      toast.success("Course added successfully");
-      setRefresh((prevRefresh) => !prevRefresh);
+      setVideoData(response.data.data);
     } catch (error) {
       console.error(error);
-      toast.error("Failed to add course");
     }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setVideoData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSaveClick = () => {
+    axios
+      .put(`${import.meta.env.VITE_BASE_URL}/api/admin/subject/update/${code}`, videoData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        toast.success("Data kelas berhasil diperbarui");
+        handleCloseModal();
+        setRefresh((prevRefresh) => !prevRefresh);
+      })
+      .catch((error) => {
+        console.log("Terjadi kesalahan saat memperbarui kelas:", error);
+
+        if (error.response) {
+          console.log("Data respons error:", error.response.data);
+          console.log("Kode status HTTP:", error.response.status);
+          toast.error(`Gagal memperbarui kelas: ${error.response.data.message}`);
+        } else if (error.request) {
+          console.log("Tidak ada respons yang diterima:", error.request);
+          toast.error("Gagal memperbarui kelas: Tidak ada respons yang diterima");
+        } else {
+          console.log("Kesalahan lainnya:", error.message);
+          toast.error(`Gagal memperbarui kelas: ${error.message}`);
+        }
+      });
   };
 
   return (
     <>
-      <Modal show={showModal} onHide={handleClose}>
+      <Modal show={showModal} onHide={handleCloseModal} onShow={getCourseByCode}>
         <Modal.Header closeButton>
-          <Modal.Title className="font-Montserrat text-[24px] font-bold leading-[36px] text-darkblue-05">Tambah Video</Modal.Title>
+          <Modal.Title className="font-Montserrat text-[24px] font-bold leading-[36px] text-darkblue-05">Update Video</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group controlId="idCourse">
-              <Form.Label>Id Course</Form.Label>
-              <Form.Control type="text" value={formData.course.id} onChange={(e) => setFormData({ ...formData, course: { id: e.target.value } })} />
+            <Form.Group controlId="titleVideo">
+              <Form.Label>Title Video</Form.Label>
+              <Form.Control type="text" name="title" value={videoData.title} onChange={handleChange} />
             </Form.Group>
 
-            <hr />
-            <h5>Subject Details</h5>
-            <Form.Group controlId="code">
-              <Form.Label>Code</Form.Label>
-              <Form.Control type="text" value={formData.code} onChange={(e) => setFormData({ ...formData, code: e.target.value })} />
-            </Form.Group>
-
-            <Form.Group controlId="title">
-              <Form.Label>Title</Form.Label>
-              <Form.Control type="text" value={formData.title} onChange={(e) => setFormData({ ...formData, title: e.target.value })} />
+            <Form.Group controlId="codeVideo">
+              <Form.Label>Code Course</Form.Label>
+              <Form.Control type="text" name="code" value={videoData.code} onChange={handleChange} />
             </Form.Group>
 
             <Form.Group controlId="linkVideo">
-              <Form.Label>Link Video</Form.Label>
-              <Form.Control type="text" value={formData.linkVideo} onChange={(e) => setFormData({ ...formData, linkVideo: e.target.value })} />
+              <Form.Label>Link</Form.Label>
+              <Form.Control type="text" name="link" value={videoData.link} onChange={handleChange} />
             </Form.Group>
 
             <Form.Group controlId="description">
               <Form.Label>Description</Form.Label>
-              <Form.Control type="text" value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} />
+              <Form.Control type="text" name="description" value={videoData.description} onChange={handleChange} />
             </Form.Group>
 
             <Form.Group controlId="isPremium">
               <Form.Label>Is Premium</Form.Label>
-              <Form.Control as="select" value={formData.isPremium} onChange={(e) => setFormData({ ...formData, isPremium: e.target.value === "true" })}>
-                <option value="true">Yes</option>
-                <option value="false">No</option>
+              <Form.Control as="select" name="isPremium" value={videoData.isPremium} onChange={handleChange}>
+                <option value={false}>False</option>
+                <option value={true}>True</option>
               </Form.Control>
             </Form.Group>
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="warning">Next Video</Button>
-          <Button variant="danger" onClick={handleCourseSubmit}>
-            Simpan
+          <Button variant="success" onClick={handleSaveClick}>
+            Update
           </Button>
         </Modal.Footer>
       </Modal>
@@ -89,4 +113,4 @@ function AddVideo(props) {
   );
 }
 
-export default AddVideo;
+export default EditVideo;

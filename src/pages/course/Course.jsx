@@ -17,6 +17,7 @@ function Course() {
   const [loading, setLoading] = useState(true);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [searchInput, setSearchInput] = useState("");
+  const [selectedFilter, setSelectedFilter] = useState(null);
 
   useEffect(() => {
     GetCourse((data) => {
@@ -70,6 +71,22 @@ function Course() {
     }
   };
 
+  const handleFilter = async (filterType) => {
+    try {
+      const newFilter = selectedFilter === filterType ? null : filterType;
+      let response;
+      if (!newFilter) {
+        response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/course/getAll`);
+      } else {
+        response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/course/${newFilter}`);
+      }
+      setSelectedFilter(newFilter);
+      setCourse(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       {loading ? (
@@ -86,31 +103,19 @@ function Course() {
                   <Accordion.Item className="accordion-item">
                     <Accordion.Header className="accordion-header text-white fw-bold">Topik Kelas</Accordion.Header>
                     <Accordion.Body className="jutify-content-center">
-                      <div>
-                        <p className="fw-bold">Filter</p>
-                        <Form className="mt-2">
-                          <Form.Check inline label="Paling Baru" name="group1" id="checkbox1" className="mt-2" />
-                          <Form.Check inline label="Paling Populer " name="group1" id="checkbox1" className="mt-2" />
-                          <Form.Check inline label="Promo" name="group1" id="checkbox1" className="mt-2" />
-
-                          {/* Add more Form.Check as needed */}
-                        </Form>
-                      </div>
                       <div className="mt-4">
                         <p className="fw-bold">Kategory</p>
                         <Form className="mt-2">
-                          <Form.Check inline label="UI/UX Design" name="group1" id="checkbox1" className="mt-2" />
-                          <Form.Check inline label="Android Development" name="group1" id="checkbox1" className="mt-2" />
-                          <Form.Check inline label="Data Science" name="group1" id="checkbox1" className="mt-2" />
-                          <Form.Check inline label="Business Intelligence" name="group1" id="checkbox1" className="mt-2" />
-                          {/* Add more Form.Check as needed */}
+                          <Form.Check inline label="BackEnd" name="group1" id="checkbox1" className="mt-2" onChange={() => handleFilter("filterBackEnd")} checked={selectedFilter === "filterBackEnd"} />
+                          <Form.Check inline label="FullStack" name="group1" id="checkbox1" className="mt-2" onChange={() => handleFilter("filterFullStack")} checked={selectedFilter === "filterFullStack"} />
+                          <Form.Check inline label="FrontEnd" name="group1" id="checkbox1" className="mt-2" onChange={() => handleFilter("filterFrontEnd")} checked={selectedFilter === "filterFrontEnd"} />
                         </Form>
                       </div>
                       <div className="mt-4">
                         <p className="fw-bold">Level Kesulitan</p>
                         <Form className="mt-1">
                           <Form.Check inline label="Semua Level" name="group1" id="checkbox1" className="mt-2" />
-                          <Form.Check inline label="Beginner Level" name="group1" id="checkbox1" className="mt-2" />
+                          <Form.Check inline label="Beaginner Level" name="group1" id="checkbox1" className="mt-2" />
                           <Form.Check inline label="Intermediate Level" name="group1" id="checkbox1" className="mt-2" />
                           <Form.Check inline label="Advanced Level" name="group1" id="checkbox1" className="mt-2" />
 
@@ -127,7 +132,7 @@ function Course() {
               <Col md={9}>
                 <div className="d-flex justify-content-end">
                   <div className="search d-flex p-3">
-                    <input type="text" value={searchInput} onChange={handleSearchInputChange} onKeyDown={(e) => e.key === "Enter" && handleSearch()} />
+                    <input type="text" value={searchInput} onChange={handleSearchInputChange} />
                     <div className="iconsearh m-1 text-danger" onClick={handleSearch}>
                       <FontAwesomeIcon icon={faSearch} />
                     </div>

@@ -21,6 +21,7 @@ function AddData(props) {
     priceCourse: 0,
     levelCourse: "",
     teacher: "",
+    linkTelegram: "",
     aboutCourse: "",
     subjects: [
       {
@@ -48,6 +49,7 @@ function AddData(props) {
           priceCourse: formData.priceCourse,
           levelCourse: formData.levelCourse,
           teacher: formData.teacher,
+          linkTelegram: formData.linkTelegram,
           aboutCourse: formData.aboutCourse,
           isPremium: formData.isPremium,
           subjects: formData.subjects.map((subject) => ({
@@ -134,6 +136,11 @@ function AddData(props) {
             <Form.Group controlId="teacher">
               <Form.Label>Teacher</Form.Label>
               <Form.Control type="text" name="teacher" value={formData.teacher} onChange={(e) => setFormData({ ...formData, teacher: e.target.value })} />
+            </Form.Group>
+            
+            <Form.Group controlId="linkTelegram">
+              <Form.Label>Link Telegram</Form.Label>
+              <Form.Control type="text" name="linkTelegram" value={formData.linkTelegram} onChange={(e) => setFormData({ ...formData, linkTelegram: e.target.value })} />
             </Form.Group>
 
             <Form.Group controlId="aboutCourse">
@@ -255,7 +262,7 @@ function AddData(props) {
           >
             Upload Video
           </Button>
-          <Button variant="danger" onClick={handleCourseSubmit}>
+          <Button variant="success" onClick={handleCourseSubmit}>
             Simpan
           </Button>
         </Modal.Footer>

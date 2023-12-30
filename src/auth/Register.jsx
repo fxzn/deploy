@@ -50,7 +50,7 @@ function Register() {
       );
   
       if (response.status === 200) {
-        toast.success("Registration successful!");
+        toast.success("Token successfully sent to your email!");
         navigate("/auth/otp", { replace: true });
       }
     } catch (error) {

@@ -24,7 +24,7 @@ function ForgotPassword() {
         }
       );
       console.log("Response:", response.data);
-      toast.success("Token sent successfully!");
+      toast.success("Link has been successfully sent to your email!");
     } catch (error) {
       console.error("Error:", error);
 

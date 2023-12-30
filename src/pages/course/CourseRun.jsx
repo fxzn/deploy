@@ -53,7 +53,11 @@ function CourseRun() {
   const handleSearch = async () => {
     try {
       if (searchInput) {
-        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/course/searchingCourseByTitle`, {
+        const token = localStorage.getItem("token");
+        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/course/searchingCourseAfterOrder`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
           params: {
             title: searchInput,
           },

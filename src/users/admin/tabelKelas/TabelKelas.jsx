@@ -98,6 +98,7 @@ function TabelKelas() {
                           <th scope="col">Kode Kelas</th>
                           <th scope="col">Kategori</th>
                           <th scope="col">Nama Kelas</th>
+                          <th scope="col">Telegram</th>
                           <th scope="col">Tipe Kelas</th>
                           <th scope="col">Level</th>
                           <th scope="col">Harga Kelas</th>
@@ -112,6 +113,7 @@ function TabelKelas() {
                               <td>{course.code}</td>
                               <td>{course.categories && course.categories.length > 0 ? course.categories.map((category) => category.categoryName).join(",") : "No category"}</td>
                               <td>{course.title}</td>
+                              <td>{course.linkTelegram}</td>
                               <td className={`tipe-kelas ${course.isPremium ? "premium" : "free"}`}>{course.isPremium ? "Premium" : "Free"}</td>
                               <td>{course.level}</td>
                               <td>Rp. {course.price.toLocaleString("id-ID", { currency: "IDR" })}</td>

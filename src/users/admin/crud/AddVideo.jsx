@@ -80,7 +80,7 @@ function AddVideo(props) {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="warning">Next Video</Button>
-          <Button variant="danger" onClick={handleCourseSubmit}>
+          <Button variant="success" onClick={handleCourseSubmit}>
             Simpan
           </Button>
         </Modal.Footer>

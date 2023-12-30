@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "./Detailcourse.css";
 import { Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,13 +11,15 @@ import ModalBeliCourse from "./ModalBeliCourse";
 
 function DetailCourse() {
   const [showModal, setShowModal] = useState(false);
-  const [courseDetail, setCourseDetail] = useState([]);
+  const [courseDetail, setCourseDetail] = useState({});
   const [subjectResponse, setsubjectresponse] = useState([]);
   const [linkVidio, setLinkVidio] = useState("https://www.youtube.com/embed/R4eWTI-07QY?si=lJXsrRVwUOkorJWl");
   const [description, setdescription] = useState("Hallo calon programmer selamat datang di easyclass");
   const [titleAktive, settitleAktive] = useState(null);
   const [loadingVidio, setLoadingvidio] = useState(false);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
   const { title } = useParams();
 
   useEffect(() => {
@@ -51,6 +53,10 @@ function DetailCourse() {
 
   const handleCloseModal = () => {
     setShowModal(false);
+  };
+
+  const handleJoinTelegram = () => {
+    navigate(courseDetail.linkTelegram);
   };
 
   return (
@@ -98,16 +104,17 @@ function DetailCourse() {
                       <p className="text-course-info">{courseDetail.duration}</p>
                     </span>
                   </div>
-
                   <div>
-                    {courseDetail.isPremium ? (
-                      <button className="btn btn-telegram" onClick={handlBuyClick}>
+                    {!courseDetail.isPremium && courseDetail.linkTelegram !== null && (
+                      <button className="btn btn-telegram" onClick={handleJoinTelegram}>
+                        Join Telegram
+                      </button>
+                    )}
+
+                    {courseDetail.isPremium && (
+                      <button className="btn btn-telegram" onClick={handlBuyClick} disabled={courseDetail.linkTelegram !== null}>
                         Premium
                       </button>
-                    ) : (
-                      <a className="btn btn-telegram" href={courseDetail.linkTelegram} target="_blank" rel="noopener noreferrer">
-                        Join Telegram
-                      </a>
                     )}
                   </div>
                 </div>
@@ -156,7 +163,9 @@ function DetailCourse() {
                           <li key={index} className="my-2 d-flex justify-content-between align-items-center pointer">
                             <p
                               onClick={() => {
-                                subject.isPremium ? handlBuyClick() : clickTitle(subject.link, subject.description, index);
+                                if (courseDetail.linkTelegram === null) {
+                                  subject.isPremium ? handlBuyClick() : clickTitle(subject.link, subject.description, index);
+                                }
                               }}
                               className={`d-flex gap-3 align-items-center title-video ${titleAktive === index ? "text-success fw-bold" : null}`}
                             >
@@ -165,7 +174,13 @@ function DetailCourse() {
                               </span>
                               {subject.title}
                             </p>
-                            {courseDetail.isPremium ? <FontAwesomeIcon icon={faLock} className="icon-lock" /> : <FontAwesomeIcon icon={faPlayCircle} className="icon-play text-dark w-10 h-full" />}
+                            {courseDetail.linkTelegram !== null ? (
+                              <FontAwesomeIcon icon={faPlayCircle} className="icon-play text-dark w-10 h-full" />
+                            ) : courseDetail.isPremium ? (
+                              <FontAwesomeIcon icon={faLock} className="icon-lock" />
+                            ) : (
+                              <FontAwesomeIcon icon={faPlayCircle} className="icon-play text-dark w-10 h-full" />
+                            )}
                           </li>
                         ))}
                       </ol>
