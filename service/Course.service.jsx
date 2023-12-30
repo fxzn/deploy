@@ -9,7 +9,6 @@ export const GetCourse = async (callback) => {
   }
 };
 
-
 export function isAuthenticated() {
   return localStorage.getItem("token") !== null;
 }

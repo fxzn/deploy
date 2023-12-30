@@ -19,6 +19,7 @@ function Register() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   
   const togglePasswordVisibility = () => {
@@ -30,6 +31,7 @@ function Register() {
     e.preventDefault();
   
     try {
+      setLoading(true);
       const userData = {
         username,
         email,
@@ -58,6 +60,7 @@ function Register() {
         toast.error(error.response.data.message);
         return;
       }
+      setLoading(false);
       toast.error(error.message);
     }
   };
@@ -164,7 +167,8 @@ function Register() {
                   <label>Password</label>
                   <FontAwesomeIcon className="icon-eye" icon={showPassword ? faEyeSlash : faEye} onClick={togglePasswordVisibility} />
                 </div>
-                <button type="submit" className="sign-btn" onSubmit={onSubmit}>
+                <button type="submit" className="sign-btn" disabled={loading}>
+                  {loading ? <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> : null}
                   Sign Up
                 </button>
                 <p className="text">

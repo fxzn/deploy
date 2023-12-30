@@ -22,9 +22,6 @@ import NotFound from "./components/notFound/NotFound";
 import DetailCourseRun from "./pages/course/detailCourseRun";
 import User from "./users/admin/User";
 
-
-
-
 function App() {
   return (
     <>
@@ -41,16 +38,16 @@ function App() {
         <Route path="/auth/register" element={<Register />} />
         <Route path="/auth/resetPassword" element={<ResetPaswd />} />
         <Route path="/detailcourse/:title" element={<DetailCourse />} />
-        <Route path="/detailcourserun/:title" element={<DetailCourseRun/>}/>
+        <Route path="/detailcourserun/:title" element={<DetailCourseRun />} />
         <Route path="/course" element={<Course />} />
         <Route path="/course/payment/:title" element={<CoursePayment />} />
         <Route path="/courserun" element={<CourseRun />} />
-        <Route path="/paymentsuccess" element={<Succespayment/>}/>
-        <Route path="/admin/dashboard" element={<DashboardAdmin />}/>
+        <Route path="/paymentsuccess" element={<Succespayment />} />
+        <Route path="/admin/dashboard" element={<DashboardAdmin />} />
         <Route path="/admin/kelas" element={<KelolaKelas />} />
-        <Route path="/admin/user" element={<User/>} />
-        <Route path="/auth/forgotpassword" element={<ForgotPassword/>}/>
-        <Route path="*" element={<NotFound/>}/>
+        <Route path="/admin/user" element={<User />} />
+        <Route path="/auth/forgotpassword" element={<ForgotPassword />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
