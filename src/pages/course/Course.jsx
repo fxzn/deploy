@@ -223,7 +223,7 @@ function Course() {
                 <Row className="mt-1">
                   <Col md={4}>
                     <Button
-                      variant="danger"
+                      variant="primary"
                       className="w-100 mt-3"
                       onClick={() => handlefilterpremium("filterAll")}
                       checked={selectedFilterPrimium === null} // Check if "All" is selected
@@ -232,12 +232,12 @@ function Course() {
                     </Button>
                   </Col>
                   <Col md={4}>
-                    <Button variant="danger" className="w-100 mt-3" onClick={() => handlefilterpremium("filterCoursePremium")} checked={selectedFilterPrimium === "filterCoursePremium"}>
+                    <Button variant="primary" className="w-100 mt-3" onClick={() => handlefilterpremium("filterCoursePremium")} checked={selectedFilterPrimium === "filterCoursePremium"}>
                       Kelas premium
                     </Button>
                   </Col>
                   <Col md={4}>
-                    <Button variant="danger" className="w-100 mt-3" onClick={() => handlefilterpremium("filterCourseFree")} checked={selectedFilterPrimium === "filterCourseFree"}>
+                    <Button variant="primary" className="w-100 mt-3" onClick={() => handlefilterpremium("filterCourseFree")} checked={selectedFilterPrimium === "filterCourseFree"}>
                       Kelas gratis
                     </Button>
                   </Col>
@@ -287,7 +287,7 @@ function Course() {
                                   <p className="ms-1 mt-1">{courseData.duration} menit</p>
                                 </div>
                               </div>
-                              {courseData.isPremium ? <Button variant="danger">Rp.{courseData.price.toLocaleString("id-ID", { currency: "IDR" })}</Button> : <Button variant="danger">gratis</Button>}
+                              {courseData.isPremium ? <Button variant="primary">Rp.{courseData.price.toLocaleString("id-ID", { currency: "IDR" })}</Button> : <Button variant="primary">gratis</Button>}
                             </Card.Body>
                           </Card>
                         </Col>

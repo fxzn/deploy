@@ -15,6 +15,7 @@
 //   const [myclass, setMyclass] = useState([]);
 //   const navigate = useNavigate();
 //   const [searchInput, setSearchInput] = useState("");
+//   const [selectedFilter, setSelectedFilter] = useState(null);
 
 //   useEffect(() => {
 //     reloadData();
@@ -53,7 +54,11 @@
 //   const handleSearch = async () => {
 //     try {
 //       if (searchInput) {
-//         const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/course/searchingCourseByTitle`, {
+//         const token = localStorage.getItem("token");
+//         const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/course/searchingCourseAfterOrder`, {
+//           headers: {
+//             Authorization: `Bearer ${token}`,
+//           },
 //           params: {
 //             title: searchInput,
 //           },
@@ -64,6 +69,38 @@
 //       }
 //     } catch (error) {
 //       console.error(error);
+//     }
+//   };
+
+//   const applyFilter = async (filterType) => {
+//     try {
+//       const token = localStorage.getItem("token");
+//       const newFilter = selectedFilter === filterType ? null : filterType;
+//       console.log("New Filter:", newFilter);
+
+//       let response;
+//       if (!newFilter) {
+//         response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/course/getAll`, {
+//           headers: {
+//             Authorization: `Bearer ${token}`,
+//           },
+//         });
+//       } else {
+//         response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/course/${newFilter}`, {
+//           headers: {
+//             Authorization: `Bearer ${token}`,
+//           },
+//         });
+//       }
+
+//       console.log("API Response:", response.data);
+
+//       setSelectedFilter((prevFilter) => (prevFilter === filterType ? null : filterType));
+//       // Hapus prevData jika Anda tidak berniat menggunakannya
+//       setMyclass(response.data);
+//     } catch (error) {
+//       console.error("Filter Error:", error);
+//       console.error("Detail Kesalahan:", error.response || error.message || error);
 //     }
 //   };
 
@@ -90,23 +127,22 @@
 //                 </div>
 
 //                 <Row className="mt-1">
-//                   <Col md={3}>
-//                     <div className="w-100 mt-3 btn btn-danger">All</div>
-//                   </Col>
+//             <Col md={3}>
+//               <div className="w-100 mt-3 btn btn-danger" onClick={() => reloadData()}>All</div>
+//             </Col>
 
-//                   <Col md={3}>
-//                     <div className="w-100 mt-3 btn btn-danger">Backend</div>
-//                   </Col>
+//             <Col md={3}>
+//               <div className="w-100 mt-3 btn btn-danger" onClick={() => applyFilter("filterBackendAfterOrder")}>Backend</div>
+//             </Col>
 
-//                   <Col md={3}>
-//                     <div className="w-100 mt-3 btn btn-danger">Frontend</div>
-//                   </Col>
+//             <Col md={3}>
+//               <div className="w-100 mt-3 btn btn-danger" onClick={() => applyFilter("filterFrontendAfterOrder")}>Frontend</div>
+//             </Col>
 
-//                   <Col md={3}>
-//                     <div className="w-100 mt-3 btn btn-danger">Fullstack</div>
-//                   </Col>
-//                 </Row>
-
+//             <Col md={3}>
+//               <div className="w-100 mt-3 btn btn-danger" onClick={() => applyFilter("filterFullstackAfterOrder")}>Fullstack</div>
+//             </Col>
+//           </Row>
 //                 {/* Card */}
 //                 <Row className="mt-4">
 //                   {myclass.data && myclass.data.length > 0 ? (
@@ -156,7 +192,7 @@
 //                       </Col>
 //                     ))
 //                   ) : (
-//                     <Col md={12} className="text-center mt-3">
+//                     <Col md={12} className="text-center mt-3 text-danger">
 //                       <p>No results found</p>
 //                     </Col>
 //                   )}
@@ -172,7 +208,6 @@
 // }
 
 // export default CourseRun;
-
 
 import "./courses.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -192,6 +227,7 @@ function CourseRun() {
   const navigate = useNavigate();
   const [searchInput, setSearchInput] = useState("");
   const [selectedFilter, setSelectedFilter] = useState(null);
+  const [filterLoading, setFilterLoading] = useState(false);
 
   useEffect(() => {
     reloadData();
@@ -248,32 +284,48 @@ function CourseRun() {
     }
   };
 
- 
   const applyFilter = async (filterType) => {
     try {
+      setFilterLoading(true); // Set loading to true when applying filters
+
+      const token = localStorage.getItem("token");
       const newFilter = selectedFilter === filterType ? null : filterType;
+      console.log("New Filter:", newFilter);
+
       let response;
       if (!newFilter) {
-        response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/course/getAll`);
+        response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/course/getAll`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
       } else {
-        response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/course/${newFilter}`);
+        response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/course/${newFilter}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
       }
-      setSelectedFilter(newFilter);
+
+      console.log("API Response:", response.data);
+
+      setSelectedFilter((prevFilter) => (prevFilter === filterType ? null : filterType));
+      // Hapus prevData jika Anda tidak berniat menggunakannya
       setMyclass(response.data);
-      console.log(response.data)
     } catch (error) {
-      console.error(error);
+      console.error("Filter Error:", error);
+      console.error("Detail Kesalahan:", error.response || error.message || error);
+    } finally {
+      setFilterLoading(false); // Set loading to false after filter operation completes
     }
   };
-
 
   return (
     <>
       {loading ? (
-          <div className="loader-container">
-            <span className="loader"></span>
-          </div>
-
+        <div className="loader-container">
+          <span className="loader"></span>
+        </div>
       ) : (
         <>
           <NavigationBars />
@@ -282,7 +334,7 @@ function CourseRun() {
               <Col>
                 <div className="d-flex justify-content-end">
                   <div className="search d-flex p-3">
-                    <input type="text" value={searchInput} onChange={handleSearchInputChange} onKeyDown={(e) => e.key === "Enter" && handleSearch()} />
+                    <input placeholder="serach..." type="text" value={searchInput} onChange={handleSearchInputChange} onKeyDown={(e) => e.key === "Enter" && handleSearch()} />
                     <div className="iconsearh m-1 text-danger" onClick={handleSearch}>
                       <FontAwesomeIcon icon={faSearch} />
                     </div>
@@ -290,76 +342,90 @@ function CourseRun() {
                 </div>
 
                 <Row className="mt-1">
-            <Col md={3}>
-              <div className="w-100 mt-3 btn btn-danger" onClick={() => reloadData()}>All</div>
-            </Col>
+                  <Col md={3}>
+                    <div className="w-100 mt-3 btn btn-primary" onClick={() => reloadData()}>
+                      All
+                    </div>
+                  </Col>
 
-            <Col md={3}>
-              <div className="w-100 mt-3 btn btn-danger" onClick={() => applyFilter("filterBackEnd")}>Backend</div>
-            </Col>
+                  <Col md={3}>
+                    <div className="w-100 mt-3 btn btn-primary" onClick={() => applyFilter("filterBackendAfterOrder")}>
+                      Backend
+                    </div>
+                  </Col>
 
-            <Col md={3}>
-              <div className="w-100 mt-3 btn btn-danger" onClick={() => applyFilter("filterFrontEnd")}>Frontend</div>
-            </Col>
+                  <Col md={3}>
+                    <div className="w-100 mt-3 btn btn-primary" onClick={() => applyFilter("filterFrontendAfterOrder")}>
+                      Frontend
+                    </div>
+                  </Col>
 
-            <Col md={3}>
-              <div className="w-100 mt-3 btn btn-danger" onClick={() => applyFilter("filterFullStack")}>Fullstack</div>
-            </Col>
-          </Row>
-                {/* Card */}
-                <Row className="mt-4">
-                  {myclass.data && myclass.data.length > 0 ? (
-                    myclass.data.map((index) => (
-                      <Col key={index.code} md={4} className="d-flex justify-content-center mt-3">
-                        <Card className="kotakcourse" onClick={() => handleCardClick(index.title)}>
-                          <Card.Img variant="top" src={imgcourse} />
-                          <Card.Body>
-                            <div className="d-flex justify-content-between">
-                              <div className="title ">{index.title}</div>
-                              <div className="rating d-flex ">
-                                <FontAwesomeIcon icon={faStar} className="img text-warning me-1" />
-                                <p>4.5</p>
-                              </div>
-                            </div>
-
-                            <Card.Text>
-                              <div className="desc mt-1 fw-bold">{index.about}</div>
-                              <div>{index.teacher}</div>
-                            </Card.Text>
-                            <div className="d-flex infocourse">
-                              <div className="level me-4 d-flex">
-                                <div>
-                                  <FontAwesomeIcon icon={faStar} className="img" />
-                                </div>
-                                <p className="ms-1 mt-1 ">{index.level}</p>
-                              </div>
-                              <div className="level me-4 d-flex">
-                                <div>
-                                  <FontAwesomeIcon icon={faBook} className="img" />
-                                </div>
-                                <p className="ms-1 mt-1">{index.module}</p>
-                              </div>
-                              <div className="level me-4 d-flex">
-                                <div>
-                                  <FontAwesomeIcon icon={faClock} className="img" />
-                                </div>
-                                <p className="ms-1 mt-1">{index.duration}</p>
-                              </div>
-                            </div>
-
-                            <div className="d-flex">
-                              <FontAwesomeIcon icon={faClock} className="img text-success me-2" /> <ProgressBar animated now={45} variant="danger" className="w-50" />
-                            </div>
-                          </Card.Body>
-                        </Card>
-                      </Col>
-                    ))
-                  ) : (
-                    <Col md={12} className="text-center mt-3">
-                      <p>No results found</p>
-                    </Col>
-                  )}
+                  <Col md={3}>
+                    <div className="w-100 mt-3 btn btn-primary" onClick={() => applyFilter("filterFullstackAfterOrder")}>
+                      Fullstack
+                    </div>
+                  </Col>
                 </Row>
+                {filterLoading ? (
+                  <div className="loader-container">
+                    <span className="loader"></span>
+                  </div>
+                ) : (
+                  <Row className="mt-4">
+                    {myclass.data && myclass.data.length > 0 ? (
+                      myclass.data.map((index) => (
+                        <Col key={index.code} md={4} className="d-flex justify-content-center mt-3">
+                          <Card className="kotakcourse" onClick={() => handleCardClick(index.title)}>
+                            <Card.Img variant="top" src={imgcourse} />
+                            <Card.Body>
+                              <div className="d-flex justify-content-between">
+                                <div className="title ">{index.title}</div>
+                                <div className="rating d-flex ">
+                                  <FontAwesomeIcon icon={faStar} className="img text-warning me-1" />
+                                  <p>4.5</p>
+                                </div>
+                              </div>
+
+                              <Card.Text>
+                                <div className="desc mt-1 fw-bold">{index.about}</div>
+                                <div>{index.teacher}</div>
+                              </Card.Text>
+                              <div className="d-flex infocourse">
+                                <div className="level me-4 d-flex">
+                                  <div>
+                                    <FontAwesomeIcon icon={faStar} className="img" />
+                                  </div>
+                                  <p className="ms-1 mt-1 ">{index.level}</p>
+                                </div>
+                                <div className="level me-4 d-flex">
+                                  <div>
+                                    <FontAwesomeIcon icon={faBook} className="img" />
+                                  </div>
+                                  <p className="ms-1 mt-1">{index.module}</p>
+                                </div>
+                                <div className="level me-4 d-flex">
+                                  <div>
+                                    <FontAwesomeIcon icon={faClock} className="img" />
+                                  </div>
+                                  <p className="ms-1 mt-1">{index.duration}</p>
+                                </div>
+                              </div>
+
+                              <div className="d-flex">
+                                <FontAwesomeIcon icon={faClock} className="img text-success me-2" /> <ProgressBar animated now={45} variant="danger" className="w-50" />
+                              </div>
+                            </Card.Body>
+                          </Card>
+                        </Col>
+                      ))
+                    ) : (
+                      <Col md={12} className="text-center mt-3 text-danger">
+                        <p>No results found</p>
+                      </Col>
+                    )}
+                  </Row>
+                )}
+                {/* Card */}
               </Col>
             </Row>
           </Container>

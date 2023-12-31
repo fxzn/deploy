@@ -17,7 +17,7 @@ function EditVideo(props) {
   const getCourseByCode = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/admin/subject/get?code=${code}`, {
+      const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/admin/subject/getByCode?code=${code}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",

@@ -27,7 +27,7 @@ function EditKelas(props) {
 
   const getCourseByCode = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/course/get?code=${code}`, {
+      const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/admin/course/getByCode?code=${code}`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -148,7 +148,7 @@ function EditKelas(props) {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="warning" onClick={handleSaveClick}>
+          <Button variant="success" onClick={handleSaveClick}>
             Update
           </Button>
         </Modal.Footer>
