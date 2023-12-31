@@ -13,13 +13,12 @@ section {
 
 .tainer-profile {
   position: relative;
-  min-width: 1100px;
-  min-height: 550px;
+  width: 1100px;
+  height: 550px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
-
 }
 
 .tainer-profile .profileForm {
@@ -162,25 +161,27 @@ section {
   margin-left: 35%;
 }
 
-.profile-picture-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100px;
-  height: 100px;
-  border: 2px solid #fa4c4c;
-  border-radius: 50%;
-  overflow: hidden;
-  background-image: url('../../assets/gallery_5045490.png');
-  background-size: cover;
-  margin-top: 3%;
-}
-
 .cardkursus {
-  background-color: #fff;
+  background-color: var(--white-color);
+  border: var(--red-pink);
   border-radius: 20px;
   box-shadow: 0 50px 50px rgba(0, 0, 0, 0.1);
   font-size: 10px;
+  overflow: hidden;
+}
+
+.cardkursus:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.cardkursus .title {
+  color: var(--red-black);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 14px;
+  letter-spacing: 0em;
+  text-align: left;
 }
 
 .kard h2 {
@@ -215,8 +216,8 @@ section {
 
   .tainer-profile {
     position: relative;
-    min-width: 100%;
-    min-height: 100vh;
+    width: 100%;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -228,7 +229,7 @@ section {
     background-color: #fff;
     height: 100%;
     max-height: fit-content;
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.1);
     width: 103%;
     border-radius: 16px;
     display: flex;

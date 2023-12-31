@@ -136,7 +136,7 @@ section {
 .coniner-profile .profileForm .formBox .inputBox input[type='submit'] {
   position: relative;
   cursor: pointer;
-  background-color: #000;
+  background-color: #f81745;
   color: #fff;
   border: none;
   padding: 12px;
@@ -230,6 +230,7 @@ section {
   text-align: center;
 }
 
+
 @media (max-width: 768px) {
   .arrow1 {
     margin-left: 0;
@@ -241,7 +242,7 @@ section {
   .coniner-profile {
     position: relative;
     min-width: 100%;
-    min-height: 100vh;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -253,7 +254,7 @@ section {
     background-color: #fff;
     height: 100%;
     max-height: fit-content;
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.1);
     width: 100%;
     border-radius: 16px;
     display: flex;

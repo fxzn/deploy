@@ -1,108 +1,92 @@
-/* Default styles for larger screens */
-.otp {
-  margin-top: 5%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-width: 100%;
-}
+/* Otp.css */
 
-.arrow {
-  margin-left: -25px;
-  cursor: pointer;
-}
-
+/* Container styling */
 .otp-container {
-  width: 40%;
-  margin: auto;
-  padding: 20px;
-  background-color: #fff;
-  text-align: start;
-}
-
-h4 {
-  text-align: start;
-  color: #f81745;
-  font-size: 24px;
-  font-weight: 700;
-}
-
-#p1 {
-  font-size: 14px;
-  margin-top: 8%;
-  margin-bottom: 10px;
-  color: #555;
-  text-align: center;
-}
-
-.otp-input-container {
-  margin-top: 8%;
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.input {
-  width: calc(100% / 6);
-  margin-right: 8px;
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #f81745;
-  border-radius: 16px;
-  outline: none;
-  box-sizing: border-box;
-  text-align: center;
-}
-
-input:last-child {
-  margin-right: 0;
-}
-
-.atention {
   align-items: center;
-  text-align: center;
-  margin-top: 30%;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f8f9fa; /* Set your desired background color */
 }
 
-.error-message,
-.success-message {
-  color: #fff;
-  padding: 16px 24px 16px 24px;
-  border-radius: 16px;
-}
-
-.error-message {
-  background-color: #f81745;
-}
-
-.success-message {
-  background-color: #73CA5C;
-}
-
-.submit-button-container {
-  margin-top: 8%;
-  text-align: center;
-}
-
-.tombol {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #73CA5C;
-  color: #fff;
-  border: none;
-  border-radius: 16px;
-  cursor: pointer;
-  outline: none;
+.otp-wrapper {
+  max-width: 500px;
   width: 100%;
 }
 
-/* Media queries for smaller screens */
-@media screen and (max-width: 768px) {
-  .otp-container {
-    width: 80%;
-  }
-
-  .input {
-    width: calc(100% / 6);
-  }
+.otp-card {
+  border: #BF3131; /* Set your desired border color */
+  border-radius: 8px; /* Set your desired border radius */
+  padding: 20px;
+  background-color: rgb(255, 254, 254);
+  border-radius: 20px;
+  box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
+
+.otp-card h6 {
+  color: var(--red-black);
+  font-weight: 700;
+  line-height: 14px;
+  letter-spacing: 0em;
+}
+
+/* Info styling */
+.otp-info {
+  margin-bottom: 10px;
+  color: #555555; 
+  font-weight: bold;
+}
+
+/* Inputs styling */
+.otp-inputs {
+  margin-top: 20px; /* Increase top margin for better spacing */
+}
+
+.otp-inputs input {
+  width: 40px; /* Set your desired input width */
+  height: 40px; /* Set your desired input height */
+  font-size: 16px; 
+  text-align: center; 
+  margin: 0 5px; 
+  background-color: #f0f0f0; 
+  color: #333; 
+}
+
+
+/* Button styling */
+.validate {
+  background-color: #fa4c4c; /* Set your desired button background color */
+  color: #ffffff; /* Set your desired button text color */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px; 
+  width: 80%;
+}
+
+.validate:hover {
+  background-color: #B31312; /* Set your desired button background color on hover */
+}
+
+.resend-btn {
+  background-color: #fa4c4c; /* Set your desired resend button background color */
+  color: #ffffff; /* Set your desired resend button text color */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.resend-btn:hover{
+  background-color: #B31312;
+  color: #f0f0f0;
+}
+
+.resend-btn:disabled {
+  background-color: #6c757d; 
+}
+

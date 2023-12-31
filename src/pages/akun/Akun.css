@@ -149,14 +149,6 @@
   transition: top 0.3s, left 0.3s, font-size 0.3s, font-weight 0.3s;
 }
 
-/* .inputBoxx input:focus + label,
-.inputBoxx input:valid + label {
-  top: -18px;
-  left: 10px;
-  font-size: 12px;
-  font-weight: 600;
-} */
-
 .akun-header {
   background-color: #fa4c4c;
   padding: 1%;
@@ -227,7 +219,6 @@
 }
 
 @media (max-width: 768px) {
-  .nav1,
   .akun-header,
   .bar {
     display: none;
@@ -248,7 +239,7 @@
   .container-profile {
     position: relative;
     min-width: 100%;
-    min-height: 100vh;
+    height: 570px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -260,7 +251,7 @@
     background-color: #fff;
     height: 100%;
     max-height: fit-content;
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.1);
     width: 100%;
     border-radius: 16px;
     display: flex;
@@ -291,8 +282,5 @@
     flex-wrap: wrap;
     padding-top: 20px;
   }
-
-  .foot1 {
-    display: none;
-  }
+ 
 }

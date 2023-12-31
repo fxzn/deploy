@@ -2,17 +2,42 @@ import { useState, useEffect } from 'react';
 import './ChangePass.css';
 import Bars from './Bar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import NavigationBars from '../../components/navigation/NavigationBars';
-import Footerr from "../../components/footer/Footerr";
+import Footerr from '../../components/footer/Footerr';
 
 const UserProfile = () => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmationPassword, setConfirmationPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false);
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmationPassword, setShowConfirmationPassword] = useState(false);
+
+  const togglePasswordVisibility = (passwordType) => {
+    switch (passwordType) {
+      case 'current':
+        setShowCurrentPassword(!showCurrentPassword);
+        break;
+      case 'new':
+        setShowNewPassword(!showNewPassword);
+        break;
+      case 'confirmation':
+        setShowConfirmationPassword(!showConfirmationPassword);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const notify = (message, type) => {
+    toast(message, { type });
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,7 +67,7 @@ const UserProfile = () => {
     };
 
     fetchData();
-  }, []); 
+  }, []);
 
   const handleChangePassword = async (e) => {
     e.preventDefault();
@@ -64,24 +89,24 @@ const UserProfile = () => {
         },
         {
           headers: {
-            'accept': '*/*',
+            accept: '*/*',
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
           },
         }
       );
 
- 
+      // Assuming the API returns a success message
+      notify('Password changed successfully', 'success');
     } catch (error) {
       console.error('Error changing password', error);
+      notify('Failed to change password', 'error');
     }
   };
 
   return (
     <>
-      <div className="nav1">
-        <NavigationBars />
-      </div>
+      <NavigationBars />
       <section>
         <div className="coniner-profile">
           <div className="profileForm">
@@ -103,41 +128,53 @@ const UserProfile = () => {
                 </span>
                 <div className="formBox">
                   <h2>Ubah Password</h2>
-                  <form onSubmit={handleChangePassword}>
+                  <form onSubmit={handleChangePassword} style={{ maxWidth: '100%' }}>
                     <div className="inputBox w100">
                       <input
-                        type="password"
+                        type={showCurrentPassword ? 'text' : 'password'}
                         id="oldPassword"
                         value={currentPassword}
                         onChange={(e) => setCurrentPassword(e.target.value)}
                         required
                       />
                       <label htmlFor="oldPassword">Masukkan Password Lama</label>
+                      <FontAwesomeIcon
+                        className="icon-eye"
+                        icon={showCurrentPassword ? faEyeSlash : faEye}
+                        onClick={() => togglePasswordVisibility('current')}
+                      />
                     </div>
                     <div className="inputBox w100">
                       <input
-                        type="password"
+                        type={showNewPassword ? 'text' : 'password'}
                         id="newPassword"
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
                         required
                       />
                       <label htmlFor="newPassword">Masukkan Password Baru</label>
+                      <FontAwesomeIcon
+                        className="icon-eye"
+                        icon={showNewPassword ? faEyeSlash : faEye}
+                        onClick={() => togglePasswordVisibility('new')}
+                      />
                     </div>
                     <div className="inputBox w100">
                       <input
-                        type="password"
+                        type={showConfirmationPassword ? 'text' : 'password'}
                         id="confirmPassword"
                         value={confirmationPassword}
                         onChange={(e) => setConfirmationPassword(e.target.value)}
                         required
                       />
-                      <label htmlFor="confirmPassword">
-                        Ulangi Password Baru
-                      </label>
+                      <label htmlFor="confirmPassword">Ulangi Password Baru</label>
+                      <FontAwesomeIcon
+                        className="icon-eye"
+                        icon={showConfirmationPassword ? faEyeSlash : faEye}
+                        onClick={() => togglePasswordVisibility('confirmation')}
+                      />
                     </div>
-
-                    <div className="inputBox w100" style={{ marginTop: '120px' }}>
+                    <div className="inputBox w100" style={{ marginTop: '90px' }}>
                       <input type="submit" value="Submit" />
                     </div>
                   </form>
@@ -147,9 +184,8 @@ const UserProfile = () => {
           </div>
         </div>
       </section>
-      <div className="foot1">
-        <Footerr/>
-      </div>
+      <Footerr />
+      <ToastContainer />
     </>
   );
 };

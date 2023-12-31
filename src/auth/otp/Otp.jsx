@@ -1,121 +1,182 @@
-import { useState, useEffect, useRef } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import "./Otp.css";
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import './Otp.css';
+// import imgcourse from '../../assets/image.png';
+// import { Card } from 'react-bootstrap';
 
 const OTPPage = () => {
-  const [otp, setOTP] = useState(Array(6).fill(""));
-  const [error, setError] = useState("");
+  const [otp, setOTP] = useState(Array(6).fill(''));
+  const [error, setError] = useState('');
   const [resendTimer, setResendTimer] = useState(60);
   const [otpValid, setOTPValid] = useState(false);
-  const [userEmail, setUserEmail] = useState("");
+  const [userEmail, setUserEmail] = useState('');
+  const [timerExpired, setTimerExpired] = useState(false);
   const navigate = useNavigate();
 
   const inputRefs = Array(6)
     .fill(null)
     .map(() => useRef(null));
 
+  useEffect(() => {
+    const userEmailFromServer = '';
+    setUserEmail(userEmailFromServer);
+  }, []);
+
   const handleOTPChange = (e, index) => {
     const value = e.target.value;
 
-    if (/^[0-9]$/.test(value) || value === "") {
+    if ((e.code === 'Backspace' || e.key === 'Backspace') && index > 0) {
+      const newOTP = [...otp];
+      newOTP[index] = '';
+      setOTP(newOTP);
+
+      inputRefs[index - 1].current.focus();
+      return;
+    }
+
+    if (/^[0-9]$/.test(value) || value === '') {
       const newOTP = [...otp];
       newOTP[index] = value;
       setOTP(newOTP);
-      setError("");
+      setError('');
       setOTPValid(false);
 
-      if (value !== "" && index < inputRefs.length - 1) {
+      if (value !== '' && index < inputRefs.length - 1) {
         inputRefs[index + 1].current.focus();
       }
     } else {
-      setError("Harap masukkan angka.");
+      setError('Harap masukkan angka.');
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Check if any digit in the OTP is empty
-    if (otp.some((digit) => digit === "")) {
-      setError("Harap masukkan semua digit OTP.");
+    if (otp.some((digit) => digit === '')) {
+      setError('Harap masukkan semua digit OTP.');
       setOTPValid(false);
       return;
     }
 
     try {
-      const response = await axios.post("https://easy-class-407401.et.r.appspot.com/api/auth/otp", {
-        otp: otp.join(""),
-      });
+      const response = await axios.post(
+        'https://easy-class-407401.et.r.appspot.com/api/auth/otp',
+        {
+          otp: otp.join(''),
+        }
+      );
 
       const { token } = response.data;
 
       if (token) {
-        localStorage.setItem("token", token);
-
-        navigate("/");
+        localStorage.setItem('token', token);
+        navigate('/');
       } else if (response.data && response.data.success) {
         setOTPValid(true);
 
         setTimeout(() => {
-          toast.success("OTP berhasil diverifikasi");
-
-          // Navigate to another page (replace the path with your desired route)
-          navigate("/auth/success", { replace: true });
+          toast.success('OTP berhasil diverifikasi');
+          navigate('/auth/success', { replace: true });
         }, 2000);
-        toast.success("OTP berhasil diverifikasi");
-        setOTPValid(true);
-        // setError('Maaf, kode OTP salah!');
-        // setOTPValid(false);
-        // toast.error('Gagal verifikasi OTP');
       }
     } catch (error) {
-      console.error("Error during OTP verification:", error);
-      setError("Terjadi kesalahan saat memverifikasi OTP.");
+      console.error('Error during OTP verification:', error);
+      setError('Terjadi kesalahan saat memverifikasi OTP.');
       setOTPValid(false);
-      toast.error("Terjadi kesalahan saat memverifikasi OTP.");
+      toast.error('Terjadi kesalahan saat memverifikasi OTP.');
+    }
+  };
+
+  const handleResend = async () => {
+    try {
+      // Add logic to resend OTP (replace the URL with your actual endpoint)
+      await axios.post(
+        'http://easy-class-407401.et.r.appspot.com/api/auth/otp',
+        { userEmail }
+      );
+
+      // Reset timer
+      setResendTimer(60);
+      setTimerExpired(false);
+      toast.info('OTP berhasil dikirim ulang.');
+    } catch (error) {
+      console.error('Error during OTP resend:', error);
+      toast.error('Terjadi kesalahan saat mengirim ulang OTP.');
     }
   };
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setResendTimer((prevTimer) => (prevTimer > 0 ? prevTimer - 1 : 0));
+      setResendTimer((prevTimer) => {
+        if (prevTimer > 0) {
+          return prevTimer - 1;
+        } else {
+          // Timer habis, atur state timerExpired menjadi true
+          setTimerExpired(true);
+          return 0;
+        }
+      });
     }, 1000);
 
     return () => clearInterval(intervalId);
   }, []);
 
+  useEffect(() => {
+    const isTimerRunning = resendTimer > 0;
+    if (!isTimerRunning) {
+    }
+  }, [resendTimer]);
+
   return (
-    <div className="otp">
-      <div className="otp-container">
-        <span className="arrow">
-          <Link to="/auth/register">
-            <FontAwesomeIcon icon={faArrowLeft} />
-          </Link>
-        </span>
-        <h4>Masukkan OTP</h4>
-        <p id="p1">Ketik 6 digit kode yang dikirimkan ke {userEmail}</p>
-        <form onSubmit={handleSubmit}>
-          <div className="otp-input-container">
+    <div className="otp-container height-100 d-flex justify-content-center align-items-center">
+      <div className="otp-wrapper position-relative">
+        <div className="otp-card card p-4 text-center animated bounceIn">
+          <h6 className="mb-4 mt-4">Masukkan Kode OTP</h6>
+          <div className="otp-info">
+            <span>Kode telah dikirimkan ke</span>
+            <small className="text-muted">{userEmail}</small>
+          </div>
+          <div
+            id="otp"
+            className="otp-inputs d-flex flex-row justify-content-center mt-4"
+          >
             {otp.map((digit, index) => (
-              <input className="input" key={index} type="text" value={digit} onChange={(e) => handleOTPChange(e, index)} maxLength="1" ref={inputRefs[index]} />
+              <input
+                key={index}
+                className="m-2 text-center form-control rounded"
+                type="text"
+                value={digit}
+                onChange={(e) => handleOTPChange(e, index)}
+                maxLength="1"
+                ref={inputRefs[index]}
+                onKeyDown={(e) => handleOTPChange(e, index)}
+              />
             ))}
           </div>
-          <p>Kirim Ulang OTP dalam {resendTimer} detik</p>
-          <div className="submit-button-container">
-            <button className="tombol" type="submit">
+          <div className="mt-3 text-danger">{error}</div>
+          <div className="mt-4 mb-4">
+            <button
+              className="btn btn-danger px-4 validate"
+              type="submit"
+              onClick={handleSubmit}
+            >
               Simpan
             </button>
-            <div className="atention">
-              {otpValid && <p className="success-message">Verifikasi berhasil</p>}
-              {error && !otpValid && <p className="error-message">{error}</p>}
-            </div>
           </div>
-        </form>
+        </div>
+        <div className="d-flex justify-content-center">
+          <button
+            className={`btn resend-btn mt-5 animated fadeIn`}
+            disabled={!timerExpired && resendTimer > 0}
+            onClick={handleResend}
+          >
+            Kirim Ulang{' '}
+            {!timerExpired && resendTimer > 0 && `(${resendTimer}s)`}
+          </button>
+        </div>
       </div>
     </div>
   );

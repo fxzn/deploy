@@ -8,7 +8,8 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { ClipLoader, PuffLoader, SyncLoader } from 'react-spinners';
-import { Toast } from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Akun = () => {
   const [loading, setLoading] = useState(true);
@@ -22,7 +23,6 @@ const Akun = () => {
     city: '',
   });
   const [imageURL, setImageURL] = useState(null);
-  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -103,19 +103,20 @@ const Akun = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Form submitted!');
-
+  
     try {
       const token = localStorage.getItem('token');
-
+  
       if (!token) {
         console.error('Token tidak ditemukan.');
         return;
       }
-
+  
+      // Upload profile picture if selected
       if (profilePicture) {
         const formData = new FormData();
         formData.append('multipartFile', profilePicture);
-
+  
         try {
           const response = await axios.post(
             'https://easy-class-407401.et.r.appspot.com/api/user/upload',
@@ -127,14 +128,15 @@ const Akun = () => {
               },
             }
           );
-
+  
           console.log('Profile Picture Upload Response:', response.data);
         } catch (error) {
           console.error('Error uploading profile picture:', error);
         }
       }
-
-      const response = await axios.put(
+  
+      // Update user data
+      const updateUserDataResponse = await axios.put(
         'https://easy-class-407401.et.r.appspot.com/api/user/update',
         {
           phoneNumber: userData.phoneNumber,
@@ -149,18 +151,22 @@ const Akun = () => {
           },
         }
       );
-
-      console.log('Update User Data Response:', response.data);
+  
+      console.log('Update User Data Response:', updateUserDataResponse.data);
+  
+      // Display success toast
+      toast.success('Profile updated successfully!', { position: toast.POSITION.TOP_RIGHT });
     } catch (error) {
       console.error('Error updating user data:', error);
+  
+      // Display error toast
+      toast.error('Error updating profile. Please try again.', { position: toast.POSITION.TOP_RIGHT });
     }
   };
 
   return (
-    <>
-      <div className="nav1">
+    <>   
         <NavigationBars />
-      </div>
       <section className="akunPage">
         <div className="container-profile">
           <div className="profileForm">
@@ -315,27 +321,8 @@ const Akun = () => {
           </div>
         </div>
       </section>
-      <div className="foot1">
+      <ToastContainer />
         <Footerr />
-      </div>
-      <Toast
-        show={showToast}
-        onClose={() => setShowToast(false)}
-        delay={3000}
-        autohide
-        style={{
-          position: 'fixed',
-          top: 20,
-          right: 20,
-        }}
-      >
-        <Toast.Header>
-          <strong className="mr-auto">Notification</strong>
-        </Toast.Header>
-        <Toast.Body>
-          {loading ? 'Loading...' : 'Submit successful!'}
-        </Toast.Body>
-      </Toast>
     </>
   );
 };

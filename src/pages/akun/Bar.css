@@ -47,6 +47,11 @@ section {
   display: none;
 }
 
+.link-text:hover {
+  color: black; 
+  text-decoration: none;
+}
+
 @media (max-width: 768px) {
   .profileInf {
     margin-left: 15%;

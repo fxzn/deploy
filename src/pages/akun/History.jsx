@@ -10,26 +10,35 @@ import {
   faArrowLeft,
 } from '@fortawesome/free-solid-svg-icons';
 import imgcourse from '../../assets/image.png';
+import invoice_1649585 from '../../assets/invoice_1649585.png';
 import './History.css';
 import Bars from './Bar';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { GridLoader } from 'react-spinners';
+import { SyncLoader } from 'react-spinners';
 
 const CourseCard = ({ order }) => {
   const { title, about, teacher, level, duration, module, price, isPremium } =
     order;
 
+  const formatIDR = (amount) => {
+    return new Intl.NumberFormat('id-ID', {
+      style: 'currency',
+      currency: 'IDR',
+    }).format(amount);
+  };
+
   return (
     <Col md={12} className="d-flex justify-content-center mt-3">
-      <Card className="cardkursus" style={{ width: '400px', height: '185px' }}>
-        <Card.Img variant="top" src={imgcourse} style={{ height: '80px' }} />
+      <Card className="cardkursus" style={{ width: '400px', height: '190px' }}>
+        <Card.Img variant="top" src={imgcourse} style={{ height: '65px' }} />
         <Card.Body>
           <div className="title mt-0" id="text1">
             {title}
           </div>
           <Card.Text className="desc mt-0" id="text2">
             {about}
+            <div className="fw-bold">{teacher}</div>
           </Card.Text>
           <div className="d-flex infocourse1" style={{ margin: '-8px 0' }}>
             <div className="level me-4 d-flex">
@@ -53,10 +62,10 @@ const CourseCard = ({ order }) => {
           </div>
           <Button
             variant="danger"
-            style={{ height: '18px', fontSize: '10px' }}
+            style={{ height: '22px', fontSize: '10px' }}
             className="d-flex align-items-center justify-content-center"
           >
-            {isPremium ? 'Premium Course' : 'Free Course'}
+            {formatIDR(price)}
           </Button>
         </Card.Body>
       </Card>
@@ -81,7 +90,7 @@ const UserProfile = () => {
         }
 
         const orderResponse = await axios.get(
-          `https://easy-class-407401.et.r.appspot.com/api/course/getCourseOrder`,
+          `${import.meta.env.VITE_BASE_URL}/api/course/getCourseOrder`,
           {
             headers: {
               accept: 'application/json',
@@ -94,11 +103,11 @@ const UserProfile = () => {
       } catch (error) {
         console.error('Error fetching data:', error.response);
       } finally {
-        setIsLoading(false);
+        setIsLoading(false); // Setelah selesai fetching, atur isLoading menjadi false
       }
     };
 
-    fetchData(); // Panggil fungsi fetchData
+    fetchData();
   }, []);
 
   const toggleShowAllCards = () => {
@@ -107,9 +116,7 @@ const UserProfile = () => {
 
   return (
     <>
-      <div className="nav1">
-        <NavigationBars />
-      </div>
+      <NavigationBars />
       <section>
         <div className="tainer-profile">
           <div className="profileForm">
@@ -130,9 +137,37 @@ const UserProfile = () => {
                   </Link>
                 </span>
 
-                {orderHistory.slice(0, 2).map((order, index) => (
-                  <CourseCard key={index} order={order} />
-                ))}
+                {/* Periksa jika tidak ada pesanan dalam riwayat */}
+                {orderHistory.length === 0 && !isLoading && (
+                  <div className="text-center mt-3">
+                    <img
+                      src={invoice_1649585}
+                      alt="Tidak Ada Riwayat Pembayaran"
+                      style={{
+                        marginTop: '35%',
+                        color: '#151515',
+                        marginLeft: '7%',
+                      }}
+                    />
+                    <h1
+                      style={{
+                        color: '#333',
+                        fontSize: '18px',
+                        marginTop: '15px',
+                      }}
+                    >
+                      No payment history available
+                    </h1>
+                  </div>
+                )}
+
+                {/* Render CourseCard untuk setiap pesanan dalam orderHistory */}
+                {orderHistory.length > 0 &&
+                  orderHistory
+                    .slice(0, 2)
+                    .map((order, index) => (
+                      <CourseCard key={index} order={order} />
+                    ))}
 
                 {showAllCards &&
                   orderHistory
@@ -144,14 +179,14 @@ const UserProfile = () => {
                 {orderHistory.length > 2 && (
                   <div className="text-center mt-3">
                     <Button variant="primary" onClick={toggleShowAllCards}>
-                      {showAllCards ? 'Show Less' : 'Show All'}
+                      {showAllCards ? 'Tampilkan sedikit' : 'Tampilkan Semua'}
                     </Button>
                   </div>
                 )}
 
                 {isLoading && (
                   <div className="spinner-container">
-                    <GridLoader color={'#fa4c4c'} loading={isLoading} />
+                    <SyncLoader color={'#fa4c4c'} loading={isLoading} />
                   </div>
                 )}
               </Row>
@@ -159,10 +194,7 @@ const UserProfile = () => {
           </div>
         </div>
       </section>
-
-      <div className="foot1">
-        <Footerr />
-      </div>
+      <Footerr />
     </>
   );
 };
