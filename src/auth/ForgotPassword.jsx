@@ -3,15 +3,17 @@ import { faCircleUser } from "@fortawesome/free-regular-svg-icons";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useState } from "react";
-import "./ForgotPassword.css"; // Import CSS file
+import "./ForgotPassword.css"; 
 
 function ForgotPassword() {
   const [username, setUsername] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmitUsername = async (e) => {
     e.preventDefault();
 
     try {
+      setLoading(true);
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/api/auth/sendToken?username=${username}`,
         {
@@ -32,7 +34,7 @@ function ForgotPassword() {
         toast.error(error.response?.data?.message || "An error occurred");
         return;
       }
-
+      setLoading(false);
       toast.error("An error occurred");
     }
   };
@@ -62,10 +64,13 @@ function ForgotPassword() {
                     onChange={(e) => setUsername(e.target.value)}
                   />
                 </div>
-                
-                <button type="submit" className="sign-btn">
-                  Submit
+                <button type="submit" className="sign-btn" disabled={loading}>
+                  {loading ? <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> : null}
+                  Sign In
                 </button>
+                {/* <button type="submit" className="sign-btn">
+                  Submit
+                </button> */}
               </div>
             </form>
           </div>
