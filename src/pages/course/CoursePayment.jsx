@@ -17,6 +17,7 @@ function CoursePayment() {
   const [courseTitle, setCourseTitle] = useState("");
   const navigate = useNavigate();
   const { title } = useParams();
+  const [loading, setLoading] = useState(false); 
 
   useEffect(() => {
     const getCourseByTitle = async () => {
@@ -41,6 +42,7 @@ function CoursePayment() {
   const handleOrder = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const token = localStorage.getItem("token");
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/api/order/createOrder`,
@@ -76,6 +78,7 @@ function CoursePayment() {
         }
         return;
       }
+      setLoading(false);
       toast.error(error.message);
     }
   };
@@ -194,7 +197,8 @@ function CoursePayment() {
                       <hr />
                     </div>
                   )}
-                  <button className="btn btn-primary w-100 mt-2" onClick={handleOrder}>
+                  <button className="btn btn-primary w-100 mt-2" onClick={handleOrder} disabled={loading}>
+                  {loading ? <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> : null}
                     Place order
                   </button>
                 </div>
