@@ -4,7 +4,7 @@ import Bars from './Bar';
 import './Akun.css';
 import Footerr from '../../components/footer/Footerr';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { ClipLoader, PuffLoader, SyncLoader } from 'react-spinners';
@@ -23,6 +23,7 @@ const Akun = () => {
     city: '',
   });
   const [imageURL, setImageURL] = useState(null);
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -103,20 +104,22 @@ const Akun = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Form submitted!');
-  
+
     try {
+      setIsSaving(true);
+
       const token = localStorage.getItem('token');
-  
+
       if (!token) {
         console.error('Token tidak ditemukan.');
         return;
       }
-  
+
       // Upload profile picture if selected
       if (profilePicture) {
         const formData = new FormData();
         formData.append('multipartFile', profilePicture);
-  
+
         try {
           const response = await axios.post(
             'https://easy-class-407401.et.r.appspot.com/api/user/upload',
@@ -128,13 +131,13 @@ const Akun = () => {
               },
             }
           );
-  
+
           console.log('Profile Picture Upload Response:', response.data);
         } catch (error) {
           console.error('Error uploading profile picture:', error);
         }
       }
-  
+
       // Update user data
       const updateUserDataResponse = await axios.put(
         'https://easy-class-407401.et.r.appspot.com/api/user/update',
@@ -151,16 +154,22 @@ const Akun = () => {
           },
         }
       );
-  
+
       console.log('Update User Data Response:', updateUserDataResponse.data);
-  
+
       // Display success toast
-      toast.success('Profile updated successfully!', { position: toast.POSITION.TOP_RIGHT });
+      toast.success('Profile updated successfully!', {
+        position: toast.POSITION.TOP_RIGHT,
+      });
     } catch (error) {
       console.error('Error updating user data:', error);
-  
+
       // Display error toast
-      toast.error('Error updating profile. Please try again.', { position: toast.POSITION.TOP_RIGHT });
+      toast.error('Error updating profile. Please try again.', {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -310,12 +319,35 @@ const Akun = () => {
                   <label>Kota</label>
                 </div>
                 <div id="tomb1" className="inputBoxx w100">
-                  <input
-                    type="submit"
-                    defaultValue="Submit"
-                    onClick={handleSubmit}
-                  />
-                </div>
+        {isSaving ? (
+          <div>
+            <div style={{ position: 'relative' }}>
+              <input
+                type="submit"
+                value="Saving..."
+                disabled
+                style={{ cursor: 'not-allowed' }}
+              />
+              <FontAwesomeIcon
+                icon={faSpinner}
+                spin
+                style={{
+                  position: 'absolute',
+                  left: '37%',
+                  top: '33%',
+                  color: 'white',
+                  transform: 'translate(-50%, -50%)',
+                }}
+                className="loding"
+              />
+            </div>
+          </div>
+        ) : (
+          <div>
+            <input type="submit" value="Save" onClick={handleSubmit} />
+          </div>
+        )}
+      </div>
               </div>
             </div>
           </div>

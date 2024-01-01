@@ -2,7 +2,12 @@ import { useState, useEffect } from 'react';
 import './ChangePass.css';
 import Bars from './Bar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import {
+  faArrowLeft,
+  faEye,
+  faEyeSlash,
+  faSpinner,
+} from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -17,7 +22,9 @@ const UserProfile = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
-  const [showConfirmationPassword, setShowConfirmationPassword] = useState(false);
+  const [showConfirmationPassword, setShowConfirmationPassword] =
+    useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   const togglePasswordVisibility = (passwordType) => {
     switch (passwordType) {
@@ -73,6 +80,8 @@ const UserProfile = () => {
     e.preventDefault();
 
     try {
+      setIsSaving(true);
+
       const token = localStorage.getItem('token');
 
       if (!token) {
@@ -96,11 +105,12 @@ const UserProfile = () => {
         }
       );
 
-      // Assuming the API returns a success message
       notify('Password changed successfully', 'success');
     } catch (error) {
       console.error('Error changing password', error);
       notify('Failed to change password', 'error');
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -128,7 +138,10 @@ const UserProfile = () => {
                 </span>
                 <div className="formBox">
                   <h2>Ubah Password</h2>
-                  <form onSubmit={handleChangePassword} style={{ maxWidth: '100%' }}>
+                  <form
+                    onSubmit={handleChangePassword}
+                    style={{ maxWidth: '100%' }}
+                  >
                     <div className="inputBox w100">
                       <input
                         type={showCurrentPassword ? 'text' : 'password'}
@@ -137,7 +150,9 @@ const UserProfile = () => {
                         onChange={(e) => setCurrentPassword(e.target.value)}
                         required
                       />
-                      <label htmlFor="oldPassword">Masukkan Password Lama</label>
+                      <label htmlFor="oldPassword">
+                        Masukkan Password Lama
+                      </label>
                       <FontAwesomeIcon
                         className="icon-eye"
                         icon={showCurrentPassword ? faEyeSlash : faEye}
@@ -152,7 +167,9 @@ const UserProfile = () => {
                         onChange={(e) => setNewPassword(e.target.value)}
                         required
                       />
-                      <label htmlFor="newPassword">Masukkan Password Baru</label>
+                      <label htmlFor="newPassword">
+                        Masukkan Password Baru
+                      </label>
                       <FontAwesomeIcon
                         className="icon-eye"
                         icon={showNewPassword ? faEyeSlash : faEye}
@@ -164,18 +181,52 @@ const UserProfile = () => {
                         type={showConfirmationPassword ? 'text' : 'password'}
                         id="confirmPassword"
                         value={confirmationPassword}
-                        onChange={(e) => setConfirmationPassword(e.target.value)}
+                        onChange={(e) =>
+                          setConfirmationPassword(e.target.value)
+                        }
                         required
                       />
-                      <label htmlFor="confirmPassword">Ulangi Password Baru</label>
+                      <label htmlFor="confirmPassword">
+                        Ulangi Password Baru
+                      </label>
                       <FontAwesomeIcon
                         className="icon-eye"
                         icon={showConfirmationPassword ? faEyeSlash : faEye}
                         onClick={() => togglePasswordVisibility('confirmation')}
                       />
                     </div>
-                    <div className="inputBox w100" style={{ marginTop: '90px' }}>
-                      <input type="submit" value="Submit" />
+                    <div
+                      className="inputBox w100"
+                      style={{ marginTop: '90px' }}
+                    >
+                      {isSaving ? (
+                        <div>
+                          <div style={{ position: 'relative' }}>
+                            <input
+                              type="submit"
+                              value="Saving..."
+                              disabled
+                              style={{ cursor: 'not-allowed' }}
+                            />
+                            <FontAwesomeIcon
+                              icon={faSpinner}
+                              spin
+                              style={{
+                                position: 'absolute',
+                                left: '37%',
+                                top: '35%',
+                                color: 'white',
+                                transform: 'translate(-50%, -50%)',
+                              }}
+                              className="loding"
+                            />
+                          </div>
+                        </div>
+                      ) : (
+                        <div>
+                          <input type="submit" value="Save" />
+                        </div>
+                      )}
                     </div>
                   </form>
                 </div>
