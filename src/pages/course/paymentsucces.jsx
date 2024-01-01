@@ -11,7 +11,6 @@ function succespayment() {
   const navigate = useNavigate();
 
   const handleBackClick = () => {
-    // navigate(`/detailcourse/${title}`);
     navigate("/courserun")
   };
   return (
