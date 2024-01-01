@@ -10,10 +10,11 @@ function EditKelas(props) {
     title: "",
     code: "",
     price: 0,
-    levelCourse: "",
+    level: "",
     teacher: "",
     isPremium: true,
     linkTelegram: "",
+    about: "",
     categories: [
       {
         id: 0,
@@ -21,8 +22,6 @@ function EditKelas(props) {
     ],
     duration: "",
     module: "",
-    about: "",
-    
   });
 
   const getCourseByCode = async () => {
@@ -125,7 +124,7 @@ function EditKelas(props) {
 
             <Form.Group controlId="levelCourse">
               <Form.Label>Level Course</Form.Label>
-              <Form.Control type="text" name="levelCourse" value={courseData.level || ""} onChange={handleChange} />
+              <Form.Control type="text" name="level" value={courseData.level || ""} onChange={handleChange} />
             </Form.Group>
 
             <Form.Group controlId="teacher">
@@ -143,7 +142,7 @@ function EditKelas(props) {
 
             <Form.Group controlId="aboutCourse">
               <Form.Label>About Course</Form.Label>
-              <Form.Control type="text" name="aboutCourse" value={courseData.about} onChange={handleChange} />
+              <Form.Control type="text" name="about" value={courseData.about || ""} onChange={handleChange} />
             </Form.Group>
           </Form>
         </Modal.Body>

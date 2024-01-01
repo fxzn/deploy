@@ -299,7 +299,7 @@ function Course() {
                     )}
                   </Row>
                 )}
-                ;
+                
               </Col>
             </Row>
           </Container>
