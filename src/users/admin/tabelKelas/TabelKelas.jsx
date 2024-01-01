@@ -111,7 +111,7 @@ function TabelKelas() {
                             <tr key={index}>
                               <td>{course.id}</td>
                               <td>{course.code}</td>
-                              <td>{course.categories && course.categories.length > 0 ? course.categories.map((category) => category.categoryName).join(",") : "No category"}</td>
+                              <td>{course.categorySet && course.categorySet.length > 0 ? course.categorySet.map((categorySet) => categorySet.categoryName).join(",") : "No category"}</td>
                               <td>{course.title}</td>
                               <td>{course.linkTelegram}</td>
                               <td className={`tipe-kelas ${course.isPremium ? "premium" : "free"}`}>{course.isPremium ? "Premium" : "Free"}</td>
