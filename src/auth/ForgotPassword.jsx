@@ -66,7 +66,7 @@ function ForgotPassword() {
                 </div>
                 <button type="submit" className="sign-btn" disabled={loading}>
                   {loading ? <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> : null}
-                  Sign In
+                  Submit
                 </button>
                 {/* <button type="submit" className="sign-btn">
                   Submit
