@@ -189,7 +189,7 @@ function Course() {
                     <Accordion.Header className="accordion-header text-white fw-bold">Topik Kelas</Accordion.Header>
                     <Accordion.Body className="jutify-content-center">
                       <div className="mt-4">
-                        <p className="fw-bold">Kategory</p>
+                        <p className="fw-bold">Kategori</p>
                         <Form className="mt-2">
                           <Form.Check inline label="BackEnd" name="group1" id="checkbox1" className="mt-2" onChange={() => handleFilter("filterBackEnd")} checked={activeFilters.general === "filterBackEnd"} />
                           <Form.Check inline label="FullStack" name="group1" id="checkbox1" className="mt-2" onChange={() => handleFilter("filterFullStack")} checked={activeFilters.general === "filterFullStack"} />
@@ -199,7 +199,7 @@ function Course() {
                       <div className="mt-4">
                         <p className="fw-bold">Level Kesulitan</p>
                         <Form className="mt-1">
-                          <Form.Check inline label="Beaginner Level" name="group1" id="checkbox1" className="mt-2" onChange={() => handlefilterlevel("filterBeginner")} checked={activeFilters.level === "filterBeginner"} />
+                          <Form.Check inline label="Beginner Level" name="group1" id="checkbox1" className="mt-2" onChange={() => handlefilterlevel("filterBeginner")} checked={activeFilters.level === "filterBeginner"} />
                           <Form.Check inline label="Intermediate Level" name="group1" id="checkbox1" className="mt-2" onChange={() => handlefilterlevel("filterIntermediate")} checked={activeFilters.level === "filterIntermediate"} />
                           <Form.Check inline label="Advanced Level" name="group1" id="checkbox1" className="mt-2" onChange={() => handlefilterlevel("filterAdvanced")} checked={activeFilters.level === "filterAdvanced"} />
                         </Form>
@@ -278,16 +278,16 @@ function Course() {
                                   <div>
                                     <FontAwesomeIcon icon={faBook} className="img" />
                                   </div>
-                                  <p className="ms-1 mt-1">{courseData.module} modul</p>
+                                  <p className="ms-1 mt-1">{courseData.module} Modul</p>
                                 </div>
                                 <div className="level me-4 d-flex">
                                   <div>
                                     <FontAwesomeIcon icon={faClock} className="img" />
                                   </div>
-                                  <p className="ms-1 mt-1">{courseData.duration} menit</p>
+                                  <p className="ms-1 mt-1">{courseData.duration}</p>
                                 </div>
                               </div>
-                              {courseData.isPremium ? <Button variant="primary">Rp.{courseData.price.toLocaleString("id-ID", { currency: "IDR" })}</Button> : <Button variant="primary">gratis</Button>}
+                              {courseData.isPremium ? <Button variant="primary">Rp.{courseData.price.toLocaleString("id-ID", { currency: "IDR" })}</Button> : <Button variant="primary">Gratis</Button>}
                             </Card.Body>
                           </Card>
                         </Col>

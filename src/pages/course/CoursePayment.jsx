@@ -1,6 +1,6 @@
 // In your CoursePayment.js file
 import { Card, Container } from "react-bootstrap";
-import { faClock, faBook, faStar } from "@fortawesome/free-solid-svg-icons";
+import {  faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import NavigationBars from "../../components/navigation/NavigationBars";
@@ -97,7 +97,7 @@ function CoursePayment() {
         </Link>
 
         <div className="w-75 header-payment mt-2">
-          <p className="text-white fw-bold mt-1">Copy Selesaikan Pembayaran sampai 10 Maret 2023 12:00</p>
+          <p className="text-white fw-bold mt-1">Selesaikan pembayaran ini 30 menit setelah Anda login!</p>
         </div>
         <hr />
 
@@ -162,26 +162,6 @@ function CoursePayment() {
                             <div className="desc mt-1 fw-bold"> </div>
                             <div>{courseData.teacher}</div>
                           </Card.Text>
-                          <div className="d-flex infocourse">
-                            <div className="level me-4 d-flex">
-                              <div>
-                                <FontAwesomeIcon icon={faStar} className="img" />
-                              </div>
-                              <p className="ms-1 mt-1"> Intermediate Level</p>
-                            </div>
-                            <div className="level me-4 d-flex">
-                              <div>
-                                <FontAwesomeIcon icon={faBook} className="img" />
-                              </div>
-                              <p className="ms-1 mt-1">10 modul</p>
-                            </div>
-                            <div className="level me-4 d-flex">
-                              <div>
-                                <FontAwesomeIcon icon={faClock} className="img" />
-                              </div>
-                              <p className="ms-1 mt-1">120 menit</p>
-                            </div>
-                          </div>
                         </Card.Body>
                       </Card>
                       <h6 className="card-title mb-3 mt-4">Order Summary</h6>

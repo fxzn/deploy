@@ -124,7 +124,7 @@ function CourseRun() {
               <Col>
                 <div className="d-flex justify-content-end">
                   <div className="search d-flex p-3">
-                    <input placeholder="serach..." type="text" value={searchInput} onChange={handleSearchInputChange} onKeyDown={(e) => e.key === "Enter" && handleSearch()} />
+                    <input placeholder="search..." type="text" value={searchInput} onChange={handleSearchInputChange} onKeyDown={(e) => e.key === "Enter" && handleSearch()} />
                     <div className="iconsearh m-1 text-danger" onClick={handleSearch}>
                       <FontAwesomeIcon icon={faSearch} />
                     </div>
