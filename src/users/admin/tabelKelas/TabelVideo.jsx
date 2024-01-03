@@ -59,7 +59,7 @@ function TabelVideo() {
       const response = await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/admin/subject/delete/${code}`);
 
       if (response.status === 200) {
-        toast.success("Course deleted successfully");
+        toast.success("Video deleted successfully");
         setRefresh((prevRefresh) => !prevRefresh);
       } else {
         toast.error("Failed to delete course");

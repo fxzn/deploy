@@ -26,7 +26,7 @@ function AddVideo(props) {
       });
   
       console.log(response.data);
-      toast.success("Course added successfully");
+      toast.success("Video added successfully");
       setRefresh((prevRefresh) => !prevRefresh);
     } catch (error) {
       console.error(error);
