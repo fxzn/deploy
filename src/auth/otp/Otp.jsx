@@ -92,12 +92,15 @@ const OTPPage = () => {
 
   const handleResend = async () => {
     try {
+      if (!userEmail) {
+        return;
+      }
+  
       await axios.post(
         'http://easy-class-407401.et.r.appspot.com/api/auth/refreshOTP',
         { userEmail }
       );
 
-      // Reset timer
       setResendTimer(60);
       setTimerExpired(false);
       toast.info('OTP berhasil dikirim ulang.');
@@ -113,7 +116,6 @@ const OTPPage = () => {
         if (prevTimer > 0) {
           return prevTimer - 1;
         } else {
-          // Timer habis, atur state timerExpired menjadi true
           setTimerExpired(true);
           return 0;
         }
@@ -167,14 +169,7 @@ const OTPPage = () => {
           </div>
         </div>
         <div className="d-flex justify-content-center">
-          <button
-            className={`btn resend-btn mt-5 animated fadeIn`}
-            disabled={!timerExpired && resendTimer > 0}
-            onClick={handleResend}
-          >
-            Kirim Ulang{' '}
-            {!timerExpired && resendTimer > 0 && `(${resendTimer}s)`}
-          </button>
+ 
         </div>
       </div>
     </div>
