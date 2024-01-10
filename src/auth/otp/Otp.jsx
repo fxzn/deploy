@@ -101,7 +101,7 @@ const OTPPage = () => {
         { userEmail }
       );
 
-      setResendTimer(60);
+      setResendTimer(300);
       setTimerExpired(false);
       toast.info('OTP berhasil dikirim ulang.');
     } catch (error) {
@@ -169,7 +169,13 @@ const OTPPage = () => {
           </div>
         </div>
         <div className="d-flex justify-content-center">
- 
+          <button
+            className={`btn resend-btn mt-5 animated fadeIn`}
+            disabled={!timerExpired && resendTimer > 0}
+            onClick={handleResend}
+          >
+            {!timerExpired && resendTimer > 0 && `(${resendTimer}s)`}
+          </button>
         </div>
       </div>
     </div>
