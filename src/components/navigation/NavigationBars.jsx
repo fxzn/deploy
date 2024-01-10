@@ -19,14 +19,14 @@ function NavigationBars() {
     }
   }, []);
 
-  window.addEventListener("scroll", () => {
-    const nav = document.querySelector(".navbar");
-    if (window.pageYOffset > 0) {
-      nav.classList.add("drop-shadow");
-    } else {
-      nav.classList.remove("drop-shadow");
-    }
-  });
+  // window.addEventListener("scroll", () => {
+  //   const nav = document.querySelector(".navbar");
+  //   if (window.pageYOffset > 0) {
+  //     nav.classList.add("drop-shadow");
+  //   } else {
+  //     nav.classList.remove("drop-shadow");
+  //   }
+  // });
 
   return (
     <>

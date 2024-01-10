@@ -92,9 +92,8 @@ const OTPPage = () => {
 
   const handleResend = async () => {
     try {
-      // Add logic to resend OTP (replace the URL with your actual endpoint)
       await axios.post(
-        'http://easy-class-407401.et.r.appspot.com/api/auth/otp',
+        'http://easy-class-407401.et.r.appspot.com/api/auth/refreshOTP',
         { userEmail }
       );
 
